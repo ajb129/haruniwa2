@@ -1,0 +1,97 @@
+#!/bin/bash
+
+SEP="_"
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      tnt_to_inline - convert TnT to inline format
+
+SYNOPSIS
+      tnt_to_inline
+
+DESCRIPTION
+      Filter to convert tagged information in TnT format to inline format.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | tnt_to_inline
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | tnt_to_inline | sed 's/^/      -| /' 1>&2
+花子	NPR
+は	P
+赤い	ADJI
+コート	N
+を	P
+着	VB
+た	AXD
+。	PU
+EOS
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      inline_to_tnt(1), tnt_clean(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --sep|-s)     # specify separator, e.g., --sep "/"
+       SEP=$2 ; shift 2 ;;
+
+      --example)    # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)            # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+awk -v SEP=${SEP} '
+
+/^EOS/ {  printf "\n" ; next }
+
+{ printf ("%s%s ", $1, $2 ? sprintf("%s%s", SEP, $2) : "") }
+
+' | sed 's/  *$//'
+

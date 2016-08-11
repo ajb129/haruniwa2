@@ -1,0 +1,38 @@
+#!/bin/bash
+
+PARSER="$($(dirname $0)/../parser_location)"
+
+MODEL=$1
+
+if test "$2"; then
+  NUMBER=$2
+else
+  NUMBER=1
+fi
+
+sed 's/^EOS.*//' | \
+java -server -mx800m -jar ${PARSER} -keepFunctionLabels -gr ${MODEL} -useGoldPOS -maxLength 400 -kbest ${NUMBER} | \
+sed 's/^( /(TOP /; s/ )$/)/' | \
+awk -v SIZE=${NUMBER} '
+
+BEGIN {
+ if (SIZE > 1) { printf ("(number %s)\n", SIZE) }
+}
+
+NF == 0 {
+  for (i = pointer; i < SIZE; i++) {
+    print store
+  }
+  pointer=0
+  next
+}
+
+{
+  pointer++
+  store = $0
+  print store
+
+}
+
+'
+

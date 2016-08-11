@@ -1,0 +1,1064 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% punctuation
+PU=x $. PU=y
+
+move x >1 y
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change POS for ない
+ADJI=x < ない|なく|なさ|なかっ|なき|なけれ|なかろ $, (@P $, @VB)
+
+relabel x NEG
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change VB to VB2
+/^VB\b/=x < /^な[ら|り|る|れ|ろ]/ $, NEG
+
+relabel x /^VB(.*)/VB2$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge VB
+/^VB\b/=x $. /^VB\b/=y
+
+move y >-1 x
+excise y y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change N-LETTER
+N|N-LETTER $. N-LETTER=x
+
+relabel x SUFFIX
+
+N=x $. N|N-LETTER
+
+relabel x PREFIX
+
+
+N-LETTER=x
+
+relabel x N
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge N
+N=a $. (PU|SYM < − $. N=b) !> N
+
+createSubtree N a b
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make operator particles
+P=x < (/か|きり|くらい|ぐらい|こそ|ごと|さえ|しか|しも|すら|だけ|だって|だり|でも|とも|ともあれ|なんか|なんて|にしてからが|にしても|にせよ|に限って|のみ|は|ばかし|ばかり|も|ものなら|ら|だが|ずつ/ !> /^P-OPTR|^P-FINAL/ !$ __)
+
+relabel x P-OPTR
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% change ADJI to ADV
+ADJI=x < /.*く$/ $. VB
+
+relabel x ADV
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% よう
+/^VB-VOL/=y < /.よう$/=x
+
+insert (MD よう) $- y
+relabel x /^(.*)よう/$1/
+relabel y /^VB-VOL(.*)$/VB$1/
+
+
+/^VB-VOL/=y < /.う$/=x
+
+insert (MD う) $- y
+relabel x /^(.*)う$/$1/
+relabel y /^VB-VOL(.*)$/VB$1/
+
+
+/^VB/=y < /.よう$/=x
+
+insert (MD よう) $- y
+relabel x /^(.*)よう/$1/
+relabel y /^VB(.*)$/VB$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% change INTJ to D
+/^INTJ/=x < あの $. N
+
+relabel x D
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% change P to N
+@P=x < の [ $. (@P < も|は) | $. /^P-CASE/ ]
+
+relabel x N
+
+
+% のには
+@P=a < の $. (__=b < に $. (__ < は))
+
+relabel a N
+relabel b P-CASE
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% sentence initial CONJ
+
+__=a < それ $. (__ < で $. (__=b < も)) !$, __ !> CONJ
+
+createSubtree CONJ a b
+
+
+__=a < それ $. (__=b < で) !$, __ !> CONJ
+
+createSubtree CONJ a b
+
+
+% なぜならば
+__=a < なぜ $. (__ < なら $. (__=b < ば)) !$, __ !> CONJ
+
+createSubtree CONJ a b
+
+
+% けれども
+__=a < けれど $. (@P=b < も) !$, __ !> CONJ
+
+createSubtree CONJ a b
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% CONJ instances
+
+% だけではなくて
+__=a < だけ $. (__ < で $. (__ < は $. (__ < なく $. (__=b < て)))) !> CONJ
+
+createSubtree CONJ a b
+
+
+% だけでなくて
+__=a < だけ $. (__ < で|じゃ $. (__ < なく $. (__=b < て))) !> CONJ
+
+createSubtree CONJ a b
+
+
+% だけではなく
+__=a < だけ $. (__ < で $. (__ < は $. (__=b < なく))) !> CONJ
+
+createSubtree CONJ a b
+
+
+% だけでなく
+__=a < だけ $. (__ < で|じゃ $. (__=b < なく)) !> CONJ
+
+createSubtree CONJ a b
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AX
+
+% つつある
+@P=a < つつ $. (/^VB/=b < あっ|あら|あり|ある|あれ|あろ) !> AX
+
+createSubtree AX a b
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% D
+
+__=a < そう|こう|ああ $.  (__ < いっ $.  (__=b < た)) !> D
+
+createSubtree D a b
+
+
+__=a < そう|こう|ああ $. (__=b < いう) !> D
+
+createSubtree D a b
+
+
+%%%%%%%%%%%%%%
+% ADV
+
+% いつも
+WPRO=a < いつ $. (@P=b < も) !> ADV
+
+createSubtree ADV a b
+
+
+% もしかしたら
+__=a < もし $. (__ < か $. (__ < し $. (__=b < たら))) !> ADV
+
+createSubtree ADV a b
+
+
+% 良くも悪くも
+__=a < 良く $. (__ < も $. (__ < 悪く $. (__=b < も))) !> ADV
+
+createSubtree ADV a b
+
+
+% そしたら
+__=a < そ $. (__ < し $. (__=b < たら)) !> ADV
+
+createSubtree ADV a b
+
+
+% どうも
+__=a < どう $. (__=b < も) !> ADV
+
+createSubtree ADV a b
+
+
+% ADV そう
+!MD=x < そう $, /^VB|^ADJ|^AX|^PASS|^NEG/
+
+relabel x MD
+
+
+%%%%%%%%%%%%%%
+% WADV
+
+% どうやって
+__=a < どう $.  (__ < やっ $.  (__=b < て)) !> WADV
+
+createSubtree WADV a b
+
+
+%%%%%%%%%%%%%%
+% MD
+
+% かもしれない
+__=a < かも $. (__ < しれ $. (__=b < ない)) !> MD
+
+createSubtree MD a b
+
+
+% かも知れません
+__=a < か $. (__ < も $. (__ < 知れ|しれ $. (__ < ませ $. (__=b < ん)))) !> MD
+
+createSubtree MD a b
+
+
+% ざるを得ません
+__=a < ざる $. (__ < を $. (__ < 得 $. (__ < ませ $. (__=b < ん)))) !> MD
+
+createSubtree MD a b
+
+
+% てもいい
+__=a < て $. (__ < も $. (__=b < いい|よい|良い)) $,, /^ADJ|^VB|^AX|^NP-PRD/ !> MD
+
+createSubtree MD a b
+
+
+% ていい
+__=a < て $. (__=b < いい|よい|良い) $,, /^ADJ|^VB|^AX|^NP-PRD/ !> MD
+
+createSubtree MD a b
+
+
+% 必要がある
+N=a < 必要 $. (@P < が|は $. (/^VB/=b < あっ|あら|あり|ある|あれ|あろ)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% 必要がない
+N=a < 必要 $. (@P < が|は $. (__=b < /^[な|無][かろ|かっ|く|い|けれ]/)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+
+% 可能性がある
+N=a < 可能性 $. (@P < が|は $. (/^VB/=b < あっ|あら|あり|ある|あれ|あろ)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% 可能性がない
+N=a < 可能性 $. (@P < が|は $. (__=b < /^[な|無][かろ|かっ|く|い|けれ]/)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% おそれがある
+N=a < おそれ $. (@P < が|は $. (/^VB/=b < あっ|あら|あり|ある|あれ|あろ)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% おそれがない
+N=a < おそれ $. (@P < が|は $. (__=b < /^[な|無][かろ|かっ|く|い|けれ]/)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% なくちゃなりません
+__=a < なく $. (__=y < ちゃ $. (__ < いけ|なり $. (__  < ませ $. (__=b < ん)))) !> MD
+
+createSubtree MD a b
+
+
+% なくちゃならない
+__=a < なく $. (__ < ちゃ $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な))) !> MD
+
+createSubtree MD a b
+
+
+% なければなりません
+__=a < なけれ $.  (__ < ば $. (__ < いけ|なり $. (__ < ませ $. (__=b < ん)))) !> MD
+
+createSubtree MD a b
+
+
+% なければならない
+__=a < なけれ $. (__ < ば $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な))) $,, /^ADJ|^VB|^AX|^NP-PRD/ !> MD
+
+createSubtree MD a b
+
+
+% なくちゃいけない
+__=a < なく $. (__ < ちゃ $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な))) !> MD
+
+createSubtree MD a b
+
+
+% ちゃいけない
+__=a < ちゃ $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な)) !> MD
+
+createSubtree MD a b
+
+
+% ちゃいけません
+__=a < ちゃ $. (__ < いけ|なり $. (__ < ませ $. (__=b < ん))) !> MD
+
+createSubtree MD a b
+
+
+% なきゃいけません
+__=a < なきゃ $. (__ < いけ|なり $.  (__ < ませ $. (__=b  < ん))) !> MD
+
+createSubtree MD a b
+
+
+% なきゃいけない
+__=a < なきゃ $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な)) $,, /^ADJ|^VB|^AX|^NP-PRD/ !> MD
+
+createSubtree MD a b
+
+
+% ないといけない
+__=a < ない $. (__ < と $. (__ < いけ $. (__=b < な|ず|なく|なかっ|なけれ|なさ|なかろ|ない))) !> MD
+
+createSubtree MD a b
+
+
+% ないといけません
+__=a < ない $. (__ < と $. (__ < いけ $. (__ < ませ $. (__=b < ん)))) !> MD
+
+createSubtree MD a b
+
+
+% なくてはいけない
+__=a < なく $. (__ < て $. (__ < は $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な)))) !> MD
+
+createSubtree MD a b
+
+
+% てはいけない
+__=a < て $. (__ < は $. (__ < いけ|なら $. (__=b < ない|ず|なく|なかっ|なけれ|なさ|なかろ|な))) !> MD
+
+createSubtree MD a b
+
+
+__=a < なく $. (__=b < ちゃいけない|ちゃならない|てはいけない|てはならない) !> MD
+
+createSubtree MD a b
+
+% なくてはだめだ|なくてはだめです
+__=a < なく $. (__ < て $. (__ < は $. (__=b < だめ $. (AX < だろ|だっ|で|に|だ|な|です|でし|でしょ)))) !> MD
+
+createSubtree MD a b
+
+% てはだめだ|てはだめです
+__=a < て $. (__ < は $. (__=b < だめ $. (AX < だろ|だっ|で|に|だ|な|です|でし|でしょ))) !> MD
+
+createSubtree MD a b
+
+% なくちゃ|なくっちゃ
+__=a < なく|なくっ $. (__=b < ちゃ [ $. (PU < 。|！) | $. (PU < 、$. (@P < と)) | $. -RRB- ]) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% なきゃ
+!MD=a < なきゃ [ $. (PU < 。|！) | $. (PU < 、$. (@P < と)) | $. -RRB- ] $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+relabel a MD
+
+% として
+@P < と $. (ADV=a < して)
+
+replace a (VB し) (P て)
+
+% うとする
+__=a < う|よう $. (__ < と $. (__=b < せ|さ|し|する|すれ|しろ)) !> MD
+
+createSubtree MD a b
+
+% わけがない|わけはない
+
+N=a < わけ $. (@P < が|は $. (__=b < /^[な|無][かろ|かっ|く|い|けれ]/)) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% わけ(だ|です)
+
+!MD=x < わけ $. (AX < だろ|だっ|で|に|だ|な|です|でし|でしょ) $, /^VB|^ADJ|^AX|^PASS|^NEG/
+
+relabel x MD
+
+% ねば
+NEG=a < ね $. (@P=b < ば [ $. (PU < 。|！) | $. (PU < 、$. (@P < と)) | $. -RRB- ]) $, /^VB|^AX|^PASS/ !> MD
+
+createSubtree MD a b
+
+% こと(だろう|でしょう)
+__=a < こと $. (__=b < だろう|でしょう) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% かも
+__=a < か $. (__=b < も [ $. (PU < 。|！) | $. (PU < 、$. (@P < と)) | $. -RRB- ]) $, /^VB|^ADJ|^AX|^PASS|^NEG/ !> MD
+
+createSubtree MD a b
+
+% よう（だ）
+!MD=a < よう $. (AX < だ|だっ|です|でし) $, /^VB|^ADJ|^AX|^PASS|^NEG/ 
+
+relabel a MD
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place particles together
+
+% ならば
+@P=a < なら $. (@P=b < ば) !> P-CONJ
+
+createSubtree P-CONJ a b
+
+
+% とともに
+@P=a < と $. (N=y < とも $. (@P=b < に)) !> P-CASE
+
+createSubtree P-CASE a b
+
+
+% けれども
+__=a < けれど|けど $. (@P=b < も) !> P-CONJ
+
+createSubtree P-CONJ a b
+
+
+% とか
+@P=a < と $. (@P=b < か) !> P-OPTR
+
+createSubtree P-OPTR a b
+
+
+% っていうか
+@P=a < って $. (__ < いう $. (@P=b < か)) !> P-CASE
+
+createSubtree P-CASE a b
+
+
+% っていう
+@P=a < って $. (__=b < いう !$. @P) !> P-CASE
+
+createSubtree P-CASE a b
+
+
+% ばかりに
+__=a < ばかり $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONJ
+
+createSubtree P-CONJ a b
+
+
+% だけに
+__=a < だけ $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONJ
+
+createSubtree P-CONJ a b
+
+% だの
+__=a < だ $. (@P=b < の) $, /^N|^AX|^ADJ|^VB|^MD|^NEG|^PASS/ !> P-OPTR
+
+createSubtree P-OPTR a b 
+
+% ども
+__=a < ど $. (__=b < も) $, /^VB|^PASS/ !> P-CONJ
+
+createSubtree P-CONJ a b
+
+% うえで
+__=a < うえ|上 $. (__=b < で) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONJ
+
+createSubtree P-CONJ a b
+
+% うえに
+__=a < うえ|上 $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONJ
+
+createSubtree P-CONJ a b
+
+% からすると
+__=a < から $. (__ < する $. (__=b < と)) $, /^N/ !> P-CASE
+
+createSubtree P-CASE a b
+
+% かわりに
+__=a < かわり|代わり $. (__=b < に) $,  /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONJ
+
+createSubtree P-CONJ a b
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge into CONJ
+
+% ばかりで|じゃなく
+__=a < ばかり $. (__ < で|じゃ $. (__=b < なく)) !> CONJ
+
+createSubtree CONJ a b
+
+% ばかりではなく
+__=a < ばかり $. (__ < で $. (__ < は $. (__=b < なく))) !> CONJ
+
+createSubtree CONJ a b
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% だけでなく
+@P=a < だけでなく
+
+relabel a CONJ
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% verbal noun
+/^NV\b/=x $. /^VB2\b/=y
+
+relabel x VB
+relabel y /^VB2(.*)$/VB0$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% どころか
+__=a < どころ $. (__=b < か) !> CONJ
+
+createSubtree CONJ a b
+
+%どころ
+@P=a < どころ
+
+relabel a N
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% だす/出す
+
+/^VB/=x $. (/^VB2/=y < /[だ|出][さ|し|す|せ|そ]/)
+
+move y >-1 x 
+excise y y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% はじめる/始める
+
+
+/^VB/=x $. (/^VB2/=y < /[はじ|始]め[る|れ|ろ]?/)
+
+move y >-1 x
+excise y y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% VB いる
+/^VB2\b/=x < い|いる|いれ|いろ !$, (@P < て|で) !$, AX !$, (/^P-OPTR/ $, (@P < て|で))
+
+relabel x /^VB2(.*)/VB$1/
+
+
+% VB2 いる
+/^VB\b/=x < い|いる|いれ|いろ $, (/^P-OPTR/ $, (@P < て|で)) 
+
+relabel x /^VB(.*)/VB2$1/
+
+% VB2 いく
+/^VB\b/=x < /^い[か|き|く|け|こ]/ $, ((@P < て|で) $, /^VB/) 
+
+relabel x /^VB(.*)/VB2$1/
+
+% VB2 くる
+/^VB\b/=x < こ|き|くる|くれ|こい $, ((@P < て|で) $, /^VB/) 
+
+relabel x /^VB(.*)/VB2$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make VB2 into VB
+/^VB2\b/=y [ $, /^P-CASE|^NP|^ADVP|CARD/ | $, (/^P-OPTR/ $, /^P-CASE/) ]
+
+relabel y /^VB2(.*)$/VB$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% combine CARD
+WCARD|CARD=x $. (PU=y $. WCARD|CARD=z)
+
+move y >-1 x
+move z >-1 x
+excise y y
+excise z z
+
+
+WCARD|CARD=x $. WCARD|CARD=y
+
+move x >1 y
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build NUMCLP layer
+NUMCL=x $. NUMCL=y
+
+move x >1 y
+excise x x
+
+
+@NUMCL=x > @IP|ALTERNATIVE !$, CARD
+
+relabel x SUFFIX
+
+
+@NUMCL=x > @IP|ALTERNATIVE
+
+adjoinF (NUMCLP @) x
+
+
+@CARD|WCARD=x !$. NUMCL|NUMCLP > @IP|ALTERNATIVE
+
+adjoinF (NUMCLP @) x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place CARD under adjacent NUMCLP
+@WCARD|CARD=x $. @NUMCLP=y
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% project NP from NUMCLP
+@NUMCLP=x > @IP $. /^P-CASE/ 
+
+adjoinF (NP @) x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build NP structure
+@N|NPR|PRO|WPRO=x > @IP
+
+adjoinF (NP @) x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place D under adjacent NP
+@D=x $. NP=y
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move SUFFIX inwards
+__ <-1 (__=x < __) $. SUFFIX=y
+
+move y $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move PREFIX inwards
+__ <1 (__=x < __) $, PREFIX=y
+
+move y $+ x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build PP structure
+NP=x $. @P=y > @IP|ALTERNATIVE
+
+adjoinF (PP @) y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place NP under adjacent PP
+@NP=x $. (@PP=y <: @P)
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build ADVP structure
+@ADV|WADV=x > @IP|ALTERNATIVE
+
+adjoinF (ADVP @) x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build PP structure
+ADVP=x $. @P=y > @IP|ALTERNATIVE
+
+adjoinF (PP @) y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place ADVP under adjacent PP
+ADVP=x $. (@PP=y <: @P)
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build PP structure
+@PP=x $. (@P=y !> @PP|CONJP)
+
+adjoinF (PP @) y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place PP under adjacent PP
+@PP=x $. (@PP=y <: @P)
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place の PP under adjacent NP or NP under adjacent PP
+@PP=x < (/^P-CASE/ <: の) [ $. (@NP=y !< /^\*/) | $. (@PP < NP=y) ] !> /^IP-REL|^NP|^NML|^PRN/
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% create subordinate IP
+/^ADJI\b|^ADJN\b|^VB\b/=x [ $.. /^VB\b|^ADJI\b|^ADJN\b|^NV\b|^IP/ | $.. (@NP|PP|ADVP $.. /^VB2|^AX/) | $.. (@NP|PP|ADVP . ID) | $.. (@NP|PP|ADVP . (PU . ID)) ]
+
+adjoinF (IP @) x
+
+
+@VB2|AX=x $, @NP|PP|ADVP [ $.. /^VB\b|^ADJI\b|^ADJN\b|^NV\b|^IP/ | $.. (@NP|PP|ADVP $.. /^VB2|^AX/) | $.. (@NP|PP|ADVP . ID) | $.. (@NP|PP|ADVP . (PU . ID)) ]
+
+adjoinF (IP @) x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% IP=z <: __=x $, IP=y
+% 
+% excise z z
+% move x >-1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bring elements under IP
+@IP=x [ $. (/^P-OPTR|^P-NOUN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/=y !> @PP) | $. (/^P-CONJ/=y $. /^P-NOUN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/) | $. (/^P-CONJ/=y $. (/^P-OPTR/ $. /^P-NOUN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/)) ]
+
+move y >-1 x
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % place NP|PP under adjacent IP
+% @PP|NP|ADVP=x $. @IP=y > @IP
+% 
+% move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% connective particle integrating IP
+@IP < (@IP $. /^P-CONJ|^P-CASE/=y)
+
+adjoinF (PP @) y
+
+
+@IP < (@IP $. (@P=y < と))
+
+adjoinF (PP @) y
+
+
+@IP=x $. (PP=y <: @P)
+
+move x >1 y
+relabel x IP-ADV
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build PP structure
+@PP=x $. (@P=y !> @PP|CONJP)
+
+adjoinF (PP @) y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place PP under adjacent PP
+@PP=x $. (@PP=y <: @P)
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move SUFFIX inwards
+__ <-1 (__=x < __) $. SUFFIX=y
+
+move y $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move FW and PREFIX inwards
+__ <1 (__=x < __) $, FW|PREFIX=y
+
+move y $+ x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% add PRD
+NP=x $. /^AX/
+
+relabel x NP-PRD
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge NPs
+NP=x $. (@NP=y >-1 @IP)
+
+move x >1 y
+
+
+NP=x > (@NP !< CONJP)
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make FRAG
+/^IP-MAT/=x <: NP|PP
+
+relabel x FRAG
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% more Ps adjacent to IP
+@IP < (@IP $. @P=y)
+
+adjoinF (PP @) y
+
+
+@IP=x $. (PP=y <: @P)
+
+move x >1 y
+relabel x IP-ADV
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% build PP structure
+PP=x $. (@P=y !> PP|CONJP)
+
+adjoinF (PP @) y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% place PP under adjacent PP
+PP=x $. (PP=y <: @P)
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% project NP with NUMCLP
+@NUMCLP=x > @IP|ALTERNATIVE
+
+adjoinF (NP @) x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move IP into nominalization marker
+@IP=x . (@NP=y <: (@N <: /^\*$/))
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move PP adjacent to nominalization marker
+@PP=x . (@NP=y <: (@N <: /^\*$/) !$, @PP)
+
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove left over PP layers
+@PP <: PP=x
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make IP-TE
+PP=z < (IP-ADV=y $. (/^P-CONJ/=x < て)) !<3 __
+
+move x >-1 y
+excise z z
+relabel y IP-TE
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% でしょう
+__=a < でしょう [ $, /^NP|^ADJN|^ADVP/ | $, (@P < ん|の) | $, (PP < /^P-OPTR/ < NP) ]
+
+replace a (AX でしょ) (MD う)
+
+
+% だろう
+__=a < だろう [ $, /^NP|^ADJN|^ADVP/ | $, (@P < ん|の) | $, (PP < /^P-OPTR/ < NP) ]
+
+replace a (AX だろ) (MD う)
+
+
+!MD=a < でしょう|だろう
+
+relabel a MD
+
+
+% であろう
+AX < で $. (/^VB2/=a < あろう) [ $, /^NP|^ADJN|^ADVP/ | $, (@P < ん|の) | $, (PP < /^P-OPTR/ < NP) ]
+
+replace a (VB2 あろ) (MD う)
+
+
+AX=a < で $. (/^VB2/=b < あろう)
+
+delete b
+replace a (MD であろう)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IP under IP
+IP=x > @IP
+
+relabel x IP-ADV
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge SUFFIX
+!/^PU|RB/=x < (__ !< __) $. SUFFIX=y
+
+move y >-1 x
+excise y y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% merge PREFIX
+!/^PU|RB/=x < (__ !< __) $, PREFIX=y
+
+move y >1 x
+excise y y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% verbal noun
+NV=x > (@IP < /^NP|^PP/)
+
+relabel x VB
+
+
+NV=x
+
+relabel x N
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% reposition IP-ADV
+/^IP-ADV/=x . (N=y < の !$, IP-EMB)
+
+move x $+ y
+relabel x IP-EMB
+
+
+@IP=x <: ADJI . NP=y
+
+move x >1 y
+excise x x
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% change NEG
+NEG=x < ない|なく|なかっ !$,, /^ADJ|^VB|^AX|^NP-PRD/
+
+relabel x ADJI
+
+
+NEG=x < ない|なく|なさ|なかっ|なき|なけれ|なかろ $, (@PP < NP)
+
+relabel x ADJI
+
+%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% have ADJN project ADVP
+ADJN=x $. (AX=y < に !$. (/^VB2/ < /なら|なり|なる|なれ|なろ|し|する|さ|せ|すれ|しろ/)) !> ADVP
+
+adjoinF (ADVP @) x
+move y $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% change VB2
+/^VB2\b/=x $, (PP < NP)
+
+relabel x /^VB2(.*)/VB$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% change VB
+
+% VB2 ADJNになる 
+/^VB\b/=x < /^な[ら|り|る|れ|ろ]/ $, (ADVP=y <-2 /^ADJN/ <-1 (AX < に))
+
+excise y y
+relabel x /^VB(.*)/VB2$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% flatten PP
+@PP < PP=x !< CONJP
+
+excise x x
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% remove layers to form words
+
+@ADV|AX|CONJ|D|MD|N|P|WADV < (__=x < __)
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% change IP-ADV
+/^IP-ADV/=x <-1 CONJ=y
+
+move y $- x
+

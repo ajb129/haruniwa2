@@ -1,0 +1,131 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      Comainu_to_BCCWJ - transform Comainu tabled analysis
+
+SYNOPSIS
+      Comainu_to_BCCWJ [OPTIONS]
+
+DESCRIPTION
+      Filter that takes Comainu tabled analysis (http://comainu.org)
+      as input and returns the data in the M-XML (morphology-based XML)
+      format of the BCCWJ.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+EXAMPLE=$(dirname $0)/../BCCWJ/Comainu_example.txt
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | Comainu_to_BCCWJ
+END
+
+cat ${EXAMPLE} | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat ${EXAMPLE} | $0 | sed 's/^/      -| /' 1>&2
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      BCCWJ_to_tnt(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --example)  # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)          # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+sed 's/^B\t//; s/^\t//;' | gawk '
+
+BEGIN {
+
+FS = "\t"
+
+print "<paragraph>"
+}
+
+$0 ~ /^EOS/ {
+word = 0
+print "</LUW>\n</sentence>"
+next
+}
+
+$13 != "*" {
+if (word) {
+  print "</LUW>"
+}
+else {
+  print "<sentence>"
+}
+
+word++
+
+printf ("<LUW%s%s%s%s%s>\n",
+ $12 && "*" != $12 ? sprintf(" l_lemma=\"%s\"", $12) : "",
+ $11 && "*" != $11 ? sprintf(" l_lForm=\"%s\"", $11) : "",
+ $8 && "*" != $8 ? sprintf(" l_pos=\"%s\"", $8) : "",
+ $9 && "*" != $9 ? sprintf(" l_cType=\"%s\"", $9) : "",
+ $10 && "*" != $10 ? sprintf(" l_cForm=\"%s\"", $10) : "")
+
+}
+
+{
+
+printf ("<SUW%s%s%s%s%s%s>%s</SUW>\n",
+ $4 && "*" != $4 ? sprintf(" lemma=\"%s\"", $4) : "",
+ $3 && "*" != $3 ? sprintf(" lForm=\"%s\"", $3) : "",
+ $5 && "*" != $5 ? sprintf(" pos=\"%s\"", $5) : "",
+ $2 && "*" != $2 ? sprintf(" pron=\"%s\"", $2) : "",
+ $6 && "*" != $6 ? sprintf(" cType=\"%s\"", $6) : "",
+ $7 && "*" != $7 ? sprintf(" cForm=\"%s\"", $7) : "",
+ $1)
+
+}
+
+END {
+print "</paragraph>"
+}
+
+'
+

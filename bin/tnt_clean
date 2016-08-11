@@ -1,0 +1,129 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      tnt_clean - clean tnt
+
+SYNOPSIS
+      tnt_clean [OPTIONS]
+
+DESCRIPTION
+      Filter that cleans tnt.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | tnt_clean
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | tnt_clean | sed 's/^/      -| /' 1>&2
+花子;ハナコ	NPR
+は;ワ	P
+赤い;アカイ	ADJI
+コート;コート	N
+を;オ	P
+着;キ	VB;着る.0
+た;タ	AXD
+。	PU
+EOS
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      tnt_to_inline(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --full)     # full parts-of-speech information
+         FULL=1 ; shift ;;
+
+      --pron)     # pronounce information
+         PRON=1 ; shift ;;
+
+      --sense)    # sense information
+         SENSE=1 ; shift ;;
+
+      --example)  # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)          # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+if test ${PRON}; then
+  cat
+else
+  awk '
+NF == 2 {
+split($1, parts, ";")
+
+printf("%s\t%s\n", parts[1], $2)
+
+next
+}
+
+{ print }
+'
+fi | \
+if test ${SENSE}; then
+  cat
+else
+  awk '
+NF == 2 {
+split($2, parts, ";")
+
+printf("%s\t%s\n", $1, parts[1])
+
+next
+}
+
+{ print }
+'
+fi | \
+if test ${FULL}; then
+  cat
+else
+  sed 's/P-[^ ]*$/P/'
+fi
+

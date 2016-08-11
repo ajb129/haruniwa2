@@ -1,0 +1,81 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      haruniwa2_scaffold - modify keyaki POS information
+
+SYNOPSIS
+      haruniwa2_scaffold
+
+DESCRIPTION
+      Filter to build parse structure, disambiguate parts-of-speech, as well as
+      merge and demerge words.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | haruniwa2_scaffold
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | $0 | sed 's/^/      -| /' 1>&2
+( (IP-MAT (N 大学) (P-CASE まで) (WADV どう) (VB2;遣る やっ) (P-CONJ て) (VB2;行く 行き) (AX ます) (P-FINAL か) (PU 。)) (ID example;MJ))
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      inline_to_tnt(1), tnt_to_inline(1), tnt_clean(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --example)    # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)            # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+DIR=$(dirname $0)/../scripts
+
+tsurgeon_script --together ${DIR}/scaffold.tsurgeon ${DIR}/scaffold.tsurgeon
+

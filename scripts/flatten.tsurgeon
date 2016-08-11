@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove layers introduced because of punctuation etc %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+% remove inside
+/^(.*)$/#1\%index < (/^(.*)$/#1\%index=x [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (/^-RRB-|^-LRB-|^PRN|^\"$/ < __) | <-1 (/^-RRB-|^-LRB-|^PRN|^\"$/ < __) ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%
+% remove inside
+/^(.*)$/#1\%index < /^(.*)$/#1\%index=x [ <1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) | <-1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) ] > TOP !< /^CONJP/
+
+excise x x
+
+
+%%%%%%%%%%%%%%%
+% remove inside
+/^(.*)$/#1\%index < (/^(.*)$/#1\%index=x !> /^NP|^ADJP|^ADVP|^PP|^IP-ADV|^IP-REL|^IP-TE|^CONJP/ [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) | <-1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) ] [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%
+% remove outside
+/^(.*)$/#1\%index=x < (/^(.*)$/#1\%index [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ/ < __) | <-1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ/ < __) ] [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove layers above CONJP
+/^(.*)$/#1\%index $ (/^(.*)$/#1\%index=x < (/^CONJP/ < /^(.*)$/#1\%index))
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%
+% remove outside
+/^(NP.*)$/#1\%index=x < (/^(NP.*)$/#1\%index <: __) [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ] !< @PP|CP|IP|RRC
+
+excise x x
+
+
+/^(NP.*)$/#1\%index=x < /^(NP.*)$/#1\%index [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ] !< @PP|CP|IP|RRC|N|NS|NPR|NPRS|ADJ|ADJS|ADJR|D|Q|QP|ADV|ADVS|ADVR > @NP|NML
+
+excise x x
+
+
+/^(.*)$/#1\%index=x < CONJP < /^(.*)$/#1\%index [ > (/^(.*)$/#1\%index < CONJP) | > (NML < CONJP) ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%
+% remove inside
+/^(.*)$/#1\%index < (/^(.*)$/#1\%index=x <: __) [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%
+% remove internal
+/^(.*)$/#1\%index <2 /^(.*)$/#1\%index=x [ <1 /^-LRB-/ <3 /^-RRB-/ !<4 __ | <1 /^\"$/ <3 /^\"$/ !<4 __ ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove noun phrase layers
+@NP <1 (NP=x < CONJP) < @PP|CP|IP|RRC
+
+relabel x NML
+
+
+@NP <-1 (NP=x < CONJP) < @PP|CP|IP|RRC
+
+relabel x NML
+
+
+@NP <1 NP=x < @PP|CP|IP|RRC
+
+excise x x
+
+
+@NP <-1 NP=x < @PP|CP|IP|RRC
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove NML, IML and VP layers
+NML|IML|VP=x !< CONJP !$ CONJP !> CONJP
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove CONJX layers
+CONJX=x
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove PX layers
+PX=x
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% add FRAG
+TOP < NP=x
+
+adjoinF (FRAG @) x
+
+

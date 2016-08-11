@@ -1,0 +1,182 @@
+#!/bin/bash
+
+BLOCK=1
+
+MODEL="$($(dirname $0)/../model_location)"
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      haruniwa2 - parse input
+
+SYNOPSIS
+      haruniwa2 [OPTIONS]
+
+DESCRIPTION
+      Parse input with the HARUNIWA grammar model for Japanese using
+      the Berkley parser.
+
+      Input should be in TnT format where each line contains one
+      word token and one part-of-speech tag separated by a single tab
+      character.  EOS indicates end-of-sentence.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | haruniwa2 | munge-trees -p
+END
+
+cat $0 | sed '1,/^cat << DEMO1/d; /^DEMO1$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO1 | $0 | munge-trees -p | sed 's/^/      -| /' 1>&2
+すもも	N
+も	P
+もも	N
+も	P
+もも	N
+の	P
+うち	N
+。	PU
+EOS
+にわ	N
+に	P
+は	P
+に	CARD
+わ	NUMCL
+の	P
+にわとり	N
+が	P
+いる	VB
+。	PU
+EOS
+DEMO1
+
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | haruniwa2 3
+END
+
+cat $0 | sed '1,/^cat << DEMO2/d; /^DEMO2$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO2 | $0 3 | sed 's/^/      -| /' 1>&2
+ゴスタック	N
+は	P
+ドッシュ	N
+を	P
+ディスティム	VB
+し	VB0
+ます	AX
+。	PU
+EOS
+DEMO2
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      parse(1), parse_finish(1), rerank(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --raw)                  # output parse without any modification
+                              #   (default is to post-process with parse_decorate and parse_finish)
+         RAW=1 ; shift ;;
+
+      --top|-top)             # output with TOP as root node
+         TOP=1 ; shift 1 ;;
+
+      --basic|-basic)         # output without root node wrapping
+         BASIC=1 ; shift 1 ;;
+
+      --johnson|-johnson)     # output prepared for reranking
+         JOHNSON=1 ; shift 1 ;;
+
+      [0-9]*)                 # number of most probable parse trees output (default is 1)
+         BLOCK=$1; shift ;;
+
+      --example)              # show examples
+         help_information
+         example
+         see_also
+         exit ;;
+
+      -*)                     # show this help message
+         help_information
+         see_also
+         exit ;;
+
+      *)                      # location of grammar model
+         MODEL=$1; shift ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+DIR=$(dirname $0)/../scripts
+
+PATH=${DIR}:${PATH}
+
+if test ${TOP}; then
+function stamp () {
+  sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
+  sed '/^(number /d'
+}
+elif test ${BASIC}; then
+function stamp () {
+  sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
+  sed '/^(TOP / {s/^(TOP //; s/)$//}' | sed '/^(number /d'
+}
+elif test ${JOHNSON}; then
+function stamp () {
+  sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE \([^ ()]*\)) /\1\n/; s/)$// }" | \
+  sed '/^(TOP / {s/^(TOP /(S1 /}' | sed 's/^(number \([0-9]*\))$/\1\t1/;'
+}
+else
+function stamp () {
+  sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
+  sed '/^(TOP / {s/^(TOP /( /; s/)$/ (ID ex'$(date +%s)';MJ))/}'
+}
+fi
+
+
+berkeley_parse ${MODEL} ${BLOCK} | \
+if test ${RAW}; then
+  cat
+else
+  tsurgeon_script ${DIR}/flatten.tsurgeon ${DIR}/japanese.tsurgeon | stamp
+fi
+

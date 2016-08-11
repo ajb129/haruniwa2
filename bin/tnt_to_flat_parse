@@ -1,0 +1,95 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      tnt_to_flat_parse - make basic parse from tnt analysis
+
+SYNOPSIS
+      tnt_to_flat_parse
+
+DESCRIPTION
+      Filter to make basic parse from tnt analysis.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | tnt_to_flat_parse
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | tnt_to_flat_parse | sed 's/^/      -| /' 1>&2
+授業	N
+が	P
+終わる	VB
+。	PU
+EOS
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      tnt_collapse(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --example)    # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)            # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+
+awk '
+BEGIN {printf("( (IP-MAT") }
+
+$1 ~ /EOS/ {
+printf(") (ID example;MJ))\n( (IP-MAT")
+next
+}
+
+{ printf(" (%s %s)", $2, $1)}
+
+
+END { printf "\n" }
+' | sed "$ d"
+

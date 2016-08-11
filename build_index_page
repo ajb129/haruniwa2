@@ -1,0 +1,125 @@
+#!/bin/bash
+
+BIN=$(dirname $0)/bin
+
+export PATH=${BIN}:$PATH
+
+cat << EOF
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="Treebank,Japanese,Natural Language,Parser">
+<meta name="description" content="HARUNIWA2 - Japanese Treebank grammar for BitPar parser">
+<title>HARUNIWA2</title>
+</head>
+
+<body>
+
+<table width="100%" border="1" cellspacing="0" cellpadding="10" style="table-layout: fixed">
+<tr>
+<td><a href="https://github.com/ajb129/haruniwa2">Download</a></td>
+<td><a href="http://www.compling.jp/haruniwa2/haruniwa2_model.zip">Berkeley Parser model</a></td>
+<td><a href="#man">Manual pages</a></td>
+<td><a href="../related/index.html">More Projects</a></td>
+</tr>
+</table>
+
+<h2 align="left"><b><i>Welcome to</i></b></h2>
+<h2 align="center"><b>HARUNIWA2 &mdash;<br> pipeline for parsing Japanese</b></h2>
+
+<h3>What is HARUNIWA2?</h3>
+
+<p align="justify">
+HARUNIWA2 provides a full pipeline for parsing Japanese,
+and also integrating information
+such as pronouncement,
+lemma and word sense information
+into a parse tree.
+Central components are an
+interface to the 
+COrpus based Morphological Analyzer with INtegrated User dictionary
+<a href="http://comainu.org/">Comainu</a>
+(<a href="http://www.anlp.jp/proceedings/annual_meeting/2014/pdf_dir/P6-2.pdf">小澤 俊介, 内元 清貴,  伝 康晴, 2014</a>)
+and a model for the
+<a href="https://github.com/slavpetrov/berkeleyparser">Berkeley Parser</a> (<a href="http://aclweb.org/anthology/N07-1051">Petrov and Klein, 2007</a>)
+trained on
+data of the <a href="http://www.compling.jp/keyaki/engindex.html">Keyaki Treebank</a>.
+</p>
+
+<p align="justify">
+Transformations
+are made to the treebank data,
+using among other things
+the <a href="http://nlp.stanford.edu/software/tregex.shtml">stanford-tregex</a> tool
+(<a href="http://nlp.stanford.edu/pubs/levy_andrew_lrec2006.pdf">Levy and Andrew, 2006</a>),
+aiming to tune the content of the Keyaki Treebank
+to the specific needs of probabilistic context-free parsers,
+while allowing the original annotation to be restored.
+</p>
+
+<p align="justify">
+All components are distributed <a href="https://github.com/ajb129/haruniwa2">freely</a>.
+</p>
+
+<h3>Acknowledgements</h3>
+
+<p align="justify">
+This software is developed as part of the project
+<a href="http://npcmj.ninjal.ac.jp/?lang=en">Development of and Linguistic Research with a Parsed Corpus of Japanese</a>
+of the
+<a href="https://www.ninjal.ac.jp/english">National Institute for Japanese Language and Linguistics</a>.
+</p>
+
+<h3>Feedback</h3>
+
+<p align="justify">
+Feedback is extremely welcome.
+Please email:
+<tt>ajb129</tt> <tt>__AT__</tt> <tt>hotmail</tt> <tt>__DOT__</tt> <tt>com</tt>.
+</p>
+
+<br>
+<hr>
+
+<h3><a name="man">Manual pages</a></h3>
+
+<table width="100%" cellspacing="0" cellpadding="0" style="table-layout: fixed">
+EOF
+
+for i in $(/bin/ls ${BIN});
+do
+${i} --help 2>&1 | sed -n 2p | awk '
+
+{
+printf ("<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"#%s\">%s(1)</a></small></td><td><small>%s</small></td></tr>\n", $1, $1, gensub(/^  *[^ ]* - /, "", 1, $0))
+}
+
+'
+done
+
+cat << EOF
+</table>
+
+<br>
+
+EOF
+
+# program
+for i in $(/bin/ls ${BIN});
+do
+${i} --example 2>&1 | build_man_html
+echo ${i} 1>&2
+done
+
+cat << EOF | LC_ALL=C gawk '{ gsub(/__date__/, strftime("%B %d, %Y")); print }'
+
+<hr>
+
+<p align="left">Last updated: __date__</p>
+
+</body>
+</html>
+EOF
+

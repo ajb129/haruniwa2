@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+
+PARSER="$($(dirname $0)/../parser_location)"
+
+DATA=$1
+
+java -server -mx800m -cp ${PARSER} edu.berkeley.nlp.PCFGLA.WriteGrammarToTextFile ${DIR}/../${DATA}/gram.gr ${DIR}/../${DATA}/${DATA}
+

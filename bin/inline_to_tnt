@@ -1,0 +1,92 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      inline_to_tnt - convert inline to TnT format
+
+SYNOPSIS
+      inline_to_tnt
+
+DESCRIPTION
+      Filter to convert tagged information in inline format to TnT format.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | inline_to_tnt
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | inline_to_tnt | sed 's/^/      -| /' 1>&2
+花子_NPR は_P 赤い_ADJI コート_N を_P 着_VB た_AXD 。_PU
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      tnt_to_inline(1), tnt_clean(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --example)    # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)            # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+awk '
+{
+
+for (i = 1; i <= NF; i++) {
+
+split($i, parts, "_")
+
+printf ("%s\t%s\n", parts[1], parts[2])
+
+}
+
+printf ("EOS\n")
+
+}
+'
+

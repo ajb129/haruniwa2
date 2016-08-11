@@ -1,0 +1,103 @@
+#!/bin/bash
+
+DIR=$(dirname $0)/../BCCWJ
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      BCCWJ_to_tnt - convert M-XML to Keyaki tags
+
+SYNOPSIS
+      BCCWJ_to_tnt [OPTIONS]
+
+DESCRIPTION
+      Filter that takes files in the M-XML (morphology-based XML) format
+      of the BCCWJ (http://www.ninjal.ac.jp/corpus_center/bccwj) that
+      contains both the document structure information and the results
+      of dual POS analysis and returns the POS analysis with Keyaki
+      Treebank tags.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+EXAMPLE=${DIR}/Comainu_example.txt
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | BCCWJ_to_tnt
+END
+
+cat ${EXAMPLE} | ${DIR}/../bin/Comainu_to_BCCWJ | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat ${EXAMPLE} | ${DIR}/../bin/Comainu_to_BCCWJ | $0 | sed 's/^/      -| /' 1>&2
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      Comainu_to_BCCWJ(1), tnt_collapse(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --tree)     # show intermediate tree from tnt_collapse
+         TREE=1 ; shift ;;
+
+      --raw)      # without tnt_collapse
+         RAW=1 ; shift ;;
+
+      --example)  # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)          # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+xmllint --noblanks - | \
+xsltproc ${DIR}/BCCWJ_remove_nodes.xsl - | \
+sed 's/superSentence/sentence/g' | \
+xmllint --noblanks - | \
+xsltproc ${DIR}/BCCWJ_to_tnt.xsl - | \
+if test ${RAW}; then
+  cat
+else
+  if test ${TREE}; then
+    tnt_collapse --tree
+  else
+    tnt_collapse
+  fi
+fi
+

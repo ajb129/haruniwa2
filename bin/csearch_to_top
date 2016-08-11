@@ -1,0 +1,72 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      csearch_to_top - change treebank format
+
+SYNOPSIS
+      csearch_to_top
+
+DESCRIPTION
+     Filter to transform CorpusSearch treebank data into Penn Treebank format.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | csearch_to_top | munge-trees -p
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | munge-trees -p | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | csearch_to_top | munge-trees -p | sed 's/^/      -| /' 1>&2
+( (IP-MAT (PP (NP (N 授業)) (P が)) (NP-SBJ *が*) (VB 終わる) (PU 。)) (ID 7_textbook_kisonihongo;page_13;AT1-7;MJ))
+DEMO
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --example)    # show an example
+         help_information
+         example
+         exit ;;
+
+      *)            # show this help message
+         help_information
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+munge-trees -w | \
+sed '
+/ (ID [^)]*))$/ { s/^( /(TOP /; s/ (ID [^)]*))$/)/ }
+/^(TOP /! { s/^/(TOP /; s/$/)/ }
+/^(TOP ([^ICSF]/ { s/^(TOP /(TOP (FRAG /; s/$/)/ }
+# s/^(TOP (IP-MAT /(TOP (IP-MAT-TOP /
+'
+

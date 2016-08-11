@@ -1,0 +1,228 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% start adding functional information, etc %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% add trace information for relative clause
+IP-REL=x !< (__ < /\*T\*/)
+
+insert (NP *T*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% を
+PP=x < (P|P-CASE < を) > @IP !$. (@NP < /^\*/)
+
+insert (NP-OB1 *を*) $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% が
+PP=x < (P|P-CASE < が) > @IP !$. (@NP < /^\*/)
+
+insert (NP *が*) $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% の
+PP=x < (P|P-CASE < の) > /^IP-REL/ !$. (@NP < /^\*/)
+
+insert (NP-SBJ *の*) $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% P-OPTR
+PP=x < NP > @IP !$. (@NP < /^\*/) [ < (P < か|きり|くらい|ぐらい|こそ|ごと|さえ|しか|しも|すら|だけ|だって|だり|でも|とも|ともあれ|なんか|なんて|にしてからが|にしても|にせよ|に限って|のみ|は|ばかし|ばかり|も|ものなら|ら|だが|ずつ !$ P|P-CASE) | < (P-OPTR !$ P|P-CASE) ]
+
+insert (NP *) $- x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONJ information for star
+PP-CONJ=x
+
+insert (CONJ *) $- x
+relabel x PP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CND information for star
+PP-CND=x
+
+insert (CND *) $- x
+relabel x PP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CRD information for star
+PP-CRD=x
+
+insert (CRD *) $- x
+relabel x PP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NP reflexive
+NP=x < (PRO < ご自身|そのもの|それ自身|みずから|僕ら|自ら|自体|自身) > @NP
+
+relabel x NP-RFL
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Give NP が functional role
+VB < いただき|いり|うわさ|お好み|お望み|ご利用|ご提供|ご用意|ご覧|しゃべれ|できれ|とれる|どけ|まとめきれ|もらえる|わかる|わかん|下ろせ|休め|作れ|優れ|出せ|分っ|分り|味わわ|弾ける|彫っ|思える|感ぜ|持て|摂取|書け|書ける|検査|気に入っ|潰せ|着慣れ|聴け|要り|見れる|観|解け|読み取れ|読み取れる|読める|貰い|買え|買える|飲み|飲め|飼え $ (NP=x < /^\*が\*$/) !$ /OB1|PRD/
+
+relabel x NP-OB1
+
+
+/^ADJ/ < うまい|うれしい|お好き|きらい|い|下手|大好き|大嫌|大嫌い|心配|恋しい|恋しく|恐い|憎かっ|楽しみ|無かっ|達者 $ (NP=x < /^\*が\*$/) !$ /OB1|PRD/
+
+relabel x NP-OB1
+
+
+NP=x < /^\*が\*$/ !$ /SBJ/
+
+relabel x NP-SBJ
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add PRD functional information
+NP=x $. AX
+
+relabel x NP-PRD
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add NP functional information
+NP=x < /^\*$/ !$ /SBJ/
+
+relabel x NP-SBJ
+
+
+NP=x < /^\*T\*$/ !$ /SBJ/
+
+relabel x NP-SBJ
+
+
+NP=x $ /SBJ/ !$ /OB1|PRD/
+
+relabel x NP-OB1
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add SBJ pro with IP-MAT or IP-REL
+/^IP-MAT|^IP-REL/=x < /^V|^ADJ|PRD|OB1|^AX/ !< /SBJ/
+
+insert (NP-SBJ *pro*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add SBJ pro with IP-ADV as NP-SBJ
+@PP < (/^IP-ADV/=x < /^V|^ADJ|PRD|OB1|^AX/ !< /SBJ/) $. (NP-SBJ < /^\*/)
+
+insert (NP-SBJ *pro*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add SBJ pro with CP-ADV as NP-SBJ
+@PP < (/^CP-ADV/ < (IP-SUB=x < /^V|^ADJ|PRD|OB1|^AX/ !< /SBJ/)) $. (NP-SBJ < /^\*/)
+
+insert (NP-SBJ *pro*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add SBJ pro with IP-EMB inside NP-SBJ
+@PP < (NP < (IP-EMB=x < /^V|^ADJ|PRD|OB1|^AX/ !< /SBJ/)) $. (NP-SBJ < /^\*/)
+
+insert (NP-SBJ *pro*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add SBJ pro with CP-THT|CP-QUE < IP-SUB
+/^IP-SUB/=x < /^V|^ADJ|PRD|OB1|^AX/ !< /SBJ/ [> /^CP-THT|^CP-QUE|^CP-EXL/ | > (/^IP-SUB/ > /^CP-THT|^CP-QUE|^CP-EXL/) | > (CONJP > (/^IP-SUB/ > /^CP-THT|^CP-QUE|^CP-EXL/))]
+
+insert (NP-SBJ *pro*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add SBJ pro when VP is only daugher of IP
+@IP=x <: (IML|VP !> /^IP-TE|^IP-PPL|^IP-INF/)
+
+insert (NP-SBJ *pro*) >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% reorder pro information
+@IP <1 (@NP=x < /^\*pro\*/) <2 /-LRB-/=y
+
+move x $- y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ensure trace is first with IP-REL
+/^IP-REL/=x !<1 (@NP < /^\*T\*/) < (@NP=y < /^\*T\*/)
+
+move y >1 x
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % the following pattern should not return results
+% % 
+% % でしょ|だろ|であろ . う !, /^NP|^ADJN|^ADVP/ !, (@P < ん|の)
+% 
+% /^NP|^ADJN|^ADVP/=x $. (__=y < でしょう)
+% 
+% insert (MD う) $- x
+% insert (AX でしょ) $- x
+% delete y
+% 
+% 
+% @P=x < ん|の $. (__=y < でしょう)
+% 
+% insert (MD う) $- x
+% insert (AX でしょ) $- x
+% delete y
+% 
+% 
+% /^NP|^ADJN|^ADVP/=x $. (__=y < だろう)
+% 
+% insert (MD う) $- x
+% insert (AX だろ) $- x
+% delete y
+% 
+% 
+% @P=x < ん|の $. (__=y < だろう)
+% 
+% insert (MD う) $- x
+% insert (AX だろ) $- x
+% delete y
+% 
+% 
+% /^NP|^ADJN|^ADVP/=x $. (__=y < であろう)
+% 
+% insert (MD う) $- x
+% insert (AX であろ) $- x
+% delete y
+% 
+% 
+% @P=x < ん|の $. (__=y < であろう)
+% 
+% insert (MD う) $- x
+% insert (AX であろ) $- x
+% delete y
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % introduce imperative
+% /^IP-MAT/=x < (VB2 < ください)
+% 
+% relabel x IP-IMP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change from IP-ADV to IP-TE
+IP-ADV=x [ <-1 (P < て|で) | <-1 (/^PU|LRB|RRB/ $, (P < て|で)) | <-1 (AX < で) | <-1 (/^PU|LRB|RRB/ $, (AX < で)) | <-1 (NEG < ず) | <-1 (/^PU|LRB|RRB/ $, (NEG < ず)) ]
+
+relabel x IP-TE
+
+

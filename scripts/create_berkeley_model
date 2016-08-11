@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# cat gold.psd | parse_decorate -d -e | parse_binarize --keepconj > data.mrg
+
+DIR=$(dirname $0)
+
+PARSER="$($(dirname $0)/../parser_location)"
+
+DATA=$1
+
+if test "$2"; then
+  CYCLES=$2
+else
+  CYCLES=5
+fi
+
+java -server -Xmx8192m -cp ${PARSER} edu.berkeley.nlp.PCFGLA.GrammarTrainer \
+ -keepFunctionLabels -treebank SINGLEFILE -path ${DIR}/../${DATA}/data.mrg -out ${DIR}/../${DATA}/gram.gr -SMcycles ${CYCLES}
+

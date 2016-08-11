@@ -1,0 +1,96 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      tnt_collapse - modify keyaki POS information
+
+SYNOPSIS
+      tnt_collapse
+
+DESCRIPTION
+      Filter to merge certain entries from keyaki part-of-speech analysis.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | tnt_collapse
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | $0 | sed 's/^/      -| /' 1>&2
+大学	N
+まで	P-CASE
+どう	WADV
+やっ	VB2;遣る
+て	P-CONJ
+行き	VB2;行く
+ます	AX
+か	P-FINAL
+。	PU
+EOS
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      tnt_to_flat_parse(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --tree)       # keep tree structure
+         TREE=1 ; shift ;;
+
+      --example)    # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)            # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+tnt_to_flat_parse | \
+haruniwa2_scaffold | \
+if test ${TREE}; then
+  cat
+else
+  tree_to_tnt --extended
+fi
+

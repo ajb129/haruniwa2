@@ -1,0 +1,68 @@
+Unless noted otherwise, all HARUNIWA-b source files (c) 2016 Alastair Butler
+
+See LICENSE.txt for licensing information.
+
+Feedback is extremely welcome. Please email: ajb129@hotmail.com
+
+
+This archive contains a Japanese grammar model for the Berkeley Parser which
+was extracted from the Keyaki Treebank (http://www.compling.jp/keyaki).
+
+
+Steps
+=====
+
+1. Obtain the Berkeley Parser which is available at
+   https://code.google.com/p/berkeleyparser
+
+2. Install Treebank Semantics Normalization Tools
+   available from http://www.compling.jp/normalization
+   This also requires installing
+     munge-trees (http://web.science.mq.edu.au/~mjohnson/code/munge-trees.tgz), and
+     stanford-tregex.jar (http://nlp.stanford.edu/software/tregex.shtml)
+
+3. Obtain the parser model trained on Keyaki Treebank from
+   http://www.compling.jp/haruniwa2/haruniwa2_model.zip
+
+   This parser model is trained on "data.mrg" created from the Keyaki
+   Treebank "gold.psd" data with the following steps:
+
+      cat gold.psd | parse_basic -d -e > essence.psd
+      cat essence.psd | parse_binarize --keepconj > binary.psd
+      cat binary.psd | csearch_to_top > data.mrg
+
+   Programs "parse_basic" and "parse_binarize" are distributed
+   as parts of the Treebank Semantics Normalization Tools obtained
+   as step 2.
+
+4. Change the content of "parser_location" (found in the same directory
+   as this README) to point to your local copy of the Berkeley Parser.
+
+5. Change the content of "model_location" (found in the same directory
+   as this README) to point to your local copy of the parser model
+   downloaded at step 3.
+
+6. Install Comainu
+   available from http://comainu.org/download 
+   This also requires installing the UNIDIC dictionary for mecab
+   (http://sourceforge.jp/projects/unidic) as well as other
+   dependencies, including mecab (https://code.google.com/p/mecab).
+
+7. Test the parser
+   The parser assumes input in pos TnT format, where each line contains
+   one word token and one part-of-speech tag separated by a single
+   tab character.  EOS indicates end-of-sentence.
+
+   Try:
+   > echo "輪が回る。" | comainu.pl plain2longout | Comainu_to_BCCWJ | \
+       BCCWJ_to_tnt | tnt_clean | haruniwa2
+
+
+Acknowledgements
+================
+
+This software is developed as part of the project Development
+of and Linguistic Research with a Parsed Corpus of Japanese
+(http://npcmj.ninjal.ac.jp/?lang=en) of the National Institute for
+Japanese Language and Linguistics (https://www.ninjal.ac.jp/english).
+
