@@ -1,4 +1,4 @@
-Unless noted otherwise, all HARUNIWA-b source files (c) 2016 Alastair Butler
+Unless noted otherwise, all HARUNIWA-b source files (c) 2017 Alastair Butler
 
 See LICENSE.txt for licensing information.
 
@@ -35,11 +35,11 @@ Steps
    as parts of the Treebank Semantics Normalization Tools obtained
    as step 2.
 
-4. Change the content of "parser_location" (found in the same directory
-   as this README) to point to your local copy of the Berkeley Parser.
+4. Change the content of "berkeley_parser_location" (found in the bin
+   directory) to point to your local copy of the Berkeley Parser.
 
-5. Change the content of "model_location" (found in the same directory
-   as this README) to point to your local copy of the parser model
+5. Change the content of "japanese_model_location" (found in the bin
+   directory) to point to your local copy of the parser model
    downloaded at step 3.
 
 6. Install Comainu

@@ -5,7 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="Treebank,Japanese,Natural Language,Parser">
 <meta name="description" content="HARUNIWA2 - Japanese Treebank grammar for BitPar parser">
+<link rel="shortcut icon" href="../dp2.ico">
 <title>HARUNIWA2</title>
+<style>li { margin: 5px -20px; }</style>
 </head>
 
 <body>
@@ -15,7 +17,7 @@
 <td><a href="https://github.com/ajb129/haruniwa2">Download</a></td>
 <td><a href="http://www.compling.jp/haruniwa2/haruniwa2_model.zip">Berkeley Parser model</a></td>
 <td><a href="#man">Manual pages</a></td>
-<td><a href="../related/index.html">More Projects</a></td>
+<td><a href="../ajb129/index.html#tools">More Tools</a></td>
 </tr>
 </table>
 
@@ -42,7 +44,7 @@ data of the <a href="http://www.compling.jp/keyaki/engindex.html">Keyaki Treeban
 </p>
 
 <p align="justify">
-Transformations
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transformations
 are made to the treebank data,
 using among other things
 the <a href="http://nlp.stanford.edu/software/tregex.shtml">stanford-tregex</a> tool
@@ -51,6 +53,16 @@ aiming to tune the content of the Keyaki Treebank
 to the specific needs of probabilistic context-free parsers,
 while allowing the original annotation to be restored.
 </p>
+
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The parser pipeline is described in the following paper:
+</p>
+
+<ul>
+<li>
+Horn, Stephen Wright, Butler, Alastair, and Yoshimoto, Kei. 2017. Keyaki Treebank segmentation and part-of-speech labelling. 『言語処理学会 第23 回年次大会 発表論文集』 Proceedings of the Twenty Third Annual Meeting of the Association of Natural Language Processing, pages 414-417. The Association for Natural Language Processing.
+[<a href="http://www.anlp.jp/proceedings/annual_meeting/2017/pdf_dir/C4-5.pdf">PDF</a>].</li>
+</ul>
 
 <p align="justify">
 All components are distributed <a href="https://github.com/ajb129/haruniwa2">freely</a>.
@@ -79,360 +91,26 @@ Please email:
 <h3><a name="man">Manual pages</a></h3>
 
 <table width="100%" cellspacing="0" cellpadding="0" style="table-layout: fixed">
-<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#BCCWJ_to_tnt">BCCWJ_to_tnt(1)</a></small></td><td><small>convert M-XML to Keyaki tags</small></td></tr>
-<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#BCCWJ_to_unidic">BCCWJ_to_unidic(1)</a></small></td><td><small>convert M-XML to UNIDIC mecab analysis</small></td></tr>
-<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Comainu_to_BCCWJ">Comainu_to_BCCWJ(1)</a></small></td><td><small>transform Comainu tabled analysis</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#add_pron">add_pron(1)</a></small></td><td><small>add pronouncement information to parse trees</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#add_tntsense">add_tntsense(1)</a></small></td><td><small>add sense information to parse trees</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#add_unidic">add_unidic(1)</a></small></td><td><small>add unidic information to parse trees</small></td></tr>
+<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#BCCWJ_to_tnt">BCCWJ_to_tnt(1)</a></small></td><td><small>convert M-XML to Keyaki tags</small></td></tr>
+<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#BCCWJ_to_unidic">BCCWJ_to_unidic(1)</a></small></td><td><small>convert M-XML to UNIDIC mecab analysis</small></td></tr>
+<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#berkeley_parser_location">berkeley_parser_location(1)</a></small></td><td><small>print parser location</small></td></tr>
+<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Comainu_to_BCCWJ">Comainu_to_BCCWJ(1)</a></small></td><td><small>transform Comainu tabled analysis</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#csearch_to_top">csearch_to_top(1)</a></small></td><td><small>change treebank format</small></td></tr>
+<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#CSJ_to_BCCWJ">CSJ_to_BCCWJ(1)</a></small></td><td><small>convert CSJ XML into BCCWJ M-XML</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#haruniwa2">haruniwa2(1)</a></small></td><td><small>parse input</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#haruniwa2_scaffold">haruniwa2_scaffold(1)</a></small></td><td><small>modify keyaki POS information</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#inline_to_tnt">inline_to_tnt(1)</a></small></td><td><small>convert inline to TnT format</small></td></tr>
+<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#japanese_model_location">japanese_model_location(1)</a></small></td><td><small>print model location</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tnt_clean">tnt_clean(1)</a></small></td><td><small>clean tnt</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tnt_collapse">tnt_collapse(1)</a></small></td><td><small>modify keyaki POS information</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tnt_to_flat_parse">tnt_to_flat_parse(1)</a></small></td><td><small>make basic parse from tnt analysis</small></td></tr>
 <tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tnt_to_inline">tnt_to_inline(1)</a></small></td><td><small>convert TnT to inline format</small></td></tr>
-<tr><td><small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tree_to_charactertree">tree_to_charactertree(1)</a></small></td><td><small>transform tree</small></td></tr>
 </table>
 
 <br>
-
-<hr/>
-
-<table border=0 cellpadding=0 cellspacing=0 width=100%>
-<tr><td><b><a name="BCCWJ_to_tnt">BCCWJ_to_tnt(1)</a></b></td><td align=right><b>BCCWJ_to_tnt(1)</b></td></tr>
-</table>
-
-<h3>NAME</h3>
-
-<p><b>BCCWJ_to_tnt</b> - convert M-XML to Keyaki tags</p>
-
-<h3><a name="BCCWJ_to_tnt_SYNOPSIS">SYNOPSIS</a></h3>
-
-<p>
-      BCCWJ_to_tnt [OPTIONS]
-</p>
-
-<h3><a name="BCCWJ_to_tnt_DESCRIPTION">DESCRIPTION</a></h3>
-
-<p>
-      Filter that takes files in the M-XML (morphology-based XML) format
-      of the BCCWJ (<a href="http://www.ninjal.ac.jp/corpus_center/bccwj">http://www.ninjal.ac.jp/corpus_center/bccwj</a>) that
-      contains both the document structure information and the results
-      of dual POS analysis and returns the POS analysis with Keyaki
-      Treebank tags.
-</p>
-
-<h3><a name="BCCWJ_to_tnt_OPTIONS">OPTIONS</a></h3>
-
-<table>
-<tr><td>--tree)</td><td>show intermediate tree from tnt_collapse</td></tr>
-<tr><td>--raw)</td><td>without tnt_collapse</td></tr>
-<tr><td>--example)</td><td>show an example</td></tr>
-<tr><td>*)</td><td>show this help message</td></tr>
-</table>
-
-<h3><a name="BCCWJ_to_tnt_EXAMPLE">EXAMPLE</a></h3>
-
-<pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;BCCWJ_to_tnt
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;paragraph&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;sentence&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="両耳受聴"&nbsp;l_lForm="リョウミミジュチョウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウミミ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョーミミ"&gt;両耳&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="受聴"&nbsp;lForm="ジュチョウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジュチョー"&gt;受聴&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="によって"&nbsp;l_lForm="ニヨッテ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="因る"&nbsp;lForm="ヨル"&nbsp;pos="動詞-一般"&nbsp;pron="ヨッ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-促音便"&gt;よっ&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="て"&nbsp;lForm="テ"&nbsp;pos="助詞-接続助詞"&nbsp;pron="テ"&gt;て&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="得る"&nbsp;l_lForm="エル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="下一段-ア行"&nbsp;l_cForm="終止形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="得る"&nbsp;lForm="エル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="ウル"&nbsp;cType="下一段-ア行"&nbsp;cForm="終止形-一般"&gt;得る&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="情報"&nbsp;l_lForm="ジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="に"&nbsp;l_lForm="ニ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="は"&nbsp;l_lForm="ハ"&nbsp;l_pos="助詞-係助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="は"&nbsp;lForm="ハ"&nbsp;pos="助詞-係助詞"&nbsp;pron="ワ"&gt;は&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="パワースペクトル情報"&nbsp;l_lForm="パワースペクトルジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="パワー-power"&nbsp;lForm="パワー"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="パワー"&gt;パワー&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="スペクトル-spectre"&nbsp;lForm="スペクトル"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="スペクトル"&gt;スペクトル&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="と"&nbsp;l_lForm="ト"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="と"&nbsp;lForm="ト"&nbsp;pos="助詞-格助詞"&nbsp;pron="ト"&gt;と&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="両耳間位相差"&nbsp;l_lForm="リョウジカンイソウサ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウジ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョージ"&gt;両耳&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="間"&nbsp;lForm="カン"&nbsp;pos="接尾辞-名詞的-副詞可能"&nbsp;pron="カン"&gt;間&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="位相"&nbsp;lForm="イソウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="イソー"&gt;位相&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="差"&nbsp;lForm="サ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="サ"&gt;差&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="が"&nbsp;l_lForm="ガ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="が"&nbsp;lForm="ガ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ガ"&gt;が&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="有る"&nbsp;l_lForm="アル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="五段-ラ行"&nbsp;l_cForm="連用形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="有る"&nbsp;lForm="アル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="アリ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-一般"&gt;あり&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;LUW&nbsp;l_lemma="ます"&nbsp;l_lForm="マス"&nbsp;l_pos="助動詞"&nbsp;l_cType="助動詞-マス"&nbsp;l_cForm="終止形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;SUW&nbsp;lemma="ます"&nbsp;lForm="マス"&nbsp;pos="助動詞"&nbsp;pron="マス"&nbsp;cType="助動詞-マス"&nbsp;cForm="終止形-一般"&gt;ます&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/sentence&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&lt;/paragraph&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;両耳受聴	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;によって	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;得る	VB;得る
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;情報	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;に	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;は	P-OPTR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;パワースペクトル情報	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;と	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;両耳間位相差	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;が	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;あり	VB;有る
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;ます	AX
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
-</pre>
-
-<h3><a name="BCCWJ_to_tnt_SEE_ALSO">SEE ALSO</a></h3>
-
-<p>
-      <a href="#Comainu_to_BCCWJ">Comainu_to_BCCWJ(1)</a>, <a href="#tnt_collapse">tnt_collapse(1)</a>
-</p>
-
-<br/>
-
-<hr/>
-
-<table border=0 cellpadding=0 cellspacing=0 width=100%>
-<tr><td><b><a name="BCCWJ_to_unidic">BCCWJ_to_unidic(1)</a></b></td><td align=right><b>BCCWJ_to_unidic(1)</b></td></tr>
-</table>
-
-<h3>NAME</h3>
-
-<p><b>BCCWJ_to_unidic</b> - convert M-XML to UNIDIC mecab analysis</p>
-
-<h3><a name="BCCWJ_to_unidic_SYNOPSIS">SYNOPSIS</a></h3>
-
-<p>
-      BCCWJ_to_unidic [OPTIONS]
-</p>
-
-<h3><a name="BCCWJ_to_unidic_DESCRIPTION">DESCRIPTION</a></h3>
-
-<p>
-      Filter that takes files in the M-XML (morphology-based XML) format
-      of the BCCWJ that contains both the document structure information
-      and the results of dual POS analysis and returns the POS analysis
-      in UNIDIC mecab format.
-</p>
-
-<h3><a name="BCCWJ_to_unidic_OPTIONS">OPTIONS</a></h3>
-
-<table>
-<tr><td>--example)</td><td>show an example</td></tr>
-<tr><td>*)</td><td>show this help message</td></tr>
-</table>
-
-<h3><a name="BCCWJ_to_unidic_EXAMPLE">EXAMPLE</a></h3>
-
-<pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;BCCWJ_to_unidic
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;paragraph&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sentence&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="両耳受聴"&nbsp;l_lForm="リョウミミジュチョウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウミミ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョーミミ"&gt;両耳&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="受聴"&nbsp;lForm="ジュチョウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジュチョー"&gt;受聴&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="によって"&nbsp;l_lForm="ニヨッテ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="因る"&nbsp;lForm="ヨル"&nbsp;pos="動詞-一般"&nbsp;pron="ヨッ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-促音便"&gt;よっ&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="て"&nbsp;lForm="テ"&nbsp;pos="助詞-接続助詞"&nbsp;pron="テ"&gt;て&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="得る"&nbsp;l_lForm="エル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="下一段-ア行"&nbsp;l_cForm="終止形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="得る"&nbsp;lForm="エル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="ウル"&nbsp;cType="下一段-ア行"&nbsp;cForm="終止形-一般"&gt;得る&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="情報"&nbsp;l_lForm="ジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="に"&nbsp;l_lForm="ニ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="は"&nbsp;l_lForm="ハ"&nbsp;l_pos="助詞-係助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="は"&nbsp;lForm="ハ"&nbsp;pos="助詞-係助詞"&nbsp;pron="ワ"&gt;は&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="パワースペクトル情報"&nbsp;l_lForm="パワースペクトルジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="パワー-power"&nbsp;lForm="パワー"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="パワー"&gt;パワー&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="スペクトル-spectre"&nbsp;lForm="スペクトル"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="スペクトル"&gt;スペクトル&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="と"&nbsp;l_lForm="ト"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="と"&nbsp;lForm="ト"&nbsp;pos="助詞-格助詞"&nbsp;pron="ト"&gt;と&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="両耳間位相差"&nbsp;l_lForm="リョウジカンイソウサ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウジ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョージ"&gt;両耳&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="間"&nbsp;lForm="カン"&nbsp;pos="接尾辞-名詞的-副詞可能"&nbsp;pron="カン"&gt;間&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="位相"&nbsp;lForm="イソウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="イソー"&gt;位相&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="差"&nbsp;lForm="サ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="サ"&gt;差&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="が"&nbsp;l_lForm="ガ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="が"&nbsp;lForm="ガ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ガ"&gt;が&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="有る"&nbsp;l_lForm="アル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="五段-ラ行"&nbsp;l_cForm="連用形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="有る"&nbsp;lForm="アル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="アリ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-一般"&gt;あり&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LUW&nbsp;l_lemma="ます"&nbsp;l_lForm="マス"&nbsp;l_pos="助動詞"&nbsp;l_cType="助動詞-マス"&nbsp;l_cForm="終止形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SUW&nbsp;lemma="ます"&nbsp;lForm="マス"&nbsp;pos="助動詞"&nbsp;pron="マス"&nbsp;cType="助動詞-マス"&nbsp;cForm="終止形-一般"&gt;ます&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/sentence&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/paragraph&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;両耳	リョーミミ	リョウミミ	両耳	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;受聴	ジュチョー	ジュチョウ	受聴	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;に	ニ	ニ	に	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;よっ	ヨッ	ヨル	因る	動詞-一般	五段-ラ行	連用形-促音便
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;て	テ	テ	て	助詞-接続助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得る	ウル	エル	得る	動詞-非自立可能	下一段-ア行	終止形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;に	ニ	ニ	に	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;は	ワ	ハ	は	助詞-係助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;パワー	パワー	パワー	パワー-power	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;スペクトル	スペクトル	スペクトル	スペクトル-spectre	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;と	ト	ト	と	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;両耳	リョージ	リョウジ	両耳	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;間	カン	カン	間	接尾辞-名詞的-副詞可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位相	イソー	イソウ	位相	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;差	サ	サ	差	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;が	ガ	ガ	が	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あり	アリ	アル	有る	動詞-非自立可能	五段-ラ行	連用形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ます	マス	マス	ます	助動詞	助動詞-マス	終止形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOS
-</pre>
-
-<br/>
-
-<hr/>
-
-<table border=0 cellpadding=0 cellspacing=0 width=100%>
-<tr><td><b><a name="Comainu_to_BCCWJ">Comainu_to_BCCWJ(1)</a></b></td><td align=right><b>Comainu_to_BCCWJ(1)</b></td></tr>
-</table>
-
-<h3>NAME</h3>
-
-<p><b>Comainu_to_BCCWJ</b> - transform Comainu tabled analysis</p>
-
-<h3><a name="Comainu_to_BCCWJ_SYNOPSIS">SYNOPSIS</a></h3>
-
-<p>
-      Comainu_to_BCCWJ [OPTIONS]
-</p>
-
-<h3><a name="Comainu_to_BCCWJ_DESCRIPTION">DESCRIPTION</a></h3>
-
-<p>
-      Filter that takes Comainu tabled analysis (<a href="http://comainu.org">http://comainu.org</a>)
-      as input and returns the data in the M-XML (morphology-based XML)
-      format of the BCCWJ.
-</p>
-
-<h3><a name="Comainu_to_BCCWJ_OPTIONS">OPTIONS</a></h3>
-
-<table>
-<tr><td>--example)</td><td>show an example</td></tr>
-<tr><td>*)</td><td>show this help message</td></tr>
-</table>
-
-<h3><a name="Comainu_to_BCCWJ_EXAMPLE">EXAMPLE</a></h3>
-
-<pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;Comainu_to_BCCWJ
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;B	両耳	リョーミミ	リョウミミ	両耳	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	リョウミミジュチョウ	両耳受聴	両耳受聴
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	受聴	ジュチョー	ジュチョウ	受聴	名詞-普通名詞-一般			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	に	ニ	ニ	に	助詞-格助詞			助詞-格助詞	*	*	ニヨッテ	によって	によって
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	よっ	ヨッ	ヨル	因る	動詞-一般	五段-ラ行	連用形-促音便	*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	て	テ	テ	て	助詞-接続助詞			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	得る	ウル	エル	得る	動詞-非自立可能	下一段-ア行	終止形-一般	動詞-一般	下一段-ア行	終止形-一般	エル	得る	得る
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	ジョウホウ	情報	情報
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	に	ニ	ニ	に	助詞-格助詞			助詞-格助詞	*	*	ニ	に	に
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	は	ワ	ハ	は	助詞-係助詞			助詞-係助詞	*	*	ハ	は	は
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	パワー	パワー	パワー	パワー-power	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	パワースペクトルジョウホウ	パワースペクトル情報	パワースペクトル情報
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	スペクトル	スペクトル	スペクトル	スペクトル-spectre	名詞-普通名詞-一般			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	と	ト	ト	と	助詞-格助詞			助詞-格助詞	*	*	ト	と	と
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	両耳	リョージ	リョウジ	両耳	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	リョウジカンイソウサ	両耳間位相差	両耳間位相差
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	間	カン	カン	間	接尾辞-名詞的-副詞可能			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	位相	イソー	イソウ	位相	名詞-普通名詞-一般			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	差	サ	サ	差	名詞-普通名詞-一般			*	*	*	*	*	*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	が	ガ	ガ	が	助詞-格助詞			助詞-格助詞	*	*	ガ	が	が
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	あり	アリ	アル	有る	動詞-非自立可能	五段-ラ行	連用形-一般	動詞-一般	五段-ラ行	連用形-一般	アル	有る	あり
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;	ます	マス	マス	ます	助動詞	助動詞-マス	終止形-一般	助動詞	助動詞-マス	終止形-一般	マス	ます	ます
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;paragraph&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;sentence&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="両耳受聴"&nbsp;l_lForm="リョウミミジュチョウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウミミ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョーミミ"&gt;両耳&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="受聴"&nbsp;lForm="ジュチョウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジュチョー"&gt;受聴&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="によって"&nbsp;l_lForm="ニヨッテ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="因る"&nbsp;lForm="ヨル"&nbsp;pos="動詞-一般"&nbsp;pron="ヨッ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-促音便"&gt;よっ&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="て"&nbsp;lForm="テ"&nbsp;pos="助詞-接続助詞"&nbsp;pron="テ"&gt;て&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="得る"&nbsp;l_lForm="エル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="下一段-ア行"&nbsp;l_cForm="終止形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="得る"&nbsp;lForm="エル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="ウル"&nbsp;cType="下一段-ア行"&nbsp;cForm="終止形-一般"&gt;得る&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="情報"&nbsp;l_lForm="ジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="に"&nbsp;l_lForm="ニ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="は"&nbsp;l_lForm="ハ"&nbsp;l_pos="助詞-係助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="は"&nbsp;lForm="ハ"&nbsp;pos="助詞-係助詞"&nbsp;pron="ワ"&gt;は&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="パワースペクトル情報"&nbsp;l_lForm="パワースペクトルジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="パワー-power"&nbsp;lForm="パワー"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="パワー"&gt;パワー&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="スペクトル-spectre"&nbsp;lForm="スペクトル"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="スペクトル"&gt;スペクトル&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="と"&nbsp;l_lForm="ト"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="と"&nbsp;lForm="ト"&nbsp;pos="助詞-格助詞"&nbsp;pron="ト"&gt;と&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="両耳間位相差"&nbsp;l_lForm="リョウジカンイソウサ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウジ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョージ"&gt;両耳&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="間"&nbsp;lForm="カン"&nbsp;pos="接尾辞-名詞的-副詞可能"&nbsp;pron="カン"&gt;間&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="位相"&nbsp;lForm="イソウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="イソー"&gt;位相&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="差"&nbsp;lForm="サ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="サ"&gt;差&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="が"&nbsp;l_lForm="ガ"&nbsp;l_pos="助詞-格助詞"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="が"&nbsp;lForm="ガ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ガ"&gt;が&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="有る"&nbsp;l_lForm="アル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="五段-ラ行"&nbsp;l_cForm="連用形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="有る"&nbsp;lForm="アル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="アリ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-一般"&gt;あり&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;LUW&nbsp;l_lemma="ます"&nbsp;l_lForm="マス"&nbsp;l_pos="助動詞"&nbsp;l_cType="助動詞-マス"&nbsp;l_cForm="終止形-一般"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;SUW&nbsp;lemma="ます"&nbsp;lForm="マス"&nbsp;pos="助動詞"&nbsp;pron="マス"&nbsp;cType="助動詞-マス"&nbsp;cForm="終止形-一般"&gt;ます&lt;/SUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/LUW&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/sentence&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&lt;/paragraph&gt;
-</pre>
-
-<h3><a name="Comainu_to_BCCWJ_SEE_ALSO">SEE ALSO</a></h3>
-
-<p>
-      <a href="#BCCWJ_to_tnt">BCCWJ_to_tnt(1)</a>
-</p>
-
-<br/>
 
 <hr/>
 
@@ -447,17 +125,17 @@ Please email:
 <h3><a name="add_pron_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      add_pron file
+add_pron file
 </p>
 
 <h3><a name="add_pron_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to add pron information to parse trees from stdin.
+Filter to add pron information to parse trees from stdin.
 </p>
 
 <p>
-      Unidic information is taken from file.
+Unidic information is taken from file.
 </p>
 
 <h3><a name="add_pron_OPTIONS">OPTIONS</a></h3>
@@ -471,62 +149,62 @@ Please email:
 <h3><a name="add_pron_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;example
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;今秋	コンシュー	コンシュウ	今秋	名詞-普通名詞-副詞可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;は	ワ	ハ	は	助詞-係助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;議長	ギチョー	ギチョウ	議長	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;国	コク	コク	国	接尾辞-名詞的-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;と	ト	ト	と	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;し	シ	スル	為る	動詞-非自立可能	サ行変格	連用形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;て	テ	テ	て	助詞-接続助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;アジア	アジア	アジア	アジア-Asia	名詞-固有名詞-地名-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;・			・	補助記号-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;太平	タイヘー	タイヘイ	タイヘイ-外国	名詞-固有名詞-地名-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;洋	ヨー	ヨウ	洋	接尾辞-名詞的-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;経済	ケーザイ	ケイザイ	経済	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;協力	キョーリョク	キョウリョク	協力	名詞-普通名詞-サ変可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;会議	カイギ	カイギ	会議	名詞-普通名詞-サ変可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;臨ま	ノゾマ	ノゾム	臨む	動詞-一般	五段-マ行	未然形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;なけれ	ナケレ	ナイ	ない	助動詞	助動詞-ナイ	仮定形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;ば	バ	バ	ば	助詞-接続助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;なら	ナラ	ナル	成る	動詞-非自立可能	五段-ラ行	未然形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;ない	ナイ	ナイ	ない	助動詞	助動詞-ナイ	終止形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;。			。	補助記号-句点		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;add_pron&nbsp;example&nbsp;|&nbsp;munge-trees&nbsp;-p
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;今秋))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;議長国))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;として))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;アジア・太平洋経済協力会議))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;臨ま)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;なければならない)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;今秋;コンシュー))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に;ニ)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は;ワ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;議長国;ギチョーコク))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;として;トシテ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;アジア・太平洋経済協力会議;アジア・タイヘーヨーケーザイキョーリョクカイギ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に;ニ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;臨ま;ノゾマ)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;なければならない;ナケレバナラナイ)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
+$&nbsp;cat&nbsp;example
+-|&nbsp;今秋	コンシュー	コンシュウ	今秋	名詞-普通名詞-副詞可能		
+-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
+-|&nbsp;は	ワ	ハ	は	助詞-係助詞		
+-|&nbsp;議長	ギチョー	ギチョウ	議長	名詞-普通名詞-一般		
+-|&nbsp;国	コク	コク	国	接尾辞-名詞的-一般		
+-|&nbsp;と	ト	ト	と	助詞-格助詞		
+-|&nbsp;し	シ	スル	為る	動詞-非自立可能	サ行変格	連用形-一般
+-|&nbsp;て	テ	テ	て	助詞-接続助詞		
+-|&nbsp;アジア	アジア	アジア	アジア-Asia	名詞-固有名詞-地名-一般		
+-|&nbsp;・			・	補助記号-一般		
+-|&nbsp;太平	タイヘー	タイヘイ	タイヘイ-外国	名詞-固有名詞-地名-一般		
+-|&nbsp;洋	ヨー	ヨウ	洋	接尾辞-名詞的-一般		
+-|&nbsp;経済	ケーザイ	ケイザイ	経済	名詞-普通名詞-一般		
+-|&nbsp;協力	キョーリョク	キョウリョク	協力	名詞-普通名詞-サ変可能		
+-|&nbsp;会議	カイギ	カイギ	会議	名詞-普通名詞-サ変可能		
+-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
+-|&nbsp;臨ま	ノゾマ	ノゾム	臨む	動詞-一般	五段-マ行	未然形-一般
+-|&nbsp;なけれ	ナケレ	ナイ	ない	助動詞	助動詞-ナイ	仮定形-一般
+-|&nbsp;ば	バ	バ	ば	助詞-接続助詞		
+-|&nbsp;なら	ナラ	ナル	成る	動詞-非自立可能	五段-ラ行	未然形-一般
+-|&nbsp;ない	ナイ	ナイ	ない	助動詞	助動詞-ナイ	終止形-一般
+-|&nbsp;。			。	補助記号-句点		
+-|&nbsp;EOS
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;add_pron&nbsp;example&nbsp;|&nbsp;munge-trees&nbsp;-p
+&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;今秋))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;議長国))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;として))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;アジア・太平洋経済協力会議))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;臨ま)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;なければならない)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
+&gt;&nbsp;EOF
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;今秋;コンシュー))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に;ニ)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は;ワ))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;議長国;ギチョーコク))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;として;トシテ))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;アジア・太平洋経済協力会議;アジア・タイヘーヨーケーザイキョーリョクカイギ))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に;ニ))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;臨ま;ノゾマ)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;なければならない;ナケレバナラナイ)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。;。))
+-|&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
 </pre>
 
 <h3><a name="add_pron_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#add_pron">add_pron(1)</a>
+<a href="#add_pron">add_pron(1)</a>
 </p>
 
 <br/>
@@ -544,17 +222,17 @@ Please email:
 <h3><a name="add_tntsense_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      add_tntsense file
+add_tntsense file
 </p>
 
 <h3><a name="add_tntsense_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to add sense information to parse trees from stdin.
+Filter to add sense information to parse trees from stdin.
 </p>
 
 <p>
-      Unidic information is taken from file.
+Unidic information is taken from file.
 </p>
 
 <h3><a name="add_tntsense_OPTIONS">OPTIONS</a></h3>
@@ -568,94 +246,94 @@ Please email:
 <h3><a name="add_tntsense_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;example
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;出稼ぎ労働者	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;は	P-OPTR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;上海	NPR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;を	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;建設	VB;建設する
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;する	VB0
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;と	P-CONJ
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;同時	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;に	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;、	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;大きな	ADJN
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;社会問題	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;と	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;治安問題	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;を	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;も	P-OPTR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;招い	VB;招く
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;て	P-CONJ
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;いる	VB2;居る
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;add_tntsense&nbsp;example&nbsp;|&nbsp;munge-trees&nbsp;-p
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;出稼ぎ)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;労働)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;者))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(IP-ADV&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;上海))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;建設)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;する))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;同時))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;、)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(ADJN&nbsp;大きな)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NML&nbsp;(CONJP&nbsp;(NP&nbsp;(N&nbsp;社会)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;治安)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;招い)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;て)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB2&nbsp;いる)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;100_wikipedia_Shanghai;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;出稼ぎ)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;労働)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;者))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(IP-ADV&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;上海))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;建設)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;する)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(SENSE&nbsp;*建設する.0*))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;同時))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;、)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(ADJN&nbsp;大きな)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NML&nbsp;(CONJP&nbsp;(NP&nbsp;(N&nbsp;社会)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;治安)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;招い)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(SENSE&nbsp;*招く.0*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;て)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB2&nbsp;いる)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;(ID&nbsp;100_wikipedia_Shanghai;MJ))
+$&nbsp;cat&nbsp;example
+-|&nbsp;出稼ぎ労働者	N
+-|&nbsp;は	P-OPTR
+-|&nbsp;上海	NPR
+-|&nbsp;を	P-ROLE
+-|&nbsp;建設	VB;建設する
+-|&nbsp;する	VB0
+-|&nbsp;と	P-SCON
+-|&nbsp;同時	N
+-|&nbsp;に	P-ROLE
+-|&nbsp;、	PU
+-|&nbsp;大きな	ADJN
+-|&nbsp;社会問題	N
+-|&nbsp;と	P-ROLE
+-|&nbsp;治安問題	N
+-|&nbsp;を	P-ROLE
+-|&nbsp;も	P-OPTR
+-|&nbsp;招い	VB;招く
+-|&nbsp;て	P-SCON
+-|&nbsp;いる	VB2;居る
+-|&nbsp;。	PU
+-|&nbsp;EOS
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;add_tntsense&nbsp;example&nbsp;|&nbsp;munge-trees&nbsp;-p
+&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;出稼ぎ)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;労働)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;者))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(IP-ADV&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;上海))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;建設)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;する))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;同時))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;、)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(ADJN&nbsp;大きな)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NML&nbsp;(CONJP&nbsp;(NP&nbsp;(N&nbsp;社会)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;治安)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;招い)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;て)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB2&nbsp;いる)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;100_wikipedia_Shanghai;MJ))
+&gt;&nbsp;EOF
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;出稼ぎ)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;労働)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;者))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(IP-ADV&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;上海))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;建設)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;する)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(SENSE&nbsp;*建設する*))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;同時))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;、)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(ADJN&nbsp;大きな)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NML&nbsp;(CONJP&nbsp;(NP&nbsp;(N&nbsp;社会)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;と))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;治安)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;問題))))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;を)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*を*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;招い)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(SENSE&nbsp;*招く*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;て)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB2&nbsp;いる)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+-|&nbsp;&nbsp;&nbsp;(ID&nbsp;100_wikipedia_Shanghai;MJ))
 </pre>
 
 <h3><a name="add_tntsense_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#add_pron">add_pron(1)</a>, <a href="#add_unidic">add_unidic(1)</a>
+<a href="#add_pron">add_pron(1)</a>, <a href="#add_unidic">add_unidic(1)</a>
 </p>
 
 <br/>
@@ -673,17 +351,17 @@ Please email:
 <h3><a name="add_unidic_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      add_unidic file
+add_unidic file
 </p>
 
 <h3><a name="add_unidic_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to add unidic information to parse trees from stdin.
+Filter to add unidic information to parse trees from stdin.
 </p>
 
 <p>
-      Unidic information is taken from file.
+Unidic information is taken from file.
 </p>
 
 <h3><a name="add_unidic_OPTIONS">OPTIONS</a></h3>
@@ -697,62 +375,422 @@ Please email:
 <h3><a name="add_unidic_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;example
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;今秋	コンシュー	コンシュウ	今秋	名詞-普通名詞-副詞可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;は	ワ	ハ	は	助詞-係助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;議長	ギチョー	ギチョウ	議長	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;国	コク	コク	国	接尾辞-名詞的-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;と	ト	ト	と	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;し	シ	スル	為る	動詞-非自立可能	サ行変格	連用形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;て	テ	テ	て	助詞-接続助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;アジア	アジア	アジア	アジア-Asia	名詞-固有名詞-地名-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;・			・	補助記号-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;太平	タイヘー	タイヘイ	タイヘイ-外国	名詞-固有名詞-地名-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;洋	ヨー	ヨウ	洋	接尾辞-名詞的-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;経済	ケーザイ	ケイザイ	経済	名詞-普通名詞-一般		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;協力	キョーリョク	キョウリョク	協力	名詞-普通名詞-サ変可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;会議	カイギ	カイギ	会議	名詞-普通名詞-サ変可能		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;臨ま	ノゾマ	ノゾム	臨む	動詞-一般	五段-マ行	未然形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;なけれ	ナケレ	ナイ	ない	助動詞	助動詞-ナイ	仮定形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;ば	バ	バ	ば	助詞-接続助詞		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;なら	ナラ	ナル	成る	動詞-非自立可能	五段-ラ行	未然形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;ない	ナイ	ナイ	ない	助動詞	助動詞-ナイ	終止形-一般
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;。			。	補助記号-句点		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;add_unidic&nbsp;example&nbsp;|&nbsp;munge-trees&nbsp;-p
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;今秋))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;議長国))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;として))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;アジア・太平洋経済協力会議))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;臨ま)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;なければならない)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N;今秋@コンシュー@コンシュウ@今秋@名詞-普通名詞-副詞可能@@&nbsp;今秋))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;に@ニ@ニ@に@助詞-格助詞@@&nbsp;に)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;は@ワ@ハ@は@助詞-係助詞@@&nbsp;は))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N;議長@ギチョー@ギチョウ@議長@名詞-普通名詞-一般@@|国@コク@コク@国@接尾辞-名詞的-一般@@&nbsp;議長国))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;と@ト@ト@と@助詞-格助詞@@|し@シ@スル@為る@動詞-非自立可能@サ行変格@連用形-一般|て@テ@テ@て@助詞-接続助詞@@&nbsp;として))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR;アジア@アジア@アジア@アジア-Asia@名詞-固有名詞-地名-一般@@|・@@@・@補助記号-一般@@|太平@タイヘー@タイヘイ@タイヘイ-外国@名詞-固有名詞-地名-一般@@|洋@ヨー@ヨウ@洋@接尾辞-名詞的-一般@@|経済@ケーザイ@ケイザイ@経済@名詞-普通名詞-一般@@|協力@キョーリョク@キョウリョク@協力@名詞-普通名詞-サ変可能@@|会議@カイギ@カイギ@会議@名詞-普通名詞-サ変可能@@&nbsp;アジア・太平洋経済協力会議))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;に@ニ@ニ@に@助詞-格助詞@@&nbsp;に))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;臨ま@ノゾマ@ノゾム@臨む@動詞-一般@五段-マ行@未然形-一般&nbsp;臨ま)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;なけれ@ナケレ@ナイ@ない@助動詞@助動詞-ナイ@仮定形-一般|ば@バ@バ@ば@助詞-接続助詞@@|なら@ナラ@ナル@成る@動詞-非自立可能@五段-ラ行@未然形-一般|ない@ナイ@ナイ@ない@助動詞@助動詞-ナイ@終止形-一般&nbsp;なければならない)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU;。@@@。@補助記号-句点@@&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
+$&nbsp;cat&nbsp;example
+-|&nbsp;今秋	コンシュー	コンシュウ	今秋	名詞-普通名詞-副詞可能		
+-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
+-|&nbsp;は	ワ	ハ	は	助詞-係助詞		
+-|&nbsp;議長	ギチョー	ギチョウ	議長	名詞-普通名詞-一般		
+-|&nbsp;国	コク	コク	国	接尾辞-名詞的-一般		
+-|&nbsp;と	ト	ト	と	助詞-格助詞		
+-|&nbsp;し	シ	スル	為る	動詞-非自立可能	サ行変格	連用形-一般
+-|&nbsp;て	テ	テ	て	助詞-接続助詞		
+-|&nbsp;アジア	アジア	アジア	アジア-Asia	名詞-固有名詞-地名-一般		
+-|&nbsp;・			・	補助記号-一般		
+-|&nbsp;太平	タイヘー	タイヘイ	タイヘイ-外国	名詞-固有名詞-地名-一般		
+-|&nbsp;洋	ヨー	ヨウ	洋	接尾辞-名詞的-一般		
+-|&nbsp;経済	ケーザイ	ケイザイ	経済	名詞-普通名詞-一般		
+-|&nbsp;協力	キョーリョク	キョウリョク	協力	名詞-普通名詞-サ変可能		
+-|&nbsp;会議	カイギ	カイギ	会議	名詞-普通名詞-サ変可能		
+-|&nbsp;に	ニ	ニ	に	助詞-格助詞		
+-|&nbsp;臨ま	ノゾマ	ノゾム	臨む	動詞-一般	五段-マ行	未然形-一般
+-|&nbsp;なけれ	ナケレ	ナイ	ない	助動詞	助動詞-ナイ	仮定形-一般
+-|&nbsp;ば	バ	バ	ば	助詞-接続助詞		
+-|&nbsp;なら	ナラ	ナル	成る	動詞-非自立可能	五段-ラ行	未然形-一般
+-|&nbsp;ない	ナイ	ナイ	ない	助動詞	助動詞-ナイ	終止形-一般
+-|&nbsp;。			。	補助記号-句点		
+-|&nbsp;EOS
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;add_unidic&nbsp;example&nbsp;|&nbsp;munge-trees&nbsp;-p
+&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;今秋))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;議長国))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;として))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR&nbsp;アジア・太平洋経済協力会議))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;臨ま)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;なければならない)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
+&gt;&nbsp;EOF
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N;今秋@コンシュー@コンシュウ@今秋@名詞-普通名詞-副詞可能@@&nbsp;今秋))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;に@ニ@ニ@に@助詞-格助詞@@&nbsp;に)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;は@ワ@ハ@は@助詞-係助詞@@&nbsp;は))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(N;議長@ギチョー@ギチョウ@議長@名詞-普通名詞-一般@@|国@コク@コク@国@接尾辞-名詞的-一般@@&nbsp;議長国))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;と@ト@ト@と@助詞-格助詞@@|し@シ@スル@為る@動詞-非自立可能@サ行変格@連用形-一般|て@テ@テ@て@助詞-接続助詞@@&nbsp;として))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(NPR;アジア@アジア@アジア@アジア-Asia@名詞-固有名詞-地名-一般@@|・@@@・@補助記号-一般@@|太平@タイヘー@タイヘイ@タイヘイ-外国@名詞-固有名詞-地名-一般@@|洋@ヨー@ヨウ@洋@接尾辞-名詞的-一般@@|経済@ケーザイ@ケイザイ@経済@名詞-普通名詞-一般@@|協力@キョーリョク@キョウリョク@協力@名詞-普通名詞-サ変可能@@|会議@カイギ@カイギ@会議@名詞-普通名詞-サ変可能@@&nbsp;アジア・太平洋経済協力会議))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P;に@ニ@ニ@に@助詞-格助詞@@&nbsp;に))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;臨ま@ノゾマ@ノゾム@臨む@動詞-一般@五段-マ行@未然形-一般&nbsp;臨ま)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;なけれ@ナケレ@ナイ@ない@助動詞@助動詞-ナイ@仮定形-一般|ば@バ@バ@ば@助詞-接続助詞@@|なら@ナラ@ナル@成る@動詞-非自立可能@五段-ラ行@未然形-一般|ない@ナイ@ナイ@ない@助動詞@助動詞-ナイ@終止形-一般&nbsp;なければならない)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU;。@@@。@補助記号-句点@@&nbsp;。))
+-|&nbsp;&nbsp;&nbsp;(ID&nbsp;12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
 </pre>
 
 <h3><a name="add_unidic_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#add_pron">add_pron(1)</a>
+<a href="#add_pron">add_pron(1)</a>
+</p>
+
+<br/>
+
+<hr/>
+
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td><b><a name="BCCWJ_to_tnt">BCCWJ_to_tnt(1)</a></b></td><td align=right><b>BCCWJ_to_tnt(1)</b></td></tr>
+</table>
+
+<h3>NAME</h3>
+
+<p><b>BCCWJ_to_tnt</b> - convert M-XML to Keyaki tags</p>
+
+<h3><a name="BCCWJ_to_tnt_SYNOPSIS">SYNOPSIS</a></h3>
+
+<p>
+BCCWJ_to_tnt [OPTIONS]
+</p>
+
+<h3><a name="BCCWJ_to_tnt_DESCRIPTION">DESCRIPTION</a></h3>
+
+<p>
+Filter that takes files in the M-XML (morphology-based XML) format
+of the BCCWJ (<a href="http://www.ninjal.ac.jp/corpus_center/bccwj">http://www.ninjal.ac.jp/corpus_center/bccwj</a>) that
+contains both the document structure information and the results
+of dual POS analysis and returns the POS analysis with Keyaki
+Treebank tags.
+</p>
+
+<h3><a name="BCCWJ_to_tnt_OPTIONS">OPTIONS</a></h3>
+
+<table>
+<tr><td>--tree)</td><td>show intermediate tree from tnt_collapse</td></tr>
+<tr><td>--raw)</td><td>without tnt_collapse</td></tr>
+<tr><td>--example)</td><td>show an example</td></tr>
+<tr><td>*)</td><td>show this help message</td></tr>
+</table>
+
+<h3><a name="BCCWJ_to_tnt_EXAMPLE">EXAMPLE</a></h3>
+
+<pre>
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;BCCWJ_to_tnt
+&gt;&nbsp;&lt;paragraph&gt;
+&gt;&nbsp;&lt;sentence&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="両耳受聴"&nbsp;l_lForm="リョウミミジュチョウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウミミ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョーミミ"&gt;両耳&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="受聴"&nbsp;lForm="ジュチョウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジュチョー"&gt;受聴&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="によって"&nbsp;l_lForm="ニヨッテ"&nbsp;l_pos="助詞-格助詞"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="因る"&nbsp;lForm="ヨル"&nbsp;pos="動詞-一般"&nbsp;pron="ヨッ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-促音便"&gt;よっ&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="て"&nbsp;lForm="テ"&nbsp;pos="助詞-接続助詞"&nbsp;pron="テ"&gt;て&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="得る"&nbsp;l_lForm="エル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="下一段-ア行"&nbsp;l_cForm="終止形-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="得る"&nbsp;lForm="エル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="ウル"&nbsp;cType="下一段-ア行"&nbsp;cForm="終止形-一般"&gt;得る&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="情報"&nbsp;l_lForm="ジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="に"&nbsp;l_lForm="ニ"&nbsp;l_pos="助詞-格助詞"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="は"&nbsp;l_lForm="ハ"&nbsp;l_pos="助詞-係助詞"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="は"&nbsp;lForm="ハ"&nbsp;pos="助詞-係助詞"&nbsp;pron="ワ"&gt;は&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="パワースペクトル情報"&nbsp;l_lForm="パワースペクトルジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="パワー-power"&nbsp;lForm="パワー"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="パワー"&gt;パワー&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="スペクトル-spectre"&nbsp;lForm="スペクトル"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="スペクトル"&gt;スペクトル&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="と"&nbsp;l_lForm="ト"&nbsp;l_pos="助詞-格助詞"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="と"&nbsp;lForm="ト"&nbsp;pos="助詞-格助詞"&nbsp;pron="ト"&gt;と&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="両耳間位相差"&nbsp;l_lForm="リョウジカンイソウサ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウジ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョージ"&gt;両耳&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="間"&nbsp;lForm="カン"&nbsp;pos="接尾辞-名詞的-副詞可能"&nbsp;pron="カン"&gt;間&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="位相"&nbsp;lForm="イソウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="イソー"&gt;位相&lt;/SUW&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="差"&nbsp;lForm="サ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="サ"&gt;差&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="が"&nbsp;l_lForm="ガ"&nbsp;l_pos="助詞-格助詞"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="が"&nbsp;lForm="ガ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ガ"&gt;が&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="有る"&nbsp;l_lForm="アル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="五段-ラ行"&nbsp;l_cForm="連用形-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="有る"&nbsp;lForm="アル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="アリ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-一般"&gt;あり&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;LUW&nbsp;l_lemma="ます"&nbsp;l_lForm="マス"&nbsp;l_pos="助動詞"&nbsp;l_cType="助動詞-マス"&nbsp;l_cForm="終止形-一般"&gt;
+&gt;&nbsp;&lt;SUW&nbsp;lemma="ます"&nbsp;lForm="マス"&nbsp;pos="助動詞"&nbsp;pron="マス"&nbsp;cType="助動詞-マス"&nbsp;cForm="終止形-一般"&gt;ます&lt;/SUW&gt;
+&gt;&nbsp;&lt;/LUW&gt;
+&gt;&nbsp;&lt;/sentence&gt;
+&gt;&nbsp;&lt;/paragraph&gt;
+&gt;&nbsp;EOF
+-|&nbsp;両耳受聴	N
+-|&nbsp;によって	P-ROLE
+-|&nbsp;得る	VB;{得る}
+-|&nbsp;情報	N
+-|&nbsp;に	P-ROLE
+-|&nbsp;は	P-OPTR
+-|&nbsp;パワースペクトル情報	N
+-|&nbsp;と	P-ROLE
+-|&nbsp;両耳間位相差	N
+-|&nbsp;が	P-ROLE
+-|&nbsp;あり	VB;{有る}
+-|&nbsp;ます	AX
+-|&nbsp;EOS
+</pre>
+
+<h3><a name="BCCWJ_to_tnt_SEE_ALSO">SEE ALSO</a></h3>
+
+<p>
+<a href="#Comainu_to_BCCWJ">Comainu_to_BCCWJ(1)</a>, <a href="#tnt_collapse">tnt_collapse(1)</a>
+</p>
+
+<br/>
+
+<hr/>
+
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td><b><a name="BCCWJ_to_unidic">BCCWJ_to_unidic(1)</a></b></td><td align=right><b>BCCWJ_to_unidic(1)</b></td></tr>
+</table>
+
+<h3>NAME</h3>
+
+<p><b>BCCWJ_to_unidic</b> - convert M-XML to UNIDIC mecab analysis</p>
+
+<h3><a name="BCCWJ_to_unidic_SYNOPSIS">SYNOPSIS</a></h3>
+
+<p>
+BCCWJ_to_unidic [OPTIONS]
+</p>
+
+<h3><a name="BCCWJ_to_unidic_DESCRIPTION">DESCRIPTION</a></h3>
+
+<p>
+Filter that takes files in the M-XML (morphology-based XML) format
+of the BCCWJ that contains both the document structure information
+and the results of dual POS analysis and returns the POS analysis
+in UNIDIC mecab format.
+</p>
+
+<h3><a name="BCCWJ_to_unidic_OPTIONS">OPTIONS</a></h3>
+
+<table>
+<tr><td>--example)</td><td>show an example</td></tr>
+<tr><td>*)</td><td>show this help message</td></tr>
+</table>
+
+<h3><a name="BCCWJ_to_unidic_EXAMPLE">EXAMPLE</a></h3>
+
+<pre>
+cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;BCCWJ_to_unidic
+&lt;paragraph&gt;
+&lt;sentence&gt;
+&lt;LUW&nbsp;l_lemma="両耳受聴"&nbsp;l_lForm="リョウミミジュチョウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウミミ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョーミミ"&gt;両耳&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="受聴"&nbsp;lForm="ジュチョウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジュチョー"&gt;受聴&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="によって"&nbsp;l_lForm="ニヨッテ"&nbsp;l_pos="助詞-格助詞"&gt;
+&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="因る"&nbsp;lForm="ヨル"&nbsp;pos="動詞-一般"&nbsp;pron="ヨッ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-促音便"&gt;よっ&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="て"&nbsp;lForm="テ"&nbsp;pos="助詞-接続助詞"&nbsp;pron="テ"&gt;て&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="得る"&nbsp;l_lForm="エル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="下一段-ア行"&nbsp;l_cForm="終止形-一般"&gt;
+&lt;SUW&nbsp;lemma="得る"&nbsp;lForm="エル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="ウル"&nbsp;cType="下一段-ア行"&nbsp;cForm="終止形-一般"&gt;得る&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="情報"&nbsp;l_lForm="ジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="に"&nbsp;l_lForm="ニ"&nbsp;l_pos="助詞-格助詞"&gt;
+&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="は"&nbsp;l_lForm="ハ"&nbsp;l_pos="助詞-係助詞"&gt;
+&lt;SUW&nbsp;lemma="は"&nbsp;lForm="ハ"&nbsp;pos="助詞-係助詞"&nbsp;pron="ワ"&gt;は&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="パワースペクトル情報"&nbsp;l_lForm="パワースペクトルジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&lt;SUW&nbsp;lemma="パワー-power"&nbsp;lForm="パワー"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="パワー"&gt;パワー&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="スペクトル-spectre"&nbsp;lForm="スペクトル"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="スペクトル"&gt;スペクトル&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="と"&nbsp;l_lForm="ト"&nbsp;l_pos="助詞-格助詞"&gt;
+&lt;SUW&nbsp;lemma="と"&nbsp;lForm="ト"&nbsp;pos="助詞-格助詞"&nbsp;pron="ト"&gt;と&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="両耳間位相差"&nbsp;l_lForm="リョウジカンイソウサ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウジ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョージ"&gt;両耳&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="間"&nbsp;lForm="カン"&nbsp;pos="接尾辞-名詞的-副詞可能"&nbsp;pron="カン"&gt;間&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="位相"&nbsp;lForm="イソウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="イソー"&gt;位相&lt;/SUW&gt;
+&lt;SUW&nbsp;lemma="差"&nbsp;lForm="サ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="サ"&gt;差&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="が"&nbsp;l_lForm="ガ"&nbsp;l_pos="助詞-格助詞"&gt;
+&lt;SUW&nbsp;lemma="が"&nbsp;lForm="ガ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ガ"&gt;が&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="有る"&nbsp;l_lForm="アル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="五段-ラ行"&nbsp;l_cForm="連用形-一般"&gt;
+&lt;SUW&nbsp;lemma="有る"&nbsp;lForm="アル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="アリ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-一般"&gt;あり&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;LUW&nbsp;l_lemma="ます"&nbsp;l_lForm="マス"&nbsp;l_pos="助動詞"&nbsp;l_cType="助動詞-マス"&nbsp;l_cForm="終止形-一般"&gt;
+&lt;SUW&nbsp;lemma="ます"&nbsp;lForm="マス"&nbsp;pos="助動詞"&nbsp;pron="マス"&nbsp;cType="助動詞-マス"&nbsp;cForm="終止形-一般"&gt;ます&lt;/SUW&gt;
+&lt;/LUW&gt;
+&lt;/sentence&gt;
+&lt;/paragraph&gt;
+EOF
+両耳	リョーミミ	リョウミミ	両耳	名詞-普通名詞-一般		
+受聴	ジュチョー	ジュチョウ	受聴	名詞-普通名詞-一般		
+に	ニ	ニ	に	助詞-格助詞		
+よっ	ヨッ	ヨル	因る	動詞-一般	五段-ラ行	連用形-促音便
+て	テ	テ	て	助詞-接続助詞		
+得る	ウル	エル	得る	動詞-非自立可能	下一段-ア行	終止形-一般
+情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般		
+に	ニ	ニ	に	助詞-格助詞		
+は	ワ	ハ	は	助詞-係助詞		
+パワー	パワー	パワー	パワー-power	名詞-普通名詞-一般		
+スペクトル	スペクトル	スペクトル	スペクトル-spectre	名詞-普通名詞-一般		
+情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般		
+と	ト	ト	と	助詞-格助詞		
+両耳	リョージ	リョウジ	両耳	名詞-普通名詞-一般		
+間	カン	カン	間	接尾辞-名詞的-副詞可能		
+位相	イソー	イソウ	位相	名詞-普通名詞-一般		
+差	サ	サ	差	名詞-普通名詞-一般		
+が	ガ	ガ	が	助詞-格助詞		
+あり	アリ	アル	有る	動詞-非自立可能	五段-ラ行	連用形-一般
+ます	マス	マス	ます	助動詞	助動詞-マス	終止形-一般
+EOS
+</pre>
+
+<br/>
+
+<hr/>
+
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td><b><a name="berkeley_parser_location">berkeley_parser_location(1)</a></b></td><td align=right><b>berkeley_parser_location(1)</b></td></tr>
+</table>
+
+<h3>NAME</h3>
+
+<p><b>berkeley_parser_location</b> - print parser location</p>
+
+<h3><a name="berkeley_parser_location_SYNOPSIS">SYNOPSIS</a></h3>
+
+<p>
+berkeley_parser_location
+</p>
+
+<h3><a name="berkeley_parser_location_DESCRIPTION">DESCRIPTION</a></h3>
+
+<p>
+Send location details of Berkeley Parser jar files to stdout.
+</p>
+
+<br/>
+
+<hr/>
+
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td><b><a name="Comainu_to_BCCWJ">Comainu_to_BCCWJ(1)</a></b></td><td align=right><b>Comainu_to_BCCWJ(1)</b></td></tr>
+</table>
+
+<h3>NAME</h3>
+
+<p><b>Comainu_to_BCCWJ</b> - transform Comainu tabled analysis</p>
+
+<h3><a name="Comainu_to_BCCWJ_SYNOPSIS">SYNOPSIS</a></h3>
+
+<p>
+Comainu_to_BCCWJ [OPTIONS]
+</p>
+
+<h3><a name="Comainu_to_BCCWJ_DESCRIPTION">DESCRIPTION</a></h3>
+
+<p>
+Filter that takes Comainu tabled analysis (<a href="http://comainu.org">http://comainu.org</a>)
+as input and returns the data in the M-XML (morphology-based XML)
+format of the BCCWJ.
+</p>
+
+<h3><a name="Comainu_to_BCCWJ_OPTIONS">OPTIONS</a></h3>
+
+<table>
+<tr><td>--example)</td><td>show an example</td></tr>
+<tr><td>*)</td><td>show this help message</td></tr>
+</table>
+
+<h3><a name="Comainu_to_BCCWJ_EXAMPLE">EXAMPLE</a></h3>
+
+<pre>
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;Comainu_to_BCCWJ
+&gt;&nbsp;B	両耳	リョーミミ	リョウミミ	両耳	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	リョウミミジュチョウ	両耳受聴	両耳受聴
+&gt;&nbsp;	受聴	ジュチョー	ジュチョウ	受聴	名詞-普通名詞-一般			*	*	*	*	*	*
+&gt;&nbsp;	に	ニ	ニ	に	助詞-格助詞			助詞-格助詞	*	*	ニヨッテ	によって	によって
+&gt;&nbsp;	よっ	ヨッ	ヨル	因る	動詞-一般	五段-ラ行	連用形-促音便	*	*	*	*	*	*
+&gt;&nbsp;	て	テ	テ	て	助詞-接続助詞			*	*	*	*	*	*
+&gt;&nbsp;	得る	ウル	エル	得る	動詞-非自立可能	下一段-ア行	終止形-一般	動詞-一般	下一段-ア行	終止形-一般	エル	得る	得る
+&gt;&nbsp;	情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	ジョウホウ	情報	情報
+&gt;&nbsp;	に	ニ	ニ	に	助詞-格助詞			助詞-格助詞	*	*	ニ	に	に
+&gt;&nbsp;	は	ワ	ハ	は	助詞-係助詞			助詞-係助詞	*	*	ハ	は	は
+&gt;&nbsp;	パワー	パワー	パワー	パワー-power	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	パワースペクトルジョウホウ	パワースペクトル情報	パワースペクトル情報
+&gt;&nbsp;	スペクトル	スペクトル	スペクトル	スペクトル-spectre	名詞-普通名詞-一般			*	*	*	*	*	*
+&gt;&nbsp;	情報	ジョーホー	ジョウホウ	情報	名詞-普通名詞-一般			*	*	*	*	*	*
+&gt;&nbsp;	と	ト	ト	と	助詞-格助詞			助詞-格助詞	*	*	ト	と	と
+&gt;&nbsp;	両耳	リョージ	リョウジ	両耳	名詞-普通名詞-一般			名詞-普通名詞-一般	*	*	リョウジカンイソウサ	両耳間位相差	両耳間位相差
+&gt;&nbsp;	間	カン	カン	間	接尾辞-名詞的-副詞可能			*	*	*	*	*	*
+&gt;&nbsp;	位相	イソー	イソウ	位相	名詞-普通名詞-一般			*	*	*	*	*	*
+&gt;&nbsp;	差	サ	サ	差	名詞-普通名詞-一般			*	*	*	*	*	*
+&gt;&nbsp;	が	ガ	ガ	が	助詞-格助詞			助詞-格助詞	*	*	ガ	が	が
+&gt;&nbsp;	あり	アリ	アル	有る	動詞-非自立可能	五段-ラ行	連用形-一般	動詞-一般	五段-ラ行	連用形-一般	アル	有る	あり
+&gt;&nbsp;	ます	マス	マス	ます	助動詞	助動詞-マス	終止形-一般	助動詞	助動詞-マス	終止形-一般	マス	ます	ます
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;&lt;paragraph&gt;
+-|&nbsp;&lt;sentence&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="両耳受聴"&nbsp;l_lForm="リョウミミジュチョウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウミミ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョーミミ"&gt;両耳&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="受聴"&nbsp;lForm="ジュチョウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジュチョー"&gt;受聴&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="によって"&nbsp;l_lForm="ニヨッテ"&nbsp;l_pos="助詞-格助詞"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="因る"&nbsp;lForm="ヨル"&nbsp;pos="動詞-一般"&nbsp;pron="ヨッ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-促音便"&gt;よっ&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="て"&nbsp;lForm="テ"&nbsp;pos="助詞-接続助詞"&nbsp;pron="テ"&gt;て&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="得る"&nbsp;l_lForm="エル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="下一段-ア行"&nbsp;l_cForm="終止形-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="得る"&nbsp;lForm="エル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="ウル"&nbsp;cType="下一段-ア行"&nbsp;cForm="終止形-一般"&gt;得る&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="情報"&nbsp;l_lForm="ジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="に"&nbsp;l_lForm="ニ"&nbsp;l_pos="助詞-格助詞"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="に"&nbsp;lForm="ニ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ニ"&gt;に&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="は"&nbsp;l_lForm="ハ"&nbsp;l_pos="助詞-係助詞"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="は"&nbsp;lForm="ハ"&nbsp;pos="助詞-係助詞"&nbsp;pron="ワ"&gt;は&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="パワースペクトル情報"&nbsp;l_lForm="パワースペクトルジョウホウ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="パワー-power"&nbsp;lForm="パワー"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="パワー"&gt;パワー&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="スペクトル-spectre"&nbsp;lForm="スペクトル"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="スペクトル"&gt;スペクトル&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="情報"&nbsp;lForm="ジョウホウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="ジョーホー"&gt;情報&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="と"&nbsp;l_lForm="ト"&nbsp;l_pos="助詞-格助詞"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="と"&nbsp;lForm="ト"&nbsp;pos="助詞-格助詞"&nbsp;pron="ト"&gt;と&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="両耳間位相差"&nbsp;l_lForm="リョウジカンイソウサ"&nbsp;l_pos="名詞-普通名詞-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="両耳"&nbsp;lForm="リョウジ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="リョージ"&gt;両耳&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="間"&nbsp;lForm="カン"&nbsp;pos="接尾辞-名詞的-副詞可能"&nbsp;pron="カン"&gt;間&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="位相"&nbsp;lForm="イソウ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="イソー"&gt;位相&lt;/SUW&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="差"&nbsp;lForm="サ"&nbsp;pos="名詞-普通名詞-一般"&nbsp;pron="サ"&gt;差&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="が"&nbsp;l_lForm="ガ"&nbsp;l_pos="助詞-格助詞"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="が"&nbsp;lForm="ガ"&nbsp;pos="助詞-格助詞"&nbsp;pron="ガ"&gt;が&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="有る"&nbsp;l_lForm="アル"&nbsp;l_pos="動詞-一般"&nbsp;l_cType="五段-ラ行"&nbsp;l_cForm="連用形-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="有る"&nbsp;lForm="アル"&nbsp;pos="動詞-非自立可能"&nbsp;pron="アリ"&nbsp;cType="五段-ラ行"&nbsp;cForm="連用形-一般"&gt;あり&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;LUW&nbsp;l_lemma="ます"&nbsp;l_lForm="マス"&nbsp;l_pos="助動詞"&nbsp;l_cType="助動詞-マス"&nbsp;l_cForm="終止形-一般"&gt;
+-|&nbsp;&lt;SUW&nbsp;lemma="ます"&nbsp;lForm="マス"&nbsp;pos="助動詞"&nbsp;pron="マス"&nbsp;cType="助動詞-マス"&nbsp;cForm="終止形-一般"&gt;ます&lt;/SUW&gt;
+-|&nbsp;&lt;/LUW&gt;
+-|&nbsp;&lt;/sentence&gt;
+-|&nbsp;&lt;/paragraph&gt;
+</pre>
+
+<h3><a name="Comainu_to_BCCWJ_SEE_ALSO">SEE ALSO</a></h3>
+
+<p>
+<a href="#BCCWJ_to_tnt">BCCWJ_to_tnt(1)</a>
 </p>
 
 <br/>
@@ -770,13 +808,13 @@ Please email:
 <h3><a name="csearch_to_top_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      csearch_to_top
+csearch_to_top
 </p>
 
 <h3><a name="csearch_to_top_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-     Filter to transform CorpusSearch treebank data into Penn Treebank format.
+Filter to transform CorpusSearch treebank data into Penn Treebank format.
 </p>
 
 <h3><a name="csearch_to_top_OPTIONS">OPTIONS</a></h3>
@@ -789,20 +827,45 @@ Please email:
 <h3><a name="csearch_to_top_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;csearch_to_top&nbsp;|&nbsp;munge-trees&nbsp;-p
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;授業))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;終わる)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;7_textbook_kisonihongo;page_13;AT1-7;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(TOP&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;授業))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;終わる)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。)))
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;csearch_to_top&nbsp;|&nbsp;munge-trees&nbsp;-p
+&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;授業))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;終わる)
+&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;7_textbook_kisonihongo;page_13;AT1-7;MJ))
+&gt;&nbsp;EOF
+-|&nbsp;(TOP&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;授業))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;終わる)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。)))
 </pre>
+
+<br/>
+
+<hr/>
+
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td><b><a name="CSJ_to_BCCWJ">CSJ_to_BCCWJ(1)</a></b></td><td align=right><b>CSJ_to_BCCWJ(1)</b></td></tr>
+</table>
+
+<h3>NAME</h3>
+
+<p><b>CSJ_to_BCCWJ</b> - convert CSJ XML into BCCWJ M-XML</p>
+
+<h3><a name="CSJ_to_BCCWJ_SYNOPSIS">SYNOPSIS</a></h3>
+
+<p>
+CSJ_to_BCCWJ
+</p>
+
+<h3><a name="CSJ_to_BCCWJ_DESCRIPTION">DESCRIPTION</a></h3>
+
+<p>
+Filter that takes CSJ XML content and returns BCCWJ M-XML
+(morphology-based XML) format.
+</p>
 
 <br/>
 
@@ -819,27 +882,27 @@ Please email:
 <h3><a name="haruniwa2_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      haruniwa2 [OPTIONS]
+haruniwa2 [OPTIONS]
 </p>
 
 <h3><a name="haruniwa2_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Parse input with the HARUNIWA grammar model for Japanese using
-      the Berkley parser.
+Parse input with the HARUNIWA grammar model for Japanese using
+the Berkley parser.
 </p>
 
 <p>
-      Input should be in TnT format where each line contains one
-      word token and one part-of-speech tag separated by a single tab
-      character.  EOS indicates end-of-sentence.
+Input should be in TnT format where each line contains one
+word token and one part-of-speech tag separated by a single tab
+character.  EOS indicates end-of-sentence.
 </p>
 
 <h3><a name="haruniwa2_OPTIONS">OPTIONS</a></h3>
 
 <table>
 <tr><td>--raw)</td><td>output parse without any modification</td></tr>
-<tr><td></td><td>(default is to post-process with parse_decorate and parse_finish)</td></tr>
+<tr><td>#   (default is to post-process with parse_decorate and parse_finish)</td></tr>
 <tr><td>--top|-top)</td><td>output with TOP as root node</td></tr>
 <tr><td>--basic|-basic)</td><td>output without root node wrapping</td></tr>
 <tr><td>--johnson|-johnson)</td><td>output prepared for reranking</td></tr>
@@ -852,74 +915,74 @@ Please email:
 <h3><a name="haruniwa2_EXAMPLE">EXAMPLES</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;haruniwa2&nbsp;|&nbsp;munge-trees&nbsp;-p
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;すもも	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;も	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;もも	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;も	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;もも	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;の	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;うち	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;にわ	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;に	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;は	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;に	CARD
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;わ	NUMCL
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;の	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;にわとり	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;が	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;いる	VB
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;すもも))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;もも))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-PRD&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;もも))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;の))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;うち))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;(ID&nbsp;ex1470890169;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;にわ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(NUMCLP&nbsp;(CARD&nbsp;に)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NUMCL&nbsp;わ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;の))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;にわとり))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;いる)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;(ID&nbsp;ex1470890169;MJ))
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;haruniwa2&nbsp;|&nbsp;munge-trees&nbsp;-p
+&gt;&nbsp;すもも	N
+&gt;&nbsp;も	P
+&gt;&nbsp;もも	N
+&gt;&nbsp;も	P
+&gt;&nbsp;もも	N
+&gt;&nbsp;の	P
+&gt;&nbsp;うち	N
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;にわ	N
+&gt;&nbsp;に	P
+&gt;&nbsp;は	P
+&gt;&nbsp;に	NUM
+&gt;&nbsp;わ	CL
+&gt;&nbsp;の	P
+&gt;&nbsp;にわとり	N
+&gt;&nbsp;が	P
+&gt;&nbsp;いる	VB
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;すもも))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;もも))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;も))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-PRD&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;もも))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;の))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;うち))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+-|&nbsp;&nbsp;&nbsp;(ID&nbsp;ex1493442670;MJ))
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;にわ))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;に)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;は))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(NP&nbsp;(PP&nbsp;(NP&nbsp;(NUMCLP&nbsp;(NUM&nbsp;に)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CL&nbsp;わ)))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;の))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;にわとり))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;いる)
+-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
+-|&nbsp;&nbsp;&nbsp;(ID&nbsp;ex1493442670;MJ))
 </pre>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;haruniwa2&nbsp;3
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;ゴスタック	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;は	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;ドッシュ	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;を	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;ディスティム	VB
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;し	VB0
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;ます	AX
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(number&nbsp;3)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ゴスタック))&nbsp;(P&nbsp;は))&nbsp;(NP-SBJ&nbsp;*)&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ドッシュ))&nbsp;(P&nbsp;を))&nbsp;(NP-OB1&nbsp;*を*)&nbsp;(VB&nbsp;ディスティム)&nbsp;(VB0&nbsp;し)&nbsp;(AX&nbsp;ます)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;ex1470890177;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)&nbsp;(PP-TMP&nbsp;(NP&nbsp;(N&nbsp;ゴスタック))&nbsp;(P&nbsp;は))&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ドッシュ))&nbsp;(P&nbsp;を))&nbsp;(NP-OB1&nbsp;*を*)&nbsp;(VB&nbsp;ディスティム)&nbsp;(VB0&nbsp;し)&nbsp;(AX&nbsp;ます)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;ex1470890177;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-IMP&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ゴスタック))&nbsp;(P&nbsp;は))&nbsp;(NP-SBJ&nbsp;*)&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ドッシュ))&nbsp;(P&nbsp;を))&nbsp;(NP-OB1&nbsp;*を*)&nbsp;(VB&nbsp;ディスティム)&nbsp;(VB0&nbsp;し)&nbsp;(AX&nbsp;ます)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;ex1470890177;MJ))
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;haruniwa2&nbsp;3
+&gt;&nbsp;ゴスタック	N
+&gt;&nbsp;は	P
+&gt;&nbsp;ドッシュ	N
+&gt;&nbsp;を	P
+&gt;&nbsp;ディスティム	VB
+&gt;&nbsp;し	VB0
+&gt;&nbsp;ます	AX
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;(number&nbsp;3)
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ゴスタック))&nbsp;(P&nbsp;は))&nbsp;(NP-SBJ&nbsp;*)&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ドッシュ))&nbsp;(P&nbsp;を))&nbsp;(NP-OB1&nbsp;*を*)&nbsp;(VB&nbsp;ディスティム)&nbsp;(VB0&nbsp;し)&nbsp;(AX&nbsp;ます)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;ex1493442674;MJ))
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*pro*)&nbsp;(PP-TMP&nbsp;(NP&nbsp;(N&nbsp;ゴスタック))&nbsp;(P&nbsp;は))&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ドッシュ))&nbsp;(P&nbsp;を))&nbsp;(NP-OB1&nbsp;*を*)&nbsp;(VB&nbsp;ディスティム)&nbsp;(VB0&nbsp;し)&nbsp;(AX&nbsp;ます)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;ex1493442674;MJ))
+-|&nbsp;(&nbsp;(IP-IMP&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ゴスタック))&nbsp;(P&nbsp;は))&nbsp;(NP-SBJ&nbsp;*)&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;ドッシュ))&nbsp;(P&nbsp;を))&nbsp;(NP-OB1&nbsp;*を*)&nbsp;(VB&nbsp;ディスティム)&nbsp;(VB0&nbsp;し)&nbsp;(AX&nbsp;ます)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;ex1493442674;MJ))
 </pre>
 
 <h3><a name="haruniwa2_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#parse">parse(1)</a>, <a href="#parse_finish">parse_finish(1)</a>, <a href="#rerank">rerank(1)</a>
+<a href="#parse">parse(1)</a>, <a href="#parse_finish">parse_finish(1)</a>, <a href="#rerank">rerank(1)</a>
 </p>
 
 <br/>
@@ -937,14 +1000,14 @@ Please email:
 <h3><a name="haruniwa2_scaffold_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      haruniwa2_scaffold
+haruniwa2_scaffold
 </p>
 
 <h3><a name="haruniwa2_scaffold_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to build parse structure, disambiguate parts-of-speech, as well as
-      merge and demerge words.
+Filter to build parse structure, disambiguate parts-of-speech, as well as
+merge and demerge words.
 </p>
 
 <h3><a name="haruniwa2_scaffold_OPTIONS">OPTIONS</a></h3>
@@ -957,16 +1020,16 @@ Please email:
 <h3><a name="haruniwa2_scaffold_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;haruniwa2_scaffold
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(N&nbsp;大学)&nbsp;(P-CASE&nbsp;まで)&nbsp;(WADV&nbsp;どう)&nbsp;(VB2;遣る&nbsp;やっ)&nbsp;(P-CONJ&nbsp;て)&nbsp;(VB2;行く&nbsp;行き)&nbsp;(AX&nbsp;ます)&nbsp;(P-FINAL&nbsp;か)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;example;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;大学))&nbsp;(P-CASE&nbsp;まで))&nbsp;(ADVP&nbsp;(WADV&nbsp;どうやって))&nbsp;(VB;行く&nbsp;行き)&nbsp;(AX&nbsp;ます)&nbsp;(P-FINAL&nbsp;か)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;example;MJ))
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;haruniwa2_scaffold
+&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(N&nbsp;大学)&nbsp;(P-ROLE&nbsp;まで)&nbsp;(WADV&nbsp;どう)&nbsp;(VB2;遣る&nbsp;やっ)&nbsp;(P-SCON&nbsp;て)&nbsp;(VB2;行く&nbsp;行き)&nbsp;(AX&nbsp;ます)&nbsp;(P-FINAL&nbsp;か)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;example;MJ))
+&gt;&nbsp;EOF
+-|&nbsp;(&nbsp;(IP-MAT&nbsp;(NP&nbsp;(N&nbsp;大学))&nbsp;(P-ROLE&nbsp;まで)&nbsp;(ADVP&nbsp;(WADV&nbsp;どうやって))&nbsp;(VB;行く&nbsp;行き)&nbsp;(AX&nbsp;ます)&nbsp;(P-FINAL&nbsp;か)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;example;MJ))
 </pre>
 
 <h3><a name="haruniwa2_scaffold_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#inline_to_tnt">inline_to_tnt(1)</a>, <a href="#tnt_to_inline">tnt_to_inline(1)</a>, <a href="#tnt_clean">tnt_clean(1)</a>
+<a href="#inline_to_tnt">inline_to_tnt(1)</a>, <a href="#tnt_to_inline">tnt_to_inline(1)</a>, <a href="#tnt_clean">tnt_clean(1)</a>
 </p>
 
 <br/>
@@ -984,13 +1047,13 @@ Please email:
 <h3><a name="inline_to_tnt_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      inline_to_tnt
+inline_to_tnt
 </p>
 
 <h3><a name="inline_to_tnt_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to convert tagged information in inline format to TnT format.
+Filter to convert tagged information in inline format to TnT format.
 </p>
 
 <h3><a name="inline_to_tnt_OPTIONS">OPTIONS</a></h3>
@@ -1003,24 +1066,48 @@ Please email:
 <h3><a name="inline_to_tnt_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;inline_to_tnt
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;花子_NPR&nbsp;は_P&nbsp;赤い_ADJI&nbsp;コート_N&nbsp;を_P&nbsp;着_VB&nbsp;た_AXD&nbsp;。_PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;花子	NPR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;は	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;赤い	ADJI
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;コート	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;を	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;着	VB
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;た	AXD
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;inline_to_tnt
+&gt;&nbsp;花子_NPR&nbsp;は_P&nbsp;赤い_ADJI&nbsp;コート_N&nbsp;を_P&nbsp;着_VB&nbsp;た_AXD&nbsp;。_PU
+&gt;&nbsp;EOF
+-|&nbsp;花子	NPR
+-|&nbsp;は	P
+-|&nbsp;赤い	ADJI
+-|&nbsp;コート	N
+-|&nbsp;を	P
+-|&nbsp;着	VB
+-|&nbsp;た	AXD
+-|&nbsp;。	PU
+-|&nbsp;EOS
 </pre>
 
 <h3><a name="inline_to_tnt_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#tnt_to_inline">tnt_to_inline(1)</a>, <a href="#tnt_clean">tnt_clean(1)</a>
+<a href="#tnt_to_inline">tnt_to_inline(1)</a>, <a href="#tnt_clean">tnt_clean(1)</a>
+</p>
+
+<br/>
+
+<hr/>
+
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td><b><a name="japanese_model_location">japanese_model_location(1)</a></b></td><td align=right><b>japanese_model_location(1)</b></td></tr>
+</table>
+
+<h3>NAME</h3>
+
+<p><b>japanese_model_location</b> - print model location</p>
+
+<h3><a name="japanese_model_location_SYNOPSIS">SYNOPSIS</a></h3>
+
+<p>
+japanese_model_location
+</p>
+
+<h3><a name="japanese_model_location_DESCRIPTION">DESCRIPTION</a></h3>
+
+<p>
+Send location details of parser model file to stdout.
 </p>
 
 <br/>
@@ -1038,13 +1125,13 @@ Please email:
 <h3><a name="tnt_clean_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      tnt_clean [OPTIONS]
+tnt_clean [OPTIONS]
 </p>
 
 <h3><a name="tnt_clean_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter that cleans tnt.
+Filter that cleans tnt.
 </p>
 
 <h3><a name="tnt_clean_OPTIONS">OPTIONS</a></h3>
@@ -1060,32 +1147,32 @@ Please email:
 <h3><a name="tnt_clean_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_clean
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;花子;ハナコ	NPR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;は;ワ	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;赤い;アカイ	ADJI
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;コート;コート	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;を;オ	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;着;キ	VB;着る.0
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;た;タ	AXD
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;花子	NPR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;は	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;赤い	ADJI
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;コート	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;を	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;着	VB
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;た	AXD
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_clean
+&gt;&nbsp;花子;ハナコ	NPR
+&gt;&nbsp;は;ワ	P
+&gt;&nbsp;赤い;アカイ	ADJI
+&gt;&nbsp;コート;コート	N
+&gt;&nbsp;を;オ	P
+&gt;&nbsp;着;キ	VB;着る.0
+&gt;&nbsp;た;タ	AXD
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;花子	NPR
+-|&nbsp;は	P
+-|&nbsp;赤い	ADJI
+-|&nbsp;コート	N
+-|&nbsp;を	P
+-|&nbsp;着	VB
+-|&nbsp;た	AXD
+-|&nbsp;。	PU
+-|&nbsp;EOS
 </pre>
 
 <h3><a name="tnt_clean_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#tnt_to_inline">tnt_to_inline(1)</a>
+<a href="#tnt_to_inline">tnt_to_inline(1)</a>
 </p>
 
 <br/>
@@ -1103,13 +1190,13 @@ Please email:
 <h3><a name="tnt_collapse_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      tnt_collapse
+tnt_collapse
 </p>
 
 <h3><a name="tnt_collapse_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to merge certain entries from keyaki part-of-speech analysis.
+Filter to merge certain entries from keyaki part-of-speech analysis.
 </p>
 
 <h3><a name="tnt_collapse_OPTIONS">OPTIONS</a></h3>
@@ -1123,32 +1210,32 @@ Please email:
 <h3><a name="tnt_collapse_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_collapse
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;大学	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;まで	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;どう	WADV
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;やっ	VB2;遣る
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;て	P-CONJ
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;行き	VB2;行く
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;ます	AX
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;か	P-FINAL
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;大学	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;まで	P-CASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;どうやって	WADV
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;行き	VB;行く
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;ます	AX
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;か	P-FINAL
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;EOS
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_collapse
+&gt;&nbsp;大学	N
+&gt;&nbsp;まで	P-ROLE
+&gt;&nbsp;どう	WADV
+&gt;&nbsp;やっ	VB2;遣る
+&gt;&nbsp;て	P-SCON
+&gt;&nbsp;行き	VB2;行く
+&gt;&nbsp;ます	AX
+&gt;&nbsp;か	P-FINAL
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;大学	N
+-|&nbsp;まで	P-ROLE
+-|&nbsp;どうやって	WADV
+-|&nbsp;行き	VB;行く
+-|&nbsp;ます	AX
+-|&nbsp;か	P-FINAL
+-|&nbsp;。	PU
+-|&nbsp;EOS
 </pre>
 
 <h3><a name="tnt_collapse_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#tnt_to_flat_parse">tnt_to_flat_parse(1)</a>
+<a href="#tnt_to_flat_parse">tnt_to_flat_parse(1)</a>
 </p>
 
 <br/>
@@ -1166,13 +1253,13 @@ Please email:
 <h3><a name="tnt_to_flat_parse_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      tnt_to_flat_parse
+tnt_to_flat_parse
 </p>
 
 <h3><a name="tnt_to_flat_parse_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to make basic parse from tnt analysis.
+Filter to make basic parse from tnt analysis.
 </p>
 
 <h3><a name="tnt_to_flat_parse_OPTIONS">OPTIONS</a></h3>
@@ -1185,20 +1272,20 @@ Please email:
 <h3><a name="tnt_to_flat_parse_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_to_flat_parse
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;授業	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;が	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;終わる	VB
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(N&nbsp;授業)&nbsp;(P&nbsp;が)&nbsp;(VB&nbsp;終わる)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;example;MJ))
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_to_flat_parse
+&gt;&nbsp;授業	N
+&gt;&nbsp;が	P
+&gt;&nbsp;終わる	VB
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;(&nbsp;(IP&nbsp;(N&nbsp;授業)&nbsp;(P&nbsp;が)&nbsp;(VB&nbsp;終わる)&nbsp;(PU&nbsp;。))&nbsp;(ID&nbsp;example;MJ))
 </pre>
 
 <h3><a name="tnt_to_flat_parse_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#tnt_collapse">tnt_collapse(1)</a>
+<a href="#tnt_collapse">tnt_collapse(1)</a>
 </p>
 
 <br/>
@@ -1216,13 +1303,13 @@ Please email:
 <h3><a name="tnt_to_inline_SYNOPSIS">SYNOPSIS</a></h3>
 
 <p>
-      tnt_to_inline
+tnt_to_inline
 </p>
 
 <h3><a name="tnt_to_inline_DESCRIPTION">DESCRIPTION</a></h3>
 
 <p>
-      Filter to convert tagged information in TnT format to inline format.
+Filter to convert tagged information in TnT format to inline format.
 </p>
 
 <h3><a name="tnt_to_inline_OPTIONS">OPTIONS</a></h3>
@@ -1236,83 +1323,24 @@ Please email:
 <h3><a name="tnt_to_inline_EXAMPLE">EXAMPLE</a></h3>
 
 <pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_to_inline
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;花子	NPR
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;は	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;赤い	ADJI
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;コート	N
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;を	P
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;着	VB
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;た	AXD
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;。	PU
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOS
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;花子_NPR&nbsp;は_P&nbsp;赤い_ADJI&nbsp;コート_N&nbsp;を_P&nbsp;着_VB&nbsp;た_AXD&nbsp;。_PU
+$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tnt_to_inline
+&gt;&nbsp;花子	NPR
+&gt;&nbsp;は	P
+&gt;&nbsp;赤い	ADJI
+&gt;&nbsp;コート	N
+&gt;&nbsp;を	P
+&gt;&nbsp;着	VB
+&gt;&nbsp;た	AXD
+&gt;&nbsp;。	PU
+&gt;&nbsp;EOS
+&gt;&nbsp;EOF
+-|&nbsp;花子_NPR&nbsp;は_P&nbsp;赤い_ADJI&nbsp;コート_N&nbsp;を_P&nbsp;着_VB&nbsp;た_AXD&nbsp;。_PU
 </pre>
 
 <h3><a name="tnt_to_inline_SEE_ALSO">SEE ALSO</a></h3>
 
 <p>
-      <a href="#inline_to_tnt">inline_to_tnt(1)</a>, <a href="#tnt_clean">tnt_clean(1)</a>
-</p>
-
-<br/>
-
-<hr/>
-
-<table border=0 cellpadding=0 cellspacing=0 width=100%>
-<tr><td><b><a name="tree_to_charactertree">tree_to_charactertree(1)</a></b></td><td align=right><b>tree_to_charactertree(1)</b></td></tr>
-</table>
-
-<h3>NAME</h3>
-
-<p><b>tree_to_charactertree</b> - transform tree</p>
-
-<h3><a name="tree_to_charactertree_SYNOPSIS">SYNOPSIS</a></h3>
-
-<p>
-      tree_to_charactertree
-</p>
-
-<h3><a name="tree_to_charactertree_DESCRIPTION">DESCRIPTION</a></h3>
-
-<p>
-      Filter to transform tree with terminals split into characters.
-</p>
-
-<h3><a name="tree_to_charactertree_OPTIONS">OPTIONS</a></h3>
-
-<table>
-<tr><td>--example)</td><td>show an example</td></tr>
-<tr><td>*)</td><td>show this help message</td></tr>
-</table>
-
-<h3><a name="tree_to_charactertree_EXAMPLE">EXAMPLE</a></h3>
-
-<pre>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;cat&nbsp;&lt;&lt;&nbsp;EOF&nbsp;|&nbsp;tree_to_charactertree&nbsp;|&nbsp;munge-trees&nbsp;-p
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;授業))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;が))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;終わる)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;。))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;(ID&nbsp;7_textbook_kisonihongo;page_13;AT1-7;MJ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;EOF
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;(&nbsp;(IP-MAT&nbsp;(PP&nbsp;(NP&nbsp;(N&nbsp;(+&nbsp;授)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+&nbsp;業)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P&nbsp;(+&nbsp;が)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*が*)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;(+&nbsp;終)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+&nbsp;わ)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+&nbsp;る))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;(+&nbsp;。)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-|&nbsp;&nbsp;&nbsp;(ID&nbsp;7_textbook_kisonihongo;page_13;AT1-7;MJ))
-</pre>
-
-<h3><a name="tree_to_charactertree_SEE_ALSO">SEE ALSO</a></h3>
-
-<p>
-      <a href="#tree_to_tnt">tree_to_tnt(1)</a>
+<a href="#inline_to_tnt">inline_to_tnt(1)</a>, <a href="#tnt_clean">tnt_clean(1)</a>
 </p>
 
 <br/>
@@ -1320,7 +1348,7 @@ Please email:
 
 <hr>
 
-<p align="left">Last updated: August 11, 2016</p>
+<p align="left">Last updated: April 29, 2017</p>
 
 </body>
 </html>

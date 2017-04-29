@@ -31,7 +31,7 @@ function example () {
 
 FILE=${TMP:-"/tmp"}/output_add$$
 
-cat > ${FILE} << FILE
+cat > "${FILE}" << FILE
 今秋	コンシュー	コンシュウ	今秋	名詞-普通名詞-副詞可能		
 に	ニ	ニ	に	助詞-格助詞		
 は	ワ	ハ	は	助詞-係助詞		
@@ -75,11 +75,11 @@ cat 1>&2 << END
       > EOF
 END
 
-cat << DEMO | $0 ${FILE} | munge-trees -p | sed 's/^/      -| /' 1>&2
+cat << DEMO | $0 "${FILE}" | munge-trees -p | sed 's/^/      -| /' 1>&2
 ( (IP-MAT (NP-SBJ *pro*) (PP (NP (N 今秋)) (P に) (P は)) (PP (NP (N 議長国)) (P として)) (PP (NP (NPR アジア・太平洋経済協力会議)) (P に)) (VB 臨ま) (MD なければならない) (PU 。)) (ID 12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
 DEMO
 
-rm ${FILE}
+rm "${FILE}"
 
 }
 
@@ -117,7 +117,7 @@ done
 # script starts here #
 ######################
 
-if test ! -f ${DATAFILE}; then
+if test ! -f "${DATAFILE}"; then
  help_information
  exit
 fi
@@ -125,7 +125,7 @@ fi
 TEMPDATA=${TMP:-"/tmp"}/output_data$$
 
 # place pron word information on the first character of the word
-cat ${DATAFILE} | \
+cat "${DATAFILE}" | \
 awk '
 BEGIN { FS="\t" }
 
@@ -147,7 +147,7 @@ print parts[i]
 }
 
 }
-' > ${TEMPDATA}
+' > "${TEMPDATA}"
 
 TEMP=${TMP:-"/tmp"}/output_comb$$
 
@@ -202,13 +202,13 @@ next
 
 { print }
 
-' > ${TEMP}
+' > "${TEMP}"
 
 TSCRIPT=${TMP:-"/tmp"}/output_tscript$$
 
 # create tsurgeon script for changing pron information placement
 # and collapsing characters back to words
-cat > ${TSCRIPT} << EOF
+cat > "${TSCRIPT}" << EOF
 pron=x \$.. (pron=y !\$,, (pron \$,, pron))
 
 move y >-1 x
@@ -225,37 +225,16 @@ excise x x
 EOF
 
 # put everything back together as an output tree or report errors
-if test $(cat ${TEMP} | grep -c PROBLEM) -gt 0; then
-  cat ${TEMP}
+if test $(cat "${TEMP}" | grep -c PROBLEM) -gt 0; then
+  cat "${TEMP}"
 else
-  cat ${TEMP} | \
+  cat "${TEMP}" | \
   table_to_tree | \
   sed 's/☺\([^)]*\))/) (pron \1)/g' | \
-  tsurgeon_script ${TSCRIPT} --together | \
-  sed '
-s/) (pron \([^)]*)\)/;\1/g
-
-s/\*から\*/&;*カラ*/g
-s/\*が\*/&;*ガ*/g
-s/\*で\*/&;*デ*/g
-s/\*と\*/&;*ト*/g
-s/\*なら\*/&;*ナラ*/g
-s/\*ならでは\*/&;*ナラデハ*/g
-s/\*なんか\*/&;*ナンカ*/g
-s/\*に\*/&;*ニ*/g
-s/\*について\*/&;*ニツイテ*/g
-s/\*によって\*/&;*ニヨッテ*/g
-s/\*により\*/&;*ニヨリ*/g
-s/\*に対し\*/&;*ニ対シ*/g
-s/\*に対して\*/&;*ニ対シテ*/g
-s/\*の\*/&;*ノ*/g
-s/\*へ\*/&;*エ*/g
-s/\*より\*/&;*ヨリ*/g
-s/\*を\*/&;*オ*/g
-s/\*をもって\*/&;*ヲモッテ*/g
-'
+  tsurgeon_script "${TSCRIPT}" --together | \
+  sed 's/) (pron \([^)]*)\)/;\1/g'
 fi
 
 # clean things up
-rm ${TEMP} ${TEMPDATA} ${TSCRIPT}
+rm "${TEMP}" "${TEMPDATA}" "${TSCRIPT}"
 

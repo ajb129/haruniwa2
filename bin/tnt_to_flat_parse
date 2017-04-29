@@ -80,10 +80,10 @@ done
 
 
 awk '
-BEGIN {printf("( (IP-MAT") }
+BEGIN {printf("( (IP") }
 
 $1 ~ /EOS/ {
-printf(") (ID example;MJ))\n( (IP-MAT")
+printf(") (ID example;MJ))\n( (IP")
 next
 }
 

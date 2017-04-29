@@ -91,7 +91,7 @@ done
 # script starts here #
 ######################
 
-if test ${PRON}; then
+if test "${PRON}"; then
   cat
 else
   awk '
@@ -106,7 +106,7 @@ next
 { print }
 '
 fi | \
-if test ${SENSE}; then
+if test "${SENSE}"; then
   cat
 else
   awk '
@@ -121,7 +121,7 @@ next
 { print }
 '
 fi | \
-if test ${FULL}; then
+if test "${FULL}"; then
   cat
 else
   sed 's/P-[^ ]*$/P/'

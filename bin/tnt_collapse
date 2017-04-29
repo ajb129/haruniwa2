@@ -39,10 +39,10 @@ END
 
 cat << DEMO | $0 | sed 's/^/      -| /' 1>&2
 大学	N
-まで	P-CASE
+まで	P-ROLE
 どう	WADV
 やっ	VB2;遣る
-て	P-CONJ
+て	P-SCON
 行き	VB2;行く
 ます	AX
 か	P-FINAL
@@ -88,7 +88,7 @@ done
 
 tnt_to_flat_parse | \
 haruniwa2_scaffold | \
-if test ${TREE}; then
+if test "${TREE}"; then
   cat
 else
   tree_to_tnt --extended

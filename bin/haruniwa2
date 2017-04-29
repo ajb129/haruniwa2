@@ -2,7 +2,7 @@
 
 BLOCK=1
 
-MODEL="$($(dirname $0)/../model_location)"
+MODEL="$(japanese_model_location)"
 
 ####################
 # help information #
@@ -59,8 +59,8 @@ EOS
 にわ	N
 に	P
 は	P
-に	CARD
-わ	NUMCL
+に	NUM
+わ	CL
 の	P
 にわとり	N
 が	P
@@ -109,8 +109,7 @@ END
 while test $# -gt 0 ; do
   case "$1" in
 
-      --raw)                  # output parse without any modification
-                              #   (default is to post-process with parse_decorate and parse_finish)
+      --raw)                  # output parse without any modification (default is to post-process with parse_decorate and parse_finish)
          RAW=1 ; shift ;;
 
       --top|-top)             # output with TOP as root node
@@ -150,17 +149,17 @@ DIR=$(dirname $0)/../scripts
 
 PATH=${DIR}:${PATH}
 
-if test ${TOP}; then
+if test "${TOP}"; then
 function stamp () {
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
   sed '/^(number /d'
 }
-elif test ${BASIC}; then
+elif test "${BASIC}"; then
 function stamp () {
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
   sed '/^(TOP / {s/^(TOP //; s/)$//}' | sed '/^(number /d'
 }
-elif test ${JOHNSON}; then
+elif test "${JOHNSON}"; then
 function stamp () {
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE \([^ ()]*\)) /\1\n/; s/)$// }" | \
   sed '/^(TOP / {s/^(TOP /(S1 /}' | sed 's/^(number \([0-9]*\))$/\1\t1/;'
@@ -173,10 +172,10 @@ function stamp () {
 fi
 
 
-berkeley_parse ${MODEL} ${BLOCK} | \
-if test ${RAW}; then
+berkeley_parse "${MODEL}" "${BLOCK}" | \
+if test "${RAW}"; then
   cat
 else
-  tsurgeon_script ${DIR}/flatten.tsurgeon ${DIR}/japanese.tsurgeon | stamp
+  tsurgeon_script "${DIR}/flatten.tsurgeon" "${DIR}/japanese.tsurgeon" | stamp
 fi
 

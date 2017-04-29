@@ -31,25 +31,25 @@ function example () {
 
 FILE=${TMP:-"/tmp"}/output_add$$
 
-cat > ${FILE} << FILE
+cat > "${FILE}" << FILE
 出稼ぎ労働者	N
 は	P-OPTR
 上海	NPR
-を	P-CASE
+を	P-ROLE
 建設	VB;建設する
 する	VB0
-と	P-CONJ
+と	P-SCON
 同時	N
-に	P-CASE
+に	P-ROLE
 、	PU
 大きな	ADJN
 社会問題	N
-と	P-CASE
+と	P-ROLE
 治安問題	N
-を	P-CASE
+を	P-ROLE
 も	P-OPTR
 招い	VB;招く
-て	P-CONJ
+て	P-SCON
 いる	VB2;居る
 。	PU
 EOS
@@ -73,11 +73,11 @@ cat 1>&2 << END
       > EOF
 END
 
-cat << DEMO | $0 ${FILE} | munge-trees -p | sed 's/^/      -| /' 1>&2
+cat << DEMO | $0 "${FILE}" | munge-trees -p | sed 's/^/      -| /' 1>&2
 ( (IP-MAT (PP (NP (N 出稼ぎ) (N 労働) (N 者)) (P は)) (NP-SBJ *) (PP (NP (PP (IP-ADV (PP (NP (NPR 上海)) (P を)) (NP-OB1 *を*) (VB 建設) (VB0 する)) (P と)) (N 同時)) (P に)) (PU 、) (PP (NP (ADJN 大きな) (NML (CONJP (NP (N 社会) (N 問題)) (P と)) (NP (N 治安) (N 問題)))) (P を) (P も)) (NP-OB1 *を*) (VB 招い) (P て) (VB2 いる) (PU 。)) (ID 100_wikipedia_Shanghai;MJ))
 DEMO
 
-rm ${FILE}
+rm "${FILE}"
 
 }
 
@@ -115,7 +115,7 @@ done
 # script starts here #
 ######################
 
-if test ! -f ${DATAFILE}; then
+if test ! -f "${DATAFILE}"; then
  help_information
  exit
 fi
@@ -123,7 +123,7 @@ fi
 TEMPDATA=${TMP:-"/tmp"}/output_data$$
 
 # place sense word information on the first character of the word
-cat ${DATAFILE} | \
+cat "${DATAFILE}" | \
 awk '
 BEGIN { FS="\t" }
 
@@ -146,7 +146,7 @@ print parts[i]
 }
 
 }
-' > ${TEMPDATA}
+' > "${TEMPDATA}"
 
 TEMP=${TMP:-"/tmp"}/output_comb$$
 
@@ -199,13 +199,13 @@ next
 
 { print }
 
-' > ${TEMP}
+' > "${TEMP}"
 
 TSCRIPT=${TMP:-"/tmp"}/output_tscript$$
 
 # create tsurgeon script for changing sense information placement
 # and collapsing characters back to words
-cat > ${TSCRIPT} << EOF
+cat > "${TSCRIPT}" << EOF
 SENSE=x \$.. (SENSE=y !\$,, (SENSE \$,, SENSE))
 
 move y >-1 x
@@ -255,18 +255,18 @@ delete x
 EOF
 
 # put everything back together as an output tree or report errors
-if test $(cat ${TEMP} | grep -c PROBLEM) -gt 0; then
-  cat ${TEMP}
+if test $(cat "${TEMP}" | grep -c PROBLEM) -gt 0; then
+  cat "${TEMP}"
 else
-  cat ${TEMP} | \
+  cat "${TEMP}" | \
   table_to_tree | \
   sed '
 s/☺\([^)]*\.[[:digit:]]\+\))/) (SENSE *\1*)/g
-s/☺\([^)]*\))/) (SENSE *\1.0*)/g
+s/☺\([^)]*\))/) (SENSE *\1*)/g
 ' | \
-  tsurgeon_script ${TSCRIPT} --together
+  tsurgeon_script "${TSCRIPT}" --together
 fi
 
 # clean things up
-rm ${TEMP} ${TEMPDATA} ${TSCRIPT}
+rm "${TEMP}" "${TEMPDATA}" "${TSCRIPT}"
 

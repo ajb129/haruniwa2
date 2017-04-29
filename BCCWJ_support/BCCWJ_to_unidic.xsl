@@ -3,8 +3,26 @@
 <xsl:output method="text" omit-xml-declaration="yes" indent="no"/>
 
 <xsl:template match="//sentence">
-  <xsl:apply-templates select="LUW/SUW" />
+  <xsl:apply-templates select="LUW/SUW | LUW/NumTrans" />
   <xsl:text>EOS
+</xsl:text>
+</xsl:template>
+
+<xsl:template match="NumTrans">
+  <xsl:value-of select="@originalText"/>
+  <xsl:text>	</xsl:text>
+  <xsl:value-of select="@originalText"/>
+  <xsl:text>	</xsl:text>
+  <xsl:value-of select="@originalText"/>
+  <xsl:text>	</xsl:text>
+  <xsl:value-of select="@originalText"/>
+  <xsl:text>	</xsl:text>
+  <xsl:value-of select="SUW[1]/@pos"/>
+  <xsl:text>	</xsl:text>
+  <xsl:value-of select="SUW[1]/@cType"/>
+  <xsl:text>	</xsl:text>
+  <xsl:value-of select="SUW[1]/@cForm"/>
+  <xsl:text>
 </xsl:text>
 </xsl:template>
 

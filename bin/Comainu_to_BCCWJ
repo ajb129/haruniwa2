@@ -27,7 +27,7 @@ cat $0 | grep " \# " 1>&2
 
 function example () {
 
-EXAMPLE=$(dirname $0)/../BCCWJ/Comainu_example.txt
+EXAMPLE=$(dirname $0)/../BCCWJ_support/Comainu_example.txt
 
 cat 1>&2 << END
 
@@ -35,13 +35,13 @@ EXAMPLE
       $ cat << EOF | Comainu_to_BCCWJ
 END
 
-cat ${EXAMPLE} | sed 's/^/      > /' 1>&2
+cat "${EXAMPLE}" | sed 's/^/      > /' 1>&2
 
 cat 1>&2 << END
       > EOF
 END
 
-cat ${EXAMPLE} | $0 | sed 's/^/      -| /' 1>&2
+cat "${EXAMPLE}" | $0 | sed 's/^/      -| /' 1>&2
 
 }
 

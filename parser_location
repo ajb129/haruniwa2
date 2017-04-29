@@ -1,2 +1,0 @@
-#!/bin/bash
-echo ${HOME}/parsed/programs/BerkeleyParser-1.7.jar

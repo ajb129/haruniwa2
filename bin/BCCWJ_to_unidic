@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=$(dirname $0)
+DIR="$(dirname $0)"
 
 ####################
 # help information #
@@ -30,7 +30,7 @@ cat $0 | grep " \# " 1>&2
 
 function example () {
 
-EXAMPLE=${DIR}/../BCCWJ/Comainu_example.txt
+EXAMPLE=${DIR}/../BCCWJ_support/Comainu_example.txt
 
 cat 1>&2 << END
 
@@ -38,13 +38,13 @@ EXAMPLE
       cat << EOF | BCCWJ_to_unidic
 END
 
-cat ${EXAMPLE} | Comainu_to_BCCWJ | sed 's/^/      /' 1>&2
+cat "${EXAMPLE}" | Comainu_to_BCCWJ | sed 's/^/      /' 1>&2
 
 cat 1>&2 << END
       EOF
 END
 
-cat ${EXAMPLE} | Comainu_to_BCCWJ | $0 | sed 's/^/      /' 1>&2
+cat "${EXAMPLE}" | Comainu_to_BCCWJ | $0 | sed 's/^/      /' 1>&2
 
 }
 
@@ -67,5 +67,11 @@ done
 # script starts here #
 ######################
 
-xmllint --noblanks - | xsltproc ${DIR}/../BCCWJ/BCCWJ_to_unidic.xsl - | sed '/^ \t\t/d'
+sed '
+s@<quote>@@g
+s@</quote>@@g
+' | \
+xmllint --noblanks - | \
+xsltproc "${DIR}/../BCCWJ_support/BCCWJ_to_unidic.xsl" - | \
+sed '/^ \t\t/d'
 

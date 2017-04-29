@@ -1,0 +1,35 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      japanese_model_location - print model location
+
+SYNOPSIS
+      japanese_model_location
+
+DESCRIPTION
+      Send location details of parser model file to stdout.
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      *) help_information
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+echo "$(dirname $0)/../../../../models/B5/gram.gr"

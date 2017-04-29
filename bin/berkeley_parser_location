@@ -1,0 +1,35 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      berkeley_parser_location - print parser location
+
+SYNOPSIS
+      berkeley_parser_location
+
+DESCRIPTION
+      Send location details of Berkeley Parser jar files to stdout.
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      *) help_information
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+echo "$(dirname $0)/../../../../ready/BerkeleyParser-1.7.jar"

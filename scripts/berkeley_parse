@@ -1,6 +1,9 @@
 #!/bin/bash
 
-PARSER="$($(dirname $0)/../parser_location)"
+TEMP1=${TMP:-"/tmp"}/output_in$$
+TEMP2=${TMP:-"/tmp"}/output_out$$
+
+PARSER="$(berkeley_parser_location)"
 
 MODEL=$1
 
@@ -10,8 +13,11 @@ else
   NUMBER=1
 fi
 
-sed 's/^EOS.*//' | \
-java -server -mx800m -jar ${PARSER} -keepFunctionLabels -gr ${MODEL} -useGoldPOS -maxLength 400 -kbest ${NUMBER} | \
+sed 's/^EOS.*//' > ${TEMP1}
+
+java -server -mx800m -jar ${PARSER} -keepFunctionLabels -gr ${MODEL} -useGoldPOS -maxLength 400 -kbest ${NUMBER} -inputFile ${TEMP1} -outputFile ${TEMP2}
+
+cat ${TEMP2} | \
 sed 's/^( /(TOP /; s/ )$/)/' | \
 awk -v SIZE=${NUMBER} '
 
@@ -35,4 +41,6 @@ NF == 0 {
 }
 
 '
+
+rm ${TEMP1} ${TEMP2}
 

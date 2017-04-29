@@ -12,7 +12,9 @@ cat << EOF
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="Treebank,Japanese,Natural Language,Parser">
 <meta name="description" content="HARUNIWA2 - Japanese Treebank grammar for BitPar parser">
+<link rel="shortcut icon" href="../dp2.ico">
 <title>HARUNIWA2</title>
+<style>li { margin: 5px -20px; }</style>
 </head>
 
 <body>
@@ -22,7 +24,7 @@ cat << EOF
 <td><a href="https://github.com/ajb129/haruniwa2">Download</a></td>
 <td><a href="http://www.compling.jp/haruniwa2/haruniwa2_model.zip">Berkeley Parser model</a></td>
 <td><a href="#man">Manual pages</a></td>
-<td><a href="../related/index.html">More Projects</a></td>
+<td><a href="../ajb129/index.html#tools">More Tools</a></td>
 </tr>
 </table>
 
@@ -49,7 +51,7 @@ data of the <a href="http://www.compling.jp/keyaki/engindex.html">Keyaki Treeban
 </p>
 
 <p align="justify">
-Transformations
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transformations
 are made to the treebank data,
 using among other things
 the <a href="http://nlp.stanford.edu/software/tregex.shtml">stanford-tregex</a> tool
@@ -58,6 +60,16 @@ aiming to tune the content of the Keyaki Treebank
 to the specific needs of probabilistic context-free parsers,
 while allowing the original annotation to be restored.
 </p>
+
+<p align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The parser pipeline is described in the following paper:
+</p>
+
+<ul>
+<li>
+Horn, Stephen Wright, Butler, Alastair, and Yoshimoto, Kei. 2017. Keyaki Treebank segmentation and part-of-speech labelling. 『言語処理学会 第23 回年次大会 発表論文集』 Proceedings of the Twenty Third Annual Meeting of the Association of Natural Language Processing, pages 414-417. The Association for Natural Language Processing.
+[<a href="http://www.anlp.jp/proceedings/annual_meeting/2017/pdf_dir/C4-5.pdf">PDF</a>].</li>
+</ul>
 
 <p align="justify">
 All components are distributed <a href="https://github.com/ajb129/haruniwa2">freely</a>.

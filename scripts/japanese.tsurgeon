@@ -11,28 +11,28 @@ insert (NP *T*) >1 x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % を
-PP=x < (P|P-CASE < を) > @IP !$. (@NP < /^\*/)
+PP=x < (P|P-ROLE < を) > @IP !$. (@NP < /^\*/)
 
 insert (NP-OB1 *を*) $- x
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % が
-PP=x < (P|P-CASE < が) > @IP !$. (@NP < /^\*/)
+PP=x < (P|P-ROLE < が) > @IP !$. (@NP < /^\*/)
 
 insert (NP *が*) $- x
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % の
-PP=x < (P|P-CASE < の) > /^IP-REL/ !$. (@NP < /^\*/)
+PP=x < (P|P-ROLE < の) > /^IP-REL/ !$. (@NP < /^\*/)
 
 insert (NP-SBJ *の*) $- x
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % P-OPTR
-PP=x < NP > @IP !$. (@NP < /^\*/) [ < (P < か|きり|くらい|ぐらい|こそ|ごと|さえ|しか|しも|すら|だけ|だって|だり|でも|とも|ともあれ|なんか|なんて|にしてからが|にしても|にせよ|に限って|のみ|は|ばかし|ばかり|も|ものなら|ら|だが|ずつ !$ P|P-CASE) | < (P-OPTR !$ P|P-CASE) ]
+PP=x < NP > @IP !$. (@NP < /^\*/) [ < (P < か|きり|くらい|ぐらい|こそ|ごと|さえ|しか|しも|すら|だけ|だって|だり|でも|とも|ともあれ|なんか|なんて|にしてからが|にしても|にせよ|に限って|のみ|は|ばかし|ばかり|も|ものなら|ら|だが|ずつ !$ P|P-ROLE) | < (P-OPTR !$ P|P-ROLE) ]
 
 insert (NP *) $- x
 
@@ -54,10 +54,10 @@ relabel x PP
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CRD information for star
-PP-CRD=x
+% SCON information for star
+PP-SCON=x
 
-insert (CRD *) $- x
+insert (SCON *) $- x
 relabel x PP
 
 
@@ -146,7 +146,7 @@ insert (NP-SBJ *pro*) >1 x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Add SBJ pro when VP is only daugher of IP
-@IP=x <: (IML|VP !> /^IP-TE|^IP-PPL|^IP-INF/)
+@IP=x <: (IML|VP !> /^IP-ADV|^IP-INF/)
 
 insert (NP-SBJ *pro*) >1 x
 
@@ -220,9 +220,9 @@ move y >1 x
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% change from IP-ADV to IP-TE
-IP-ADV=x [ <-1 (P < て|で) | <-1 (/^PU|LRB|RRB/ $, (P < て|で)) | <-1 (AX < で) | <-1 (/^PU|LRB|RRB/ $, (AX < で)) | <-1 (NEG < ず) | <-1 (/^PU|LRB|RRB/ $, (NEG < ず)) ]
+% add CONJ with IP-ADV
+IP-ADV=x [ <-1 (P < て|で) | <-1 (/^PU|LRB|RRB/ $, (P < て|で)) | <-1 (AX < で) | <-1 (/^PU|LRB|RRB/ $, (AX < で)) | <-1 (NEG < ず) | <-1 (/^PU|LRB|RRB/ $, (NEG < ず)) ] !$. CONJ !$. (PU $. CONJ)
 
-relabel x IP-TE
+insert (CONJ *) $- x
 
 

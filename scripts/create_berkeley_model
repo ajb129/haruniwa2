@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# cat gold.psd | parse_decorate -d -e | parse_binarize --keepconj > data.mrg
+# cat gold.psd | parse_decorate --essence | parse_binarize --keepconj > data.mrg
 
 DIR=$(dirname $0)
 
-PARSER="$($(dirname $0)/../parser_location)"
+PARSER="$($(dirname $0)/../bin/berkeley_parser_location)"
 
 DATA=$1
 
