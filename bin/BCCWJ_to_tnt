@@ -99,5 +99,6 @@ else
   else
     tnt_collapse
   fi
-fi
+fi | \
+sed 's/};{//g'
 

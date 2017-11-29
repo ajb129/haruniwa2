@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# cat gold.psd | parse_decorate --essence | parse_binarize --keepconj > data.mrg
+# cat gold.psd | parse_decorate --essence | parse_binarize --keepconj > data.psd
+# cat data.psd | csearch_to_top > data.mrg
 
 DIR=$(dirname $0)
 

@@ -76,7 +76,7 @@ cat 1>&2 << END
 END
 
 cat << DEMO | $0 "${FILE}" | munge-trees -p | sed 's/^/      -| /' 1>&2
-( (IP-MAT (NP-SBJ *pro*) (PP (NP (N 今秋)) (P に) (P は)) (PP (NP (N 議長国)) (P として)) (PP (NP (NPR アジア・太平洋経済協力会議)) (P に)) (VB 臨ま) (MD なければならない) (PU 。)) (ID 12_newswire_KTC_MAINICHI-1995;950101008-004;MJ))
+( (IP-MAT (NP-SBJ *pro*) (PP (NP (N 今秋)) (P に) (P は)) (PP (NP (N 議長国)) (P として)) (PP (NP (NPR アジア・太平洋経済協力会議)) (P に)) (VB 臨ま) (MD なければならない) (PU 。)) (ID 12_newswire_KTC_MAINICHI-1995;950101008-004;JP))
 DEMO
 
 rm "${FILE}"
@@ -194,7 +194,7 @@ if (index($5, $4)) {
   print
 }
 else {
-  print "PROBLEM:" $0
+  print "__PROBLEM__:" $0
 }
 
 next
@@ -226,16 +226,25 @@ move y \$+ x
 
 excise x x
 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% merge characters
+__=x \$ (__=y !< __)
+  
+relabel x /^.*\$/={x}={y}/
+delete y
+
+
 EOF
 
 # put everything back together as an output tree or report errors
-if test $(cat "${TEMP}" | grep -c PROBLEM) -gt 0; then
+if test $(cat "${TEMP}" | grep -c __PROBLEM__) -gt 0; then
   cat "${TEMP}"
 else
   cat "${TEMP}" | \
   table_to_tree | \
   sed 's/☺\([^)]*\))/) (unidic \1|)/g' | \
-  tsurgeon_script "${TSCRIPT}" --together | \
+  tsurgeon_script "${TSCRIPT}" | \
   sed 's/(unidic \([^)]*\)) (\([^ ]*\) /(\2;\1 /g'
 fi
 

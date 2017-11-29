@@ -83,7 +83,7 @@ awk '
 BEGIN {printf("( (IP") }
 
 $1 ~ /EOS/ {
-printf(") (ID example;MJ))\n( (IP")
+printf(") (ID example;JP))\n( (IP")
 next
 }
 

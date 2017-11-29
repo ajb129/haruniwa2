@@ -167,7 +167,7 @@ function stamp () {
 else
 function stamp () {
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
-  sed '/^(TOP / {s/^(TOP /( /; s/)$/ (ID ex'$(date +%s)';MJ))/}'
+  sed '/^(TOP / {s/^(TOP /( /; s/)$/ (ID ex'$(date +%s)';JP))/}'
 }
 fi
 

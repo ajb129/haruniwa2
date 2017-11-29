@@ -178,10 +178,10 @@ FW                未知語 英単語
 
         <!-- adjective -->
         <xsl:when test="@l_pos='形状詞-一般'">
-          <xsl:value-of select="."/><xsl:text>&#x9;ADJN&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;ADJN;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
         </xsl:when>
         <xsl:when test="@l_pos='形状詞-タリ'">
-          <xsl:value-of select="."/><xsl:text>&#x9;ADJT&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;ADJT;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
         </xsl:when>
 
         <!-- adjective for CSJ -->
@@ -191,7 +191,7 @@ FW                未知語 英単語
               <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="."/><xsl:text>&#x9;ADJN&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;ADJN;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
@@ -224,7 +224,7 @@ FW                未知語 英単語
               <xsl:value-of select="."/><xsl:text>&#x9;PNL&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="@l_lemma='同じ'">
-              <xsl:value-of select="."/><xsl:text>&#x9;ADJN&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;ADJN;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="@l_lemma='我が'">
               <xsl:value-of select="."/><xsl:text>&#x9;PRO&#x0A;</xsl:text>
@@ -330,13 +330,13 @@ FW                未知語 英単語
               <xsl:value-of select="."/><xsl:text>&#x9;NEG&#x0A;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="."/><xsl:text>&#x9;ADJI&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;ADJI;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <!-- adjective for CSJ -->
         <xsl:when test="@l_pos='形容詞'">
-          <xsl:value-of select="."/><xsl:text>&#x9;ADJI&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;ADJI;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
         </xsl:when>
 
         <!-- particle ので -->
@@ -527,7 +527,7 @@ FW                未知語 英単語
                   <xsl:when test="@lemma='多く' or @lemma='皆'">
                     <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
-                  <xsl:when test="@lemma='半' or @l_lemma='一人' or @l_lemma='二人'">
+                  <xsl:when test="@lemma='半' or @lemma='一人' or @lemma='二人'">
                     <xsl:value-of select="."/><xsl:text>&#x9;NUM&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '全')">
@@ -552,8 +552,8 @@ FW                未知語 英単語
                 <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>
               </xsl:when>
 
-              <xsl:when test="@pos='名詞-普通名詞-サ変可能' and ../following-sibling::LUW[1]/@l_lForm='。'">
-                <xsl:value-of select="."/><xsl:text>&#x9;VB;{</xsl:text><xsl:value-of select="@l_lemma"/><xsl:text>}&#x0A;</xsl:text>
+              <xsl:when test="@pos='名詞-普通名詞-サ変可能' and ../following-sibling::LUW[1]/SUW[1]/@lemma='。'">
+                <xsl:value-of select="."/><xsl:text>&#x9;VB;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
 
               <xsl:when test="@pos='名詞-普通名詞-サ変可能' and @lemma='-'">
@@ -561,7 +561,7 @@ FW                未知語 英単語
               </xsl:when>
 
               <xsl:when test="@pos='名詞-普通名詞-サ変可能'">
-                <xsl:value-of select="."/><xsl:text>&#x9;NV;{</xsl:text><xsl:value-of select="@l_lemma"/>する<xsl:text>}&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;NV;{</xsl:text><xsl:value-of select="@lemma"/>する<xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
 
               <xsl:when test="@pos='名詞-普通名詞-形状詞可能'">
@@ -572,10 +572,10 @@ FW                未知語 英単語
               </xsl:when>
               <xsl:when test="@pos='名詞-普通名詞-副詞可能'">
                 <xsl:choose>
-                  <xsl:when test="@l_lemma='自身'">
+                  <xsl:when test="@lemma='自身'">
                     <xsl:value-of select="."/><xsl:text>&#x9;PRO&#x0A;</xsl:text>
                   </xsl:when>
-                  <xsl:when test="@l_lemma='半分'">
+                  <xsl:when test="@lemma='半分'">
                     <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="@lemma='多く'">
@@ -624,7 +624,7 @@ FW                未知語 英単語
                 <xsl:value-of select="."/><xsl:text>&#x9;NPR&#x0A;</xsl:text>
               </xsl:when>
               <!-- proper name for CSJ -->
-              <xsl:when test="@l_pos='名詞-固有名詞'">
+              <xsl:when test="@pos='名詞-固有名詞'">
                 <xsl:value-of select="."/><xsl:text>&#x9;NPR&#x0A;</xsl:text>
               </xsl:when>
 
@@ -674,10 +674,10 @@ FW                未知語 英単語
 
               <!-- adjective -->
               <xsl:when test="@pos='形状詞-一般'">
-                <xsl:value-of select="."/><xsl:text>&#x9;ADJN&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;ADJN;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
               <xsl:when test="@pos='形状詞-タリ'">
-                <xsl:value-of select="."/><xsl:text>&#x9;ADJT&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;ADJT;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
 
               <!-- adjective for CSJ -->
@@ -687,7 +687,7 @@ FW                未知語 英単語
                     <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="."/><xsl:text>&#x9;ADJN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;ADJN;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
@@ -781,6 +781,13 @@ FW                未知語 英単語
                 <xsl:value-of select="."/><xsl:text>&#x9;VB;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
 
+              <!-- VB0 -->
+              <xsl:when test="@pos='動詞-非自立可能' and ../preceding-sibling::*[1]/SUW/@pos='名詞-普通名詞-サ変可能' and not(preceding-sibling::*[1])">
+                <xsl:value-of select="."/><xsl:text>&#x9;VB0&#x0A;</xsl:text>
+              </xsl:when>
+              <xsl:when test="@pos='動詞-非自立可能' and ../preceding-sibling::*[1]/SUW/@pos='動詞-一般' and not(preceding-sibling::*[1])">
+                <xsl:value-of select="."/><xsl:text>&#x9;VB0&#x0A;</xsl:text>
+              </xsl:when>
 
               <!-- secondary verb -->
               <xsl:when test="@pos='動詞-非自立可能'">
@@ -789,11 +796,11 @@ FW                未知語 英単語
 
               <!-- adjective -->
               <xsl:when test="@pos='形容詞-一般'">
-                <xsl:value-of select="."/><xsl:text>&#x9;ADJI&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;ADJI;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
               <!-- adjective for CSJ -->
               <xsl:when test="@pos='形容詞'">
-                <xsl:value-of select="."/><xsl:text>&#x9;ADJI&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;ADJI;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
               </xsl:when>
 
               <xsl:when test="@pos='形容詞-非自立可能'">
@@ -805,7 +812,7 @@ FW                未知語 英単語
                     <xsl:value-of select="."/><xsl:text>&#x9;NEG&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="."/><xsl:text>&#x9;ADJI&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;ADJI;{</xsl:text><xsl:value-of select="@lemma"/><xsl:text>}&#x0A;</xsl:text>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>

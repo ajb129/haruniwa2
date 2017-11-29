@@ -1,8 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % remove layers to form words
-
 /^(ADV\b|AX\b|CONJ\b|D\b|MD\b|N\b|P\b|WADV\b|PU\b|VB\b|CL\b|NUM\b|WNUM\b)/ < (__=x < __)
 
 excise x x
+
+
+%%%%%%%%%%%%%%
+% merge words
+__=x $ (__=y !< __) !> COMMENT
+  
+relabel x /^.*$/={x}={y}/
+delete y
 
 

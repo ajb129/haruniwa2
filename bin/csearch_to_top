@@ -38,7 +38,7 @@ cat 1>&2 << END
 END
 
 cat << DEMO | csearch_to_top | munge-trees -p | sed 's/^/      -| /' 1>&2
-( (IP-MAT (PP (NP (N 授業)) (P が)) (NP-SBJ *が*) (VB 終わる) (PU 。)) (ID 7_textbook_kisonihongo;page_13;AT1-7;MJ))
+( (IP-MAT (PP (NP (N 授業)) (P が)) (NP-SBJ *が*) (VB 終わる) (PU 。)) (ID 7_textbook_kisonihongo;page_13;AT1-7;JP))
 DEMO
 
 }

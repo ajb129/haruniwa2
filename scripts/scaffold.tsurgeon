@@ -12,7 +12,7 @@ N|N-LETTER $. (N-LETTER=x !$. N|N-LETTER)
 relabel x SUFFIX
 
 
-N-LETTER=x
+N-LETTER=x < __
 
 relabel x N
 
@@ -64,7 +64,7 @@ relabel x /^NV(.*)$/VB$1/
 
 
 % verbal noun followed by する
-/^NV\b/=x $. /^VB2\b/=y
+/^NV\b/=x $. /^VB2\b|^VB0\b/=y
 
 relabel x /^NV(.*)$/VB$1/
 relabel y /^VB2(.*)$/VB0$1/
