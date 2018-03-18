@@ -39,7 +39,7 @@ cat 1>&2 << END
 END
 
 cat << DEMO | $0 | sed 's/^/      -| /' 1>&2
-( (IP-MAT (N 大学) (P-ROLE まで) (WADV どう) (VB2;遣る やっ) (P-SCON て) (VB2;行く 行き) (AX ます) (P-FINAL か) (PU 。)) (ID example;JP))
+( (IP-MAT (N 大学) (P-ROLE まで) (WADV どう) (VB2;遣る やっ) (P-CONN て) (VB2;行く 行き) (AX ます) (P-FINAL か) (PU 。)) (ID example;JP))
 DEMO
 
 }

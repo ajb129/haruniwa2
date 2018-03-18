@@ -61,11 +61,11 @@ insert (SCON *) $- x
 relabel x PP
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% NP reflexive
-NP=x < (PRO < ご自身|そのもの|それ自身|みずから|僕ら|自ら|自体|自身) > @NP
-
-relabel x NP-RFL
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % NP reflexive
+% NP=x < (PRO < ご自身|そのもの|それ自身|みずから|僕ら|自ら|自体|自身) > @NP
+% 
+% relabel x NP-RFL
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -221,7 +221,7 @@ move y >1 x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % add CONJ with IP-ADV
-IP-ADV=x [ <-1 (P < て|で) | <-1 (/^PU|LRB|RRB/ $, (P < て|で)) | <-1 (AX < で) | <-1 (/^PU|LRB|RRB/ $, (AX < で)) | <-1 (NEG < ず) | <-1 (/^PU|LRB|RRB/ $, (NEG < ず)) ] !$. CONJ !$. (PU $. CONJ)
+IP-ADV=x [ <-1 (P < て|で) | <-1 (/^PU|LRB|RRB/ $, (P < て|で)) | <-1 (AX < で) | <-1 (/^PU|LRB|RRB/ $, (AX < で)) | <-1 (NEG < ず) | <-1 (/^PU|LRB|RRB/ $, (NEG < ず)) ] !$. CONJ !$. (PU $. CONJ) !> /^PP\b/
 
 insert (CONJ *) $- x
 

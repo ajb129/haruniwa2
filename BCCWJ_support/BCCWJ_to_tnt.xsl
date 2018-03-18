@@ -34,7 +34,7 @@ AX/AXD/VB2/NEG/MD 助動詞
 P-ROLE            助詞-格助詞
 P-ROLE            助詞-副助詞
 P-OPTR            助詞-係助詞
-P-SCON            助詞-接続助詞
+P-CONN            助詞-接続助詞
 P-FINAL           助詞-終助詞
 P-FINAL           助詞-準体助詞
 PREFIX            接頭辞
@@ -341,17 +341,17 @@ FW                未知語 英単語
 
         <!-- particle ので -->
         <xsl:when test="@l_pos='助動詞' and @l_lemma='のだ' and SUW/.='の' and SUW/.='で'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-SCON&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
         </xsl:when>
 
         <!-- particle なら -->
         <xsl:when test="@l_pos='助動詞' and @l_lemma='だ' and SUW/.='なら'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-SCON&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
         </xsl:when>
 
         <!-- particle たら -->
         <xsl:when test="@l_pos='助動詞' and @l_lemma='た' and (SUW/.='たら' or SUW/.='だら')">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-SCON&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
         </xsl:when>
 
         <!-- VB -->
@@ -371,10 +371,10 @@ FW                未知語 英単語
         </xsl:when>
 
         <xsl:when test="@l_lemma='のです' and @l_pos='助動詞' and SUW[1]/.='の' and SUW[2]/.='でしょう'">
-          <xsl:text>の&#x9;P-NOUN&#x0A;でしょ&#x9;AX&#x0A;う&#x9;MD&#x0A;</xsl:text>
+          <xsl:text>の&#x9;P-SPAN&#x0A;でしょ&#x9;AX&#x0A;う&#x9;MD&#x0A;</xsl:text>
         </xsl:when>
         <xsl:when test="@l_lemma='のです' and @l_pos='助動詞' and SUW[1]/.='ん' and SUW[2]/.='でしょう'">
-          <xsl:text>ん&#x9;P-NOUN&#x0A;でしょ&#x9;AX&#x0A;う&#x9;MD&#x0A;</xsl:text>
+          <xsl:text>ん&#x9;P-SPAN&#x0A;でしょ&#x9;AX&#x0A;う&#x9;MD&#x0A;</xsl:text>
         </xsl:when>
 
         <!-- modal -->
@@ -450,7 +450,7 @@ FW                未知語 英単語
         </xsl:when>
         <!-- particle, adverbial -->
         <xsl:when test="@l_pos='助詞-副助詞' and @l_lemma='や'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-CONJ&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
         </xsl:when>
         <xsl:when test="@l_pos='助詞-副助詞' and @l_lemma='だけ'">
           <xsl:value-of select="."/><xsl:text>&#x9;P-OPTR&#x0A;</xsl:text>
@@ -481,11 +481,8 @@ FW                未知語 英単語
         </xsl:when>
 
         <!-- particle, conjunctive -->
-        <xsl:when test="@l_pos='助詞-接続助詞' and @l_lemma='が'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-CONJ&#x0A;</xsl:text>
-        </xsl:when>
         <xsl:when test="@l_pos='助詞-接続助詞'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-SCON&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
         </xsl:when>
         <!-- particle, sentence-ending -->
         <xsl:when test="@l_pos='助詞-終助詞'">
@@ -493,14 +490,14 @@ FW                未知語 英単語
         </xsl:when>
         <!-- particle, のに -->
         <xsl:when test="@l_pos='助詞-準体助詞' and following-sibling::LUW[1]/@l_pos='助詞-格助詞' and following-sibling::LUW[1]/@l_lForm='ニ'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-SCON&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
         </xsl:when>
         <!-- particle, の -->
         <xsl:when test="@l_pos='助詞-準体助詞' and following-sibling::LUW[1]/@l_pos='助詞-格助詞'">
           <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>
         </xsl:when>
         <xsl:when test="@l_pos='助詞-準体助詞' and @l_lemma='の'">
-          <xsl:value-of select="."/><xsl:text>&#x9;P-NOUN&#x0A;</xsl:text>
+          <xsl:value-of select="."/><xsl:text>&#x9;P-SPAN&#x0A;</xsl:text>
         </xsl:when>
         <xsl:when test="@l_pos='助詞-準体助詞'">
           <xsl:value-of select="."/><xsl:text>&#x9;P-FINAL&#x0A;</xsl:text>
@@ -867,7 +864,7 @@ FW                未知語 英単語
               </xsl:when>
               <!-- particle, conjunctive -->
               <xsl:when test="@pos='助詞-接続助詞'">
-                <xsl:value-of select="."/><xsl:text>&#x9;P-SCON&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;P-CONN&#x0A;</xsl:text>
               </xsl:when>
               <!-- particle, sentence-ending -->
               <xsl:when test="@pos='助詞-終助詞'">
@@ -875,7 +872,7 @@ FW                未知語 英単語
               </xsl:when>
               <!-- particle, の -->
               <xsl:when test="@pos='助詞-準体助詞' and @lemma='の'">
-                <xsl:value-of select="."/><xsl:text>&#x9;P-NOUN&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;P-SPAN&#x0A;</xsl:text>
               </xsl:when>
               <xsl:when test="@pos='助詞-準体助詞'">
                 <xsl:value-of select="."/><xsl:text>&#x9;P-FINAL&#x0A;</xsl:text>

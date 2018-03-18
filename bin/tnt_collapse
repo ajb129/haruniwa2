@@ -42,7 +42,7 @@ cat << DEMO | $0 | sed 's/^/      -| /' 1>&2
 まで	P-ROLE
 どう	WADV
 やっ	VB2;遣る
-て	P-SCON
+て	P-CONN
 行き	VB2;行く
 ます	AX
 か	P-FINAL
@@ -91,6 +91,6 @@ haruniwa2_scaffold | \
 if test "${TREE}"; then
   cat
 else
-  tree_to_tnt --extended
+  tree_to_tnt
 fi
 

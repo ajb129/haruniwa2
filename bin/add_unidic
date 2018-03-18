@@ -147,7 +147,7 @@ print parts[i]
 }
 
 }
-' | sed 's/\t/@/g' > "${TEMPDATA}"
+' | sed 's/_/♕/g; s/\t/@/g' > "${TEMPDATA}"
 
 TEMP=${TMP:-"/tmp"}/output_comb$$
 

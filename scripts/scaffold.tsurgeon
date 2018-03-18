@@ -24,7 +24,7 @@ relabel x N
 createSubtree MERGESUFFIX a b
 
 
-MERGESUFFIX=x <1 /^(.*)$/#1\%pos !<1 MERGESUFFIX
+MERGESUFFIX=x <1 /^(.*)$/`#'1\%pos !<1 MERGESUFFIX
 
 relabel x /^(.*)$/\%{pos}/
 
@@ -36,7 +36,7 @@ PREFIX=a $. !/^PU|RB/=b !> MERGEPREFIX
 createSubtree MERGEPREFIX a b
 
 
-MERGEPREFIX=x <-1 /^(.*)$/#1\%pos !<-1 MERGEPREFIX
+MERGEPREFIX=x <-1 /^(.*)$/`#'1\%pos !<-1 MERGEPREFIX
 
 relabel x /^(.*)$/\%{pos}/
 
@@ -84,7 +84,7 @@ relabel x /^VB(.*)/VB2$1/
 createSubtree MERGEVB a b
 
 
-MERGEVB=x < (/^VB\b(.*)$/#1\%first $. /^VB\b(.*)$/#1\%second)
+MERGEVB=x < (/^VB\b(.*)$/`#'1\%first $. /^VB\b(.*)$/`#'1\%second)
 
 relabel x /^.*$/VB\%{first}\%{second}/
 
@@ -523,9 +523,9 @@ createSubtree MD a b
 % place particles together
 
 % ならば
-/^P\b/=a < なら $. (/^P\b/=b < ば) !> P-SCON
+/^P\b/=a < なら $. (/^P\b/=b < ば) !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % とともに
@@ -535,9 +535,9 @@ createSubtree P-ROLE a b
 
 
 % けれども
-__=a < けれど|けど $. (/^P\b/=b < も) !> P-SCON
+__=a < けれど|けど $. (/^P\b/=b < も) !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % とか
@@ -559,15 +559,15 @@ createSubtree P-ROLE a b
 
 
 % ばかりに
-__=a < ばかり $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-SCON
+__=a < ばかり $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % だけに
-__=a < だけ $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-SCON
+__=a < だけ $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % だの
@@ -577,21 +577,21 @@ createSubtree P-OPTR a b
 
 
 % ども
-__=a < ど $. (__=b < も) $, /^VB|^PASS/ !> P-SCON
+__=a < ど $. (__=b < も) $, /^VB|^PASS/ !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % うえで
-__=a < うえ|上 $. (__=b < で) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-SCON
+__=a < うえ|上 $. (__=b < で) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % うえに
-__=a < うえ|上 $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-SCON
+__=a < うえ|上 $. (__=b < に) $, /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 % からすると
@@ -601,9 +601,9 @@ createSubtree P-ROLE a b
 
 
 % かわりに
-__=a < かわり|代わり $. (__=b < に) $,  /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-SCON
+__=a < かわり|代わり $. (__=b < に) $,  /^AX|^ADJI|^VB|^MD|^NEG|^PASS/ !> P-CONN
 
-createSubtree P-SCON a b
+createSubtree P-CONN a b
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -858,14 +858,14 @@ adjoinF (IP @) x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % bring elements under IP
-IP=x [ $. (/^P-OPTR|^P-NOUN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/=y !> /^PP\b/) | $. (/^P-SCON/=y $. /^P-NOUN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/) | $. (/^P-SCON/=y $. (/^P-OPTR/ $. /^P-NOUN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/)) ]
+IP=x [ $. (/^P-OPTR|^P-SPAN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/=y !> /^PP\b/) | $. (/^P-CONN/=y $. /^P-SPAN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/) | $. (/^P-CONN/=y $. (/^P-OPTR/ $. /^P-SPAN|^VB0|^VB2|^AX|^SUFFIX|^MD|^NEG/)) ]
 
 move y >-1 x
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % connective particle integrating IP
-IP=a $. /^P-SCON|^P-ROLE/=b > IP
+IP=a $. /^P-CONN|^P-ROLE/=b > IP
 
 createSubtree PP a b
 
@@ -948,7 +948,7 @@ move x $+ y
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % make IP with て
-PP=z < (IP=y $. (/^P-SCON/=x < て)) !<3 __
+PP=z < (IP=y $. (/^P-CONN/=x < て)) !<3 __
 
 move x >-1 y
 excise z z
@@ -1077,6 +1077,76 @@ move y $- x
 move x >1 y
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% break up /^つつあ/ > AX
+/^つつ(あ.*)$/`#'1\%store=x >: AX=z
+
+insert (VB2 =y) $- z
+relabel y /^.*$/\%{store}/
+relabel z P-CONN
+relabel x /つつ/
+
+
+VB2 < /^(なり|あり|おり|しまい)$/ >-1 /^IP-ADV$/=x
+
+relabel x IP-ADV-CONJ
+
+
+/^NP-PRD/ $. (AX=y < であろ=x)
+
+insert (VB2 あろ) $- y
+relabel x /で/
+
+
+/^(ほし|欲し)(が.+)$/#1\%first#2\%second=x > VB=y
+
+insert (AX =z) $- y
+relabel z /^.*$/\%{second}/
+relabel x /^.*$/\%{first}/
+relabel y ADJI
+
+
+/^(た)(が.+)$/#1\%first#2\%second=x > AX=y
+
+insert (AX =z) $- y
+relabel z /^.*$/\%{second}/
+relabel x /^.*$/\%{first}/
+
+
+
+/^(VB|PASS)/ < /(い|き|ぎ|し|じ|ち|ぢ|に|ひ|び|み|り|え|け|げ|せ|ぜ|て|で|ね|へ|べ|め|れ)$/ $. (MD=x < そう)
+
+relabel x AX
+
+
+
+/^(ADJI|ADJN|NP-PRD)/ !< (/い$/ > ADJI) $. (MD=x < そう)
+
+relabel x AX
+
+
+P-SPAN=x
+
+relabel x FN
+
+
+AX=x < /^(一方|ところ)$/ !>-1 /^IP-ADV/
+
+relabel x FN
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change particles
+P-CONN=x > /^IP/ < は|も|まで|ばっかり|ばかり|さえ|など|しか|のみ|なんか|でも !>- /^IP/ !. /RRB/
+
+relabel x P-OPTR
+
+
+P-ROLE=x < なら $, NP
+
+relabel x P-OPTR
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % reposition IP
 IP=x [ $. NP=y | $. (PP < NP=y) ] > IP
@@ -1086,11 +1156,11 @@ move x >1 y
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % remove dupicate layers
-/^([^-]*)-.*$/#1\%main <: /^(.*)$/#1\%main=x
+/^([^-]*)-.*$/`#'1\%main <: /^(.*)$/`#'1\%main=x
 
 excise x x
 
-/^(.*)$/#1\%tag <: /^(.*)$/#1\%tag=x
+/^(.*)$/`#'1\%tag <: /^(.*)$/`#'1\%tag=x
 
 excise x x
 

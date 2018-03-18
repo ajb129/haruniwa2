@@ -129,7 +129,7 @@ cat "${DATAFILE}" | \
 awk '
 BEGIN { FS="\t" }
 
-NF < 2 { next }
+$1 == "EOS" || NF < 2 { next }
 
 {
 
@@ -147,7 +147,7 @@ print parts[i]
 }
 
 }
-' > "${TEMPDATA}"
+' | sed 's/_/♕/g' > "${TEMPDATA}"
 
 TEMP=${TMP:-"/tmp"}/output_comb$$
 
