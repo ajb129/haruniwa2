@@ -3,6 +3,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change tags
+/^-LRB-$/=x < __
+
+relabel x PUL
+
+
+/^-RRB-$/=x < __
+
+relabel x PUR
+
+
+QUOT=x < __
+
+relabel x PUQ
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % add trace information for relative clause
 IP-REL=x !< (__ < /\*T\*/)
 
@@ -153,7 +170,7 @@ insert (NP-SBJ *pro*) >1 x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % reorder pro information
-@IP <1 (@NP=x < /^\*pro\*/) <2 /-LRB-/=y
+@IP <1 (@NP=x < /^\*pro\*/) <2 /PUL/=y
 
 move x $- y
 
@@ -221,7 +238,7 @@ move y >1 x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % add CONJ with IP-ADV
-IP-ADV=x [ <-1 (P < て|で) | <-1 (/^PU|LRB|RRB/ $, (P < て|で)) | <-1 (AX < で) | <-1 (/^PU|LRB|RRB/ $, (AX < で)) | <-1 (NEG < ず) | <-1 (/^PU|LRB|RRB/ $, (NEG < ず)) ] !$. CONJ !$. (PU $. CONJ) !> /^PP\b/
+IP-ADV=x [ <-1 (P < て|で) | <-1 (_pu $, (P < て|で)) | <-1 (AX < で) | <-1 (_pu $, (AX < で)) | <-1 (NEG < ず) | <-1 (_pu $, (NEG < ず)) ] !$. CONJ !$. (PU $. CONJ) !> /^PP\b/
 
 insert (CONJ *) $- x
 

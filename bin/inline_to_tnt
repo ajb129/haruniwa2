@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DIVIDER="_"
+
 ####################
 # help information #
 ####################
@@ -56,13 +58,16 @@ END
 while test $# -gt 0 ; do
   case "$1" in
 
-      --example)    # show an example
+      --divider|--div)  # set divider
+         DIVIDER=$2 ; shift 2 ;;
+
+      --example)        # show an example
          help_information
          example
          see_also
          exit ;;
 
-      *)            # show this help message
+      *)                # show this help message
          help_information
          see_also
          exit ;;
@@ -74,12 +79,12 @@ done
 # script starts here #
 ######################
 
-awk '
+awk -v DIVIDER=${DIVIDER} '
 {
 
 for (i = 1; i <= NF; i++) {
 
-split($i, parts, "_")
+split($i, parts, DIVIDER)
 
 printf ("%s\t%s\n", parts[1], parts[2])
 

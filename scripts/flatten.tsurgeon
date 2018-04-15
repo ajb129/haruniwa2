@@ -4,28 +4,28 @@
 
 %%%%%%%%%%%%%%%
 % remove inside
-/^(.*)$/`#'1\%index < (/^(.*)$/`#'1\%index=x [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (/^-RRB-|^-LRB-|^PRN|^\"$/ < __) | <-1 (/^-RRB-|^-LRB-|^PRN|^\"$/ < __) ]
+/^(.*)$/`#'1\%index < (/^(.*)$/`#'1\%index=x [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (_extra < __) | <-1 (_extra < __) ]
 
 excise x x
 
 
 %%%%%%%%%%%%%%%
 % remove inside
-/^(.*)$/`#'1\%index < /^(.*)$/`#'1\%index=x [ <1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) | <-1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) ] > TOP !< /^CONJP/
+/^(.*)$/`#'1\%index < /^(.*)$/`#'1\%index=x [ <1 (_extra < __) | <1 (/^CONJ\b/ < __) | <-1 (_extra < __) | <-1 (/^CONJ\b/ < __) ] > TOP !< /^CONJP/
 
 excise x x
 
 
 %%%%%%%%%%%%%%%
 % remove inside
-/^(.*)$/`#'1\%index < (/^(.*)$/`#'1\%index=x !> /^NP|^ADJP|^ADVP|^PP|^IP-ADV|^IP-REL|^IP-TE|^CONJP/ [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) | <-1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ|^CONJ\b/ < __) ] [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
+/^(.*)$/`#'1\%index < (/^(.*)$/`#'1\%index=x !> /^(NP|ADJP|ADVP|PP|IP-ADV|IP-REL|CONJP)\b/ [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (_extra < __) | <1 (/^CONJ\b/ < __) | <-1 (_extra < __) | <-1 (/^CONJ\b/ < __) ] [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
 
 excise x x
 
 
 %%%%%%%%%%%%%%%%
 % remove outside
-/^(.*)$/`#'1\%index=x < (/^(.*)$/`#'1\%index [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ/ < __) | <-1 (/^[.,;]$|^PU\b|^LST|^SYM|^INTJ/ < __) ] [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
+/^(.*)$/`#'1\%index=x < (/^(.*)$/`#'1\%index [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]) [ <1 (_extra < __) | <-1 (_extra < __) ] [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
 
 excise x x
 
@@ -39,12 +39,12 @@ excise x x
 
 %%%%%%%%%%%%%%%%
 % remove outside
-/^(NP.*)$/`#'1\%index=x < (/^(NP.*)$/`#'1\%index <: __) [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ] !< @PP|CP|IP|RRC
+/^(NP.*)$/`#'1\%index=x < (/^(NP.*)$/`#'1\%index <: __) [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ] !< /^(PP|CP|IP)\b/
 
 excise x x
 
 
-/^(NP.*)$/`#'1\%index=x < /^(NP.*)$/`#'1\%index [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ] !< @PP|CP|IP|RRC|N|NS|NPR|NPRS|ADJ|ADJS|ADJR|D|Q|QP|ADV|ADVS|ADVR > @NP|NML
+/^(NP.*)$/`#'1\%index=x < /^(NP.*)$/`#'1\%index [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ] !< /^(PP|CP|IP|N|NS|NPR|NPRS|ADJ|ADJS|ADJR|D|Q|QP|ADV|ADVS|ADVR)\b/ > /^(NP|NML)\b/
 
 excise x x
 
@@ -63,29 +63,43 @@ excise x x
 
 %%%%%%%%%%%%%%%%%
 % remove internal
-/^(.*)$/`#'1\%index <2 /^(.*)$/`#'1\%index=x [ <1 /^-LRB-/ <3 /^-RRB-/ !<4 __ | <1 /^\"$/ <3 /^\"$/ !<4 __ ]
+/^(.*)$/`#'1\%index <2 /^(.*)$/`#'1\%index=x [ <1 /^PUL/ <3 /^PUR/ !<4 __ | <1 /^\"$/ <3 /^\"$/ !<4 __ ]
 
 excise x x
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % remove noun phrase layers
-@NP <1 (NP=x < CONJP) < @PP|CP|IP|RRC
+/^NP\b/ <1 (NP=x < CONJP) < /^(PP|CP|IP|ADJP)\b/
 
 relabel x NML
 
 
-@NP <-1 (NP=x < CONJP) < @PP|CP|IP|RRC
+/^NP\b/ <-1 (NP=x < CONJP) < /^(PP|CP|IP|ADJP)\b/
 
 relabel x NML
 
 
-@NP <1 NP=x < @PP|CP|IP|RRC
+/^NP\b/ <1 NP=x < /^(PP|CP|IP|ADJP)\b/
 
 excise x x
 
 
-@NP <-1 NP=x < @PP|CP|IP|RRC
+/^NP\b/ <-1 NP=x < /^(PP|CP|IP|ADJP)\b/
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove ADJP phrase layers
+/^ADJP\b/ !< (ADJP < CONJP) < /^(PP|CP|IP|ADVP)\b/ [ <1 ADJP=x | <-1 ADJP=x ]
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove ADVP phrase layers
+/^ADVP\b/ !< (ADVP < CONJP) < /^(PP|CP|IP|ADVP)\b/ [ <1 ADVP=x | <-1 ADVP=x ]
 
 excise x x
 
@@ -125,5 +139,17 @@ adjoinF (FRAG @) x
 relabel x IP-MAT
 relabel y IP-MAT
 excise z z
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% push punctuation higher
+__=x !> TOP !$ ID <1 PU=y
+
+move y $+ x
+
+
+__=x !> TOP !$ ID <-1 PU=y
+
+move y $- x
 
 
