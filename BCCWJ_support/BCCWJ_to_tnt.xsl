@@ -87,16 +87,16 @@ FW                未知語 英単語
               <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="starts-with(., '全')">
-              <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="starts-with(., '両') and not(starts-with(., '両親')) and not(starts-with(., '両耳'))">
-              <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="starts-with(., '各')">
-              <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="starts-with(., '毎')">
-              <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+              <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
             </xsl:when>
             <xsl:when test="@lemma='半' or @l_lemma='一人' or @l_lemma='二人'">
               <xsl:value-of select="."/><xsl:text>&#x9;NUM&#x0A;</xsl:text>
@@ -255,16 +255,16 @@ FW                未知語 英単語
             <xsl:when test="SUW/@pos='名詞-普通名詞-副詞可能' and (contains(SUW/@lemma, '日') or contains(SUW/@lemma, '月') or contains(SUW/@lemma, '年') or contains(SUW/@lemma, '今') or contains(SUW/@lemma, '朝') or contains(SUW/@lemma, '時') or contains(SUW/@lemma, '昨') or contains(SUW/@lemma, '来') or contains(SUW/@lemma, '昔'))">
               <xsl:choose>
                 <xsl:when test="starts-with(., '全')">
-                  <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                  <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                 </xsl:when>
                 <xsl:when test="starts-with(., '両') and not(starts-with(., '両親')) and not(starts-with(., '両耳'))">
-                  <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                  <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                 </xsl:when>
                 <xsl:when test="starts-with(., '各')">
-                  <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                  <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                 </xsl:when>
                 <xsl:when test="starts-with(., '毎')">
-                  <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                  <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>
@@ -528,16 +528,16 @@ FW                未知語 英単語
                     <xsl:value-of select="."/><xsl:text>&#x9;NUM&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '全')">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '両') and not(starts-with(., '両親')) and not(starts-with(., '両耳'))">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '各')">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '毎')">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
                     <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>
@@ -579,16 +579,16 @@ FW                未知語 英単語
                     <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '全')">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '両') and not(starts-with(., '両親')) and not(starts-with(., '両耳'))">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '各')">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:when test="starts-with(., '毎')">
-                    <xsl:value-of select="."/><xsl:text>&#x9;QN&#x0A;</xsl:text>
+                    <xsl:value-of select="."/><xsl:text>&#x9;Q&#x0A;</xsl:text>
                   </xsl:when>
                   <xsl:otherwise>
                     <xsl:value-of select="."/><xsl:text>&#x9;N&#x0A;</xsl:text>

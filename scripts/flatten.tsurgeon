@@ -56,7 +56,7 @@ excise x x
 
 %%%%%%%%%%%%%%%
 % remove inside
-/^(.*)$/`#'1\%index < (/^(.*)$/`#'1\%index=x <: __) [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
+/^(.*)$/`#'1\%index < (/^(.*)$/`#'1\%index=x <: __ !== (/^IP-PPL/ < HAG|HVN|BAG|BEN|DAG|DON|VVN|VAG)) [ !< /^CONJP/ | < (/^CONJP/ > /^CONJP/) ]
 
 excise x x
 

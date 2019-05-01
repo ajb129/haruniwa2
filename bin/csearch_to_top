@@ -46,6 +46,9 @@ DEMO
 while test $# -gt 0 ; do
   case "$1" in
 
+      --keep)      # keep ID
+         KEEP=1 ; shift ;;
+
       --example)    # show an example
          help_information
          example
@@ -62,6 +65,12 @@ done
 # script starts here #
 ######################
 
+if test "${KEEP}"; then
+
+munge-trees -w | sed 's/^( /(TOP /'
+
+else
+
 munge-trees -w | \
 sed '
 / (ID [^)]*))$/ { s/^( /(TOP /; s/ (ID [^)]*))$/)/ }
@@ -69,4 +78,6 @@ sed '
 /^(TOP ([^ICSF]/ { s/^(TOP /(TOP (FRAG /; s/$/)/ }
 # s/^(TOP (IP-MAT /(TOP (IP-MAT-TOP /
 '
+
+fi
 
