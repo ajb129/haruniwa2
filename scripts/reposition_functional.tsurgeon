@@ -1,0 +1,99 @@
+define(`_STAR', `ifelse(`$#', `0', `\*', `\*$1\*')')dnl
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% reposition functional information
+/^NP(-.*)$/`#'1\%funct=x $, /^PP/=y < /^_STAR$/
+
+relabel y /^PP(.*)$/PP\%{funct}$1/
+delete x
+
+
+/^NP(-.*)$/`#'1\%funct=x $, (/^PP/=y < (/^P\b/ < /^(.*)$/`#'1\%index)) < /^_STAR((.*))$/`#'1\%index
+
+relabel y /^PP(.*)$/PP\%{funct}$1/
+delete x
+
+
+__ << (/^NP(-.*)$/`#'1\%funct=x < /^_STAR((.*))$/`#'1\%index $, (/^PP/=y < /^_STAR(ICH)-(\p{Digit}+)$/`#'1\%link)) << (/^PP-(\p{Digit}+)$/`#'1\%link < (/^P\b/ < /^(.*)$/`#'1\%index))
+
+relabel y /^PP(.*)$/PP\%{funct}$1/
+delete x
+
+
+/^NP(-.*)$/`#'1\%funct=x $, /^CP-([A-Z][A-Z][A-Z])(.*)$/`#'1\%middle`#'2\%rest=y < /^_STAR$/
+
+relabel y /^.*$/CP-\%{middle}\%{funct}\%{rest}/
+delete x
+
+
+/^NP(-.*)$/`#'1\%funct=x < /^_STAR$/ $, /^IP-ADV2(.*)$/`#'1\%extra=y
+
+relabel y /^.*$/IP-ADV2\%{funct}\%{extra}/
+delete x
+
+
+/^NP(-.*)$/`#'1\%funct=x < /^_STAR$/ $, (/^IP-ADV(.*)$/`#'1\%extra=y !== /^IP-ADV2/)
+
+relabel y /^.*$/IP-ADV\%{funct}\%{extra}/
+delete x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CND, CONJ, or SCON with extra information
+(/^(CND|CONJ|SCON)/`#'1\%funct=x < /^_STAR(([^*]+))(.*)$/`#'2\%extra $, (/^PP/=y < /^_STAR(ICH)-([0-9]+)$/`#'1\%index)) : (/^PP-([0-9]+)$/`#'1\%index < /^IP|^CP/)
+
+relabel y /^PP(.*)$/PP-\%{funct}-\%{extra}$1/
+delete x
+
+
+/^(CND|CONJ|SCON)/`#'1\%funct=x < /^_STAR(([^*]+))(.*)$/`#'2\%extra $, (/^PP/=y < /^IP|^CP/)
+
+relabel y /^PP(.*)$/PP-\%{funct}-\%{extra}$1/
+delete x
+
+
+/^(CND|CONJ|SCON)/`#'1\%funct=x < /^_STAR(([^*]+))(.*)$/`#'2\%extra $, /^IP-ADV2(.*)$/`#'1\%more=y
+
+relabel y /^.*$/IP-ADV2-\%{funct}-\%{extra}\%{more}/
+delete x
+
+
+/^(CND|CONJ|SCON)/`#'1\%funct=x < /^_STAR(([^*]+))(.*)$/`#'2\%extra $, (/^IP-ADV(.*)$/`#'1\%more=y !== /^IP-ADV2/)
+
+relabel y /^.*$/IP-ADV-\%{funct}-\%{extra}\%{more}/
+delete x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CND, CONJ, or SCON without extra information
+(/^(CND|CONJ|SCON)/`#'1\%funct=x $, (/^PP/=y < /^_STAR(ICH)-([0-9]+)$/`#'1\%index) < /^_STAR/) : (/^PP-([0-9]+)$/`#'1\%index < /^IP|^CP/)
+
+relabel y /^PP(.*)$/PP-\%{funct}$1/
+delete x
+
+
+/^(CND|CONJ|SCON)/`#'1\%funct=x $, (/^PP/=y < /^IP|^CP/) < /^_STAR/
+
+relabel y /^PP(.*)$/PP-\%{funct}$1/
+delete x
+
+
+/^(CND|CONJ|SCON)/`#'1\%funct=x < /^_STAR/ $, /^IP-ADV2(.*)$/`#'1\%more=y
+
+relabel y /^.*$/IP-ADV2-\%{funct}\%{more}/
+delete x
+
+
+/^(CND|CONJ|SCON)/`#'1\%funct=x < /^_STAR/ $, (/^IP-ADV(.*)$/`#'1\%more=y !== /^IP-ADV2/)
+
+relabel y /^.*$/IP-ADV-\%{funct}\%{more}/
+delete x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% mark IP-ADV-CONJ
+IP-ADV=x [ $. CONJ | $. (PU $. CONJ) ]
+
+relabel x IP-ADV-CONJ
+
+

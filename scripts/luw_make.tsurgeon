@@ -1,0 +1,117 @@
+/^([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)$/`#'1\%one`#'2\%two`#'3\%three`#'4\%four`#'5\%five`#'6\%six`#'7\%seven=y !<__ > !ID|SORT=x !== /^\*/
+
+insert (=a1 =b1) >-1 x
+insert (=a2 =b2) >-1 x
+insert (=a3 =b3) >-1 x
+insert (=a4 =b4) >-1 x
+insert (=a5 =b5) >-1 x
+insert (=a6 =b6) >-1 x
+insert (=a7 =b7) >-1 x
+relabel a1 /^.*$/={x}17/
+relabel a2 /^.*$/={x}27/
+relabel a3 /^.*$/={x}37/
+relabel a4 /^.*$/={x}47/
+relabel a5 /^.*$/={x}57/
+relabel a6 /^.*$/={x}67/
+relabel a7 /^.*$/={x}77/
+relabel b1 /^.*$/\%{one}/
+relabel b2 /^.*$/\%{two}/
+relabel b3 /^.*$/\%{three}/
+relabel b4 /^.*$/\%{four}/
+relabel b5 /^.*$/\%{five}/
+relabel b6 /^.*$/\%{six}/
+relabel b7 /^.*$/\%{seven}/
+relabel x /^.*$/={x}=/
+delete y
+
+
+/^([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)$/`#'1\%one`#'2\%two`#'3\%three`#'4\%four`#'5\%five`#'6\%six=y !<__ > !ID|SORT=x !== /^\*/
+
+insert (=a1 =b1) >-1 x
+insert (=a2 =b2) >-1 x
+insert (=a3 =b3) >-1 x
+insert (=a4 =b4) >-1 x
+insert (=a5 =b5) >-1 x
+insert (=a6 =b6) >-1 x
+relabel a1 /^.*$/={x}16/
+relabel a2 /^.*$/={x}26/
+relabel a3 /^.*$/={x}36/
+relabel a4 /^.*$/={x}46/
+relabel a5 /^.*$/={x}56/
+relabel a6 /^.*$/={x}66/
+relabel b1 /^.*$/\%{one}/
+relabel b2 /^.*$/\%{two}/
+relabel b3 /^.*$/\%{three}/
+relabel b4 /^.*$/\%{four}/
+relabel b5 /^.*$/\%{five}/
+relabel b6 /^.*$/\%{six}/
+relabel x /^.*$/={x}=/
+delete y
+
+
+/^([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)$/`#'1\%one`#'2\%two`#'3\%three`#'4\%four`#'5\%five=y !<__ > !ID|SORT=x !== /^\*/
+
+insert (=a1 =b1) >-1 x
+insert (=a2 =b2) >-1 x
+insert (=a3 =b3) >-1 x
+insert (=a4 =b4) >-1 x
+insert (=a5 =b5) >-1 x
+relabel a1 /^.*$/={x}15/
+relabel a2 /^.*$/={x}25/
+relabel a3 /^.*$/={x}35/
+relabel a4 /^.*$/={x}45/
+relabel a5 /^.*$/={x}55/
+relabel b1 /^.*$/\%{one}/
+relabel b2 /^.*$/\%{two}/
+relabel b3 /^.*$/\%{three}/
+relabel b4 /^.*$/\%{four}/
+relabel b5 /^.*$/\%{five}/
+relabel x /^.*$/={x}=/
+delete y
+
+
+/^([^_]*)_([^_]*)_([^_]*)_([^_]*)$/`#'1\%one`#'2\%two`#'3\%three`#'4\%four=y !<__ > !ID|SORT=x !== /^\*/
+
+insert (=a1 =b1) >-1 x
+insert (=a2 =b2) >-1 x
+insert (=a3 =b3) >-1 x
+insert (=a4 =b4) >-1 x
+relabel a1 /^.*$/={x}14/
+relabel a2 /^.*$/={x}24/
+relabel a3 /^.*$/={x}34/
+relabel a4 /^.*$/={x}44/
+relabel b1 /^.*$/\%{one}/
+relabel b2 /^.*$/\%{two}/
+relabel b3 /^.*$/\%{three}/
+relabel b4 /^.*$/\%{four}/
+relabel x /^.*$/={x}=/
+delete y
+
+
+/^([^_]*)_([^_]*)_([^_]*)$/`#'1\%one`#'2\%two`#'3\%three=y !<__ > !ID|SORT=x !== /^\*/
+
+insert (=a1 =b1) >-1 x
+insert (=a2 =b2) >-1 x
+insert (=a3 =b3) >-1 x
+relabel a1 /^.*$/={x}13/
+relabel a2 /^.*$/={x}23/
+relabel a3 /^.*$/={x}33/
+relabel b1 /^.*$/\%{one}/
+relabel b2 /^.*$/\%{two}/
+relabel b3 /^.*$/\%{three}/
+relabel x /^.*$/={x}=/
+delete y
+
+
+/^([^_]*)_([^_]*)$/`#'1\%one`#'2\%two=y !<__ > !ID|SORT=x !== /^\*/
+
+insert (=a1 =b1) >-1 x
+insert (=a2 =b2) >-1 x
+relabel a1 /^.*$/={x}12/
+relabel a2 /^.*$/={x}22/
+relabel b1 /^.*$/\%{one}/
+relabel b2 /^.*$/\%{two}/
+relabel x /^.*$/={x}=/
+delete y
+
+

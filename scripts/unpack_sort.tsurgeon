@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change back ACT information
+/^D;\{([^},]+)\}(.*)$/`#'1\%sense`#'2\%rest=x > __=y
+
+insert (ACT =z) >1 y
+relabel x /^.*$/D\%{rest}/
+relabel z /^.*$/*\%{sense}*/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change back quantificational SORT information
+/^(.*);(\*[^*]+\*)(.*)$/`#'1\%node`#'2\%sort`#'3\%rest=x
+
+insert (SORT =y) $- x
+relabel x /^.*$/\%{node}\%{rest}/
+relabel y /^.*$/\%{sort}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change back entity SORT information
+/^(.*);\{([^},]+)\}(.*)$/`#'1\%pos`#'2\%sort`#'3\%rest=x < (__ < __)
+
+insert (SORT =y) >1 x
+relabel x /^.*$/\%{pos}\%{rest}/
+relabel y /^.*$/*\%{sort}*/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change back SORT information
+/^(.*);\{([^},]+)\}(.*)$/`#'1\%cat`#'2\%sense`#'3\%rest=x < (__=w !< __) == /^NP\b/
+
+adjoinF (ZERO @) w
+insert (SORT =y) >1 x
+relabel x /^.*$/\%{cat}\%{rest}/
+relabel y /^.*$/*\%{sense}*/
+
+

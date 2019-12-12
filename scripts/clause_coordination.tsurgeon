@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% create coordinate structure from IP-ADV followed by conjunction marker
+/^IP-ADV/ $. (PU=y $. CONJ=x) !> CONJP
+
+adjoinF (IML CONJP @ IML) x
+move y $+ x
+
+
+/^IP-ADV-CONJ/=x !$. CONJ
+
+relabel x /^IP-ADV-CONJ(.*)$/IP-ADV$1/
+insert (CONJ *) $- x
+
+
+/^IP-ADV/ $. CONJ=x
+
+adjoinF (IML CONJP @ IML) x
+
+
+/^IP-ADV/=x $. (IML <1 (CONJP=y !< __))
+
+move x >1 y
+relabel x IML
+
+
+IML < CONJ <-1 IML=y $. __=x
+
+move x >-1 y
+
+
+CONJP $. (CONJ=x < /^\*$/)
+
+delete x
+
+
+CONJP=z $. (PU=y $. CONJ=x)
+
+move y >-1 z
+move x >-1 z
+
+
+CONJP=z $. CONJ=x
+
+move x >-1 z
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% create coordinate structure from PP with IP-ADV followed by conjunction marker
+/^PP/ < /^IP-ADV/ $. (PU=y $. CONJ=x) !> CONJP
+
+adjoinF (IML CONJP @ IML) x
+move y $+ x
+
+
+/^PP-CONJ/=x !$. CONJ
+
+relabel x /^PP-CONJ(.*)$/PP$1/
+insert (CONJ *) $- x
+
+
+/^PP/ < /^IP-ADV/ $. CONJ=x !> CONJP
+
+adjoinF (IML CONJP @ IML) x
+
+
+/^PP/=x < /^IP-ADV/=z $. (IML <1 (CONJP=y !< __))
+
+move x >1 y
+relabel z IML
+excise x x
+
+
+IML < CONJ <-1 IML=y $. __=x
+
+move x >-1 y
+
+
+CONJP $. (CONJ=x < /^\*$/)
+
+delete x
+
+
+CONJP=z $. (PU=y $. CONJ=x)
+
+move y >-1 z
+move x >-1 z
+
+
+CONJP=z $. CONJ=x
+
+move x >-1 z
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% reshape IML coordination
+
+IML=x <: IML
+
+excise x x
+
+
+IML < (CONJP=y !< CONJ <1 (IML <1 (CONJP=x < IML)))
+
+move x $+ y
+
+
+IML < (CONJP=y <1 (IML <1 (CONJP=x !< CONJ < IML)))
+
+move x $+ y
+
+
+IML < (CONJP=y < (CONJ < /^(.*)$/`#'1\%index) <1 (IML <1 (CONJP=x < (CONJ < /^(.*)$/`#'1\%index) < IML)))
+
+move x $+ y
+
+
+IML=x <: IML
+
+excise x x
+
+

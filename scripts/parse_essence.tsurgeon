@@ -1,0 +1,121 @@
+define(`_STAR', `ifelse(`$#', `0', `\*', `\*$1\*')')dnl
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% remove extra information
+/.;./=x
+
+relabel x /^(.+);.+$/$1/
+
+
+%%%%%%%%%%%%%%%%%%%
+% remove indexing
+/^(.+)-\p{Digit}+$/`#'1\%tag=x
+
+relabel x /^.*$/\%{tag}/
+
+
+/^(.+)\p{Digit}\p{Digit}$/`#'1\%tag=x < __
+
+relabel x /^.*$/\%{tag}/
+
+
+/^(.+)=$/`#'1\%tag=x < __
+
+relabel x /^.*$/\%{tag}/
+
+
+/^_STAR/=x
+
+prune x
+
+
+/^(META|FS)/=x
+
+prune x
+
+
+/^-$/=x !< __ !> /^PU\b/
+
+prune x
+
+
+PASS=x
+
+relabel x VB2
+
+
+% /^P-/=x
+% 
+% relabel x P
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change tags
+
+/^(.+)-(ADV|INF|PPL|SMC|PRD)2\b(.*)$/#1\%start#2\%middle#3\%end=x
+
+relabel x /^.*$/\%{start}-\%{middle}\%{end}/
+
+
+/^(.+)-DSBJ\b(.*)$/#1\%start#2\%end=x
+
+relabel x /^.*$/\%{start}-SBJ\%{end}/
+
+
+/^NP-ADV\b/=x
+
+relabel x NP
+
+
+/^(PP-CND|PP-CONJ|NP-POS|PP-SCON)\b./#1\%keep=x
+
+relabel x /^.*$/\%{keep}/
+
+
+/^(PP-ADV|PP-TMP)\b/=x
+
+relabel x PP
+
+
+/^(ADVP|ADJP|IP-ADV|IP-CAR|IP-EMB|IP-INF|IP-MAT|IP-REL|IP-SMC|IP-FRL|IP-PPL|IP-CLF-SBJ|CP-THT|CP-QUE)\b./#1\%keep=x
+
+relabel x /^.*$/\%{keep}/
+
+
+/^IP-EXC\b/=x
+
+relabel x IP-MAT
+
+
+/^INTJ\b./=x
+
+relabel x INTJ
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove EXL distinction from data
+/^CP-EXL/=x
+
+relabel x CP-FINAL
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove particular information
+
+/^(.+)-(ABS|ADT|BEN|BNF|CNT|COM|DIR|DOB1|LOC|MNR|MOD|LGS|OB1|OB2|PRD|PRN|PRP|RES|RST|SBJ2|SPR|TPC|VOC)\b(.*)$/#1\%start#3\%end=x
+
+relabel x /^.*$/\%{start}\%{end}/
+
+
+/^PP-SBJ/=x
+
+relabel x PP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% relabel
+FA|FB=x
+
+relabel x FW
+
+

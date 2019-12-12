@@ -10,7 +10,7 @@ function help_information () {
 
 cat 1>&2 << END
 NAME
-      BCCWJ_to_tnt - convert M-XML to Keyaki tags
+      BCCWJ_to_tnt - convert M-XML to NPCMJ tags
 
 SYNOPSIS
       BCCWJ_to_tnt [OPTIONS]
@@ -19,8 +19,7 @@ DESCRIPTION
       Filter that takes files in the M-XML (morphology-based XML) format
       of the BCCWJ (http://www.ninjal.ac.jp/corpus_center/bccwj) that
       contains both the document structure information and the results
-      of dual POS analysis and returns the POS analysis with Keyaki
-      Treebank tags.
+      of dual POS analysis and returns the POS analysis with NPCMJ tags.
 
 OPTIONS
 END

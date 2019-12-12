@@ -96,30 +96,24 @@ DEMO2
 
 }
 
-function see_also () {
-
-cat 1>&2 << END
-
-SEE ALSO
-      parse(1), parse_finish(1), rerank(1)
-END
-
-}
-
 while test $# -gt 0 ; do
   case "$1" in
 
-      --raw)                  # output parse without any modification (default is to post-process with parse_decorate and parse_finish)
+      -i|--id)                # must receive an argument giving ID basename
+         BASENAME=$2 ; shift 2 ;;
+
+      --raw)                  # output parse without any modification
+                              #   (default is to post-process with parse_decorate and parse_finish)
          RAW=1 ; shift ;;
 
       --top|-top)             # output with TOP as root node
-         TOP=1 ; shift 1 ;;
+         TOP=1 ; shift ;;
 
       --basic|-basic)         # output without root node wrapping
-         BASIC=1 ; shift 1 ;;
+         BASIC=1 ; shift ;;
 
-      --johnson|-johnson)     # output prepared for reranking
-         JOHNSON=1 ; shift 1 ;;
+      --rank|-rank)           # output prepared for reranking
+         RANK=1 ; shift ;;
 
       [0-9]*)                 # number of most probable parse trees output (default is 1)
          BLOCK=$1; shift ;;
@@ -127,12 +121,10 @@ while test $# -gt 0 ; do
       --example)              # show examples
          help_information
          example
-         see_also
          exit ;;
 
       -*)                     # show this help message
          help_information
-         see_also
          exit ;;
 
       *)                      # location of grammar model
@@ -151,23 +143,37 @@ PATH=${DIR}:${PATH}
 
 if test "${TOP}"; then
 function stamp () {
-  sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
-  sed '/^(number /d'
+  sed '/^(number /d' | \
+  sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }"
 }
 elif test "${BASIC}"; then
 function stamp () {
+  sed '/^(number /d' | \
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
-  sed '/^(TOP / {s/^(TOP //; s/)$//}' | sed '/^(number /d'
+  sed '/^(TOP / {s/^(TOP //; s/)$//}'
 }
-elif test "${JOHNSON}"; then
+elif test "${RANK}"; then
 function stamp () {
+  sed '/^(number /d' | \
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE \([^ ()]*\)) /\1\n/; s/)$// }" | \
   sed '/^(TOP / {s/^(TOP /(S1 /}' | sed 's/^(number \([0-9]*\))$/\1\t1/;'
 }
 else
+  if test ! "${BASENAME}"; then
+    BASENAME="ex$(date +%s)"
+  fi
 function stamp () {
+  sed '/^(number /d' | \
   sed "/^(LOGVITPROB / { s/^(LOGVITPROB (VALUE [^ ()]*) //; s/)$// }" | \
-  sed '/^(TOP / {s/^(TOP /( /; s/)$/ (ID ex'$(date +%s)';JP))/}'
+  awk -v BASENAME="${BASENAME}" '
+function clean(s) {
+  s = gensub(/^\(TOP /, "", 1, s)
+  s = gensub(/\)$/, "", 1, s)
+  return(s)
+}
+
+{ printf("( %s (ID %s_%s;JP))\n", clean($0), ++NUM, BASENAME) }
+'
 }
 fi
 
@@ -176,6 +182,6 @@ berkeley_parse "${MODEL}" "${BLOCK}" | \
 if test "${RAW}"; then
   cat
 else
-  tsurgeon_script "${DIR}/flatten.tsurgeon" "${DIR}/japanese.tsurgeon" | stamp
+  "${DIR}/tsurgeon_script" "${DIR}/flatten.tsurgeon" "${DIR}/japanese.tsurgeon" | stamp | parse_decorate
 fi
 

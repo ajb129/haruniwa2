@@ -8,14 +8,14 @@ function help_information () {
 
 cat 1>&2 << END
 NAME
-      haruniwa2_scaffold - modify keyaki POS information
+      haruniwa2_scaffold - modify NPCMJ word class information
 
 SYNOPSIS
       haruniwa2_scaffold
 
 DESCRIPTION
-      Filter to build parse structure, disambiguate parts-of-speech, as well as
-      merge and demerge words.
+      Filter to build parse structure, merge and demerge word segments, and
+      disambiguate word class information.
 
 OPTIONS
 END
@@ -77,5 +77,5 @@ done
 
 DIR="$(dirname $0)/../scripts"
 
-tsurgeon_script "${DIR}/scaffold.tsurgeon" "${DIR}/scaffold.tsurgeon" "${DIR}/remove_layers_for_words.tsurgeon"
+"${DIR}/tsurgeon_script" "${DIR}/scaffold.tsurgeon" "${DIR}/scaffold.tsurgeon" "${DIR}/remove_layers_for_words.tsurgeon"
 

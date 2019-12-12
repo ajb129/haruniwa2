@@ -1,0 +1,36 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      tregex_location - print tregex location
+
+SYNOPSIS
+      tregex_location
+
+DESCRIPTION
+      Send location details of tregex jar files to stdout.
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      *) help_information
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+echo "$(dirname $0)/../../../../ready/stanford-tregex.jar"
+

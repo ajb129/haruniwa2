@@ -1,0 +1,112 @@
+#!/bin/bash
+
+PATH=$(dirname $0)/../bin:$PATH
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      tsurgeon_script - pipeline tsurgeon
+
+SYNOPSIS
+      tsurgeon_script script
+
+DESCRIPTION
+      This wrapper script runs stanford-tregex.jar in the tsurgeon mode
+      as a filter changing stdin.  At least one tsurgeon script must be
+      supplied.
+
+      Before tsurgeon gets to see any script content, the script content
+      is passed through the m4 macro processor.
+
+      A tsurgeon script is a file containing a list of pattern and
+      transformation operation list pairs.  That is, it is a sequence of
+      pairs of a Tregex pattern on one or more lines, then a blank line
+      (empty or whitespace), then a list of transformation operations
+      one per line to apply when the pattern is matched, and then
+      another blank line (empty or whitespace).  Note the need for blank
+      lines: The code crashes if they are not present as separators.
+
+      The character % introduces a comment that extends to the end of the
+      line.  All other intended uses of % must be escaped as \% .
+
+      Also lines that begin .R and end .E are commented out. It is not
+      necessary to close .R, in which case all lines are commented out
+      from the instance of .R to the end of the given script.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      tregex(1), tsurgeon_script_animate(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      -*)   # show this help message
+         help_information
+         see_also
+         exit ;;
+
+      *)    # file name from where to source the tsurgeon script content
+         INPUT="${INPUT} $1" ; shift ;;
+ 
+  esac
+done
+
+
+######################
+# script starts here #
+######################
+
+TEMP=${TMP:-"/tmp"}/output_t$$
+SCRIPT=${TMP:-"/tmp"}/output_s$$
+
+# collect input
+cat > "${TEMP}"
+
+# ensure there is content to potentially alter
+if test $(cat "${TEMP}" | wc -l) -gt 0; then
+
+# establish location of stanford-tregex.jar
+TREGEX="$(tregex_location)"
+
+# collect and comment script content
+cat ${INPUT} | m4 | awk '
+$1 ~ /^\.R/ { remove_all++ ; next }
+
+$1 ~ /^\.E/ { remove_all-- ; next }
+
+remove_all != 0	{ next }
+
+{ print }
+' > "${SCRIPT}"
+
+# simple cat when ther are no script commands
+if test $(cat "${SCRIPT}" | wc -l) -eq 0; then cat "${TEMP}"; else
+
+# run tsurgeon
+java -mx300m -cp "${TREGEX}" edu.stanford.nlp.trees.tregex.tsurgeon.Tsurgeon -treeFile "${TEMP}" "${SCRIPT}" -s
+
+rm "${SCRIPT}"
+
+fi
+
+fi
+
+rm "${TEMP}"
+

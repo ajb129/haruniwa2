@@ -1,0 +1,127 @@
+define(`_i', `ifelse(`$#', `0', `/^(IP|IML|VP|FRAG)\b/', `/^(IP|IML|VP|FRAG)\b/=$1')')dnl
+define(`_STAR', `ifelse(`$#', `0', `\*', `\*$1\*')')dnl
+
+%%%%%%%%%%
+% P-COMP
+/^CP-THT/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/)
+
+relabel x /^.*$/P-COMP\%{extra}/
+
+
+%%%%%%%%%%
+% P-FINAL
+/^CP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/)
+
+relabel x /^.*$/P-FINAL\%{extra}/
+
+
+/^INTJP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/) < /^IP-SUB/
+
+relabel x /^.*$/P-FINAL\%{extra}/
+
+
+%%%%%%%
+% の
+/^PP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/ <: の) [ < NP | < (/^PP/ < NP) | < (/^PP/ < (/^PP/ < NP)) ] [ > /^NP\b|^NML/ | > (/^PP/ > /^NP\b|^NML/) | > (/^PP/ > (/^PP/ > /^NP\b|^NML/)) | > (CONJP > (/^PP/ > (/^PP/ > /^NP\b|^NML/))) | > (PRN > /^NP\b|^NML/) | > (PRN > (PRN > /^NP\b|^NML/)) ]
+
+relabel x /^.*$/P-ROLE\%{extra}/
+
+
+%%%%%%%%
+% P-CONN
+/^CONJP|^PP-CONJ/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/)
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+/^P\b(.*)/`#'1\%extra=x !== /^P-/ $ CONJP
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% clause level particle
+_i < (/^P\b(.*)/`#'1\%extra=x !== /^P-/ < の|もの|ん)
+
+relabel x /^.*$/P-SPAN\%{extra}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% て as clause level particle
+_i < (/^P\b(.*)/`#'1\%extra=x !== /^P-/ <: て|で|たり|ば)
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% clause level particle
+_i < (/^P\b(.*)/`#'1\%extra=x !== /^P-/ $. /^VB|^AX|^MD|^NEG|^P\b|^PU/)
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+%%%%%%%%%%%%%%%%
+% OPTR particles
+/^P\b(.*)/`#'1\%extra=x !== /^P-/ < /^か\b|^きり\b|^くらい\b|^ぐらい\b|^こそ\b|^ごと\b|^さえ\b|^しか\b|^しも\b|^すら\b|^だけ\b|^だって\b|^でも\b|^とも\b|^ともあれ\b|^なんか\b|^なんて\b|^にしてからが\b|^にしても\b|^にせよ\b|^に限って\b|^のみ\b|^は\b|^ばかし\b|^ばかり\b|^も\b|^ものなら\b|^ら\b|^だが\b|^ずつ\b|^など\b|^等\b|^とか$/ > /^PP/
+
+relabel x /^.*$/P-OPTR\%{extra}/
+
+
+/^P\b(.*)/`#'1\%extra=x !== /^P-/ < /\bか_|\bきり_|\bくらい_|\bぐらい_|\bこそ_|\bごと_|\bさえ_|\bしか_|\bしも_|\bすら_|\bだけ_|\bだって_|\bでも_|\bとも_|\bともあれ_|\bなんか_|\bなんて_|\bにしてからが_|\bにしても_|\bにせよ_|\bに限って_|\bのみ_|\bは_|\bばかし_|\bばかり_|\bも_|\bものなら_|\bら_|\bだが_|\bずつ_|^など_|^等_|^とか_/ > /^PP/
+
+relabel x /^.*$/P-OPTR\%{extra}/
+
+
+/^PP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/ < /^まで\b|\bまで_/ $, P)
+
+relabel x /^.*$/P-OPTR\%{extra}/
+
+
+/^PP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/) $. (/NP\b/ < (/^_STAR$/ !< __))
+
+relabel x /^.*$/P-OPTR\%{extra}/
+
+
+%%%%%%%%%%%%%%%%%
+% P-CONN
+/^PP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/ > /SCON|CND/)
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+/^PP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/) $. SCON|CND
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+/^PP/ < (/^P\b(.*)/`#'1\%extra=x !== /^P-/) [ $. CONJ | $. (PU $. CONJ) ] [ < /^IP/ | < (/^PP/ < /^IP/) ]
+
+relabel x /^.*$/P-CONN\%{extra}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% default for particles
+/^P\b(.*)/`#'1\%extra=x !== /^P-/ [ > (/^PP/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/) | > (/^PP/ > (/^PP/ > /^IP|^VP|^IML|^NP|^NML|^ADVP|^ADJP|^FRAG|^CP/) $ /^CONJP/) | > (/^PP/ > (/^CONJP/ > (/^PP/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/))) | > (/^PP/ > (/^PRN/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/)) | > (/^PP/ > (/^PP/ > (/^PRN/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/))) ]
+
+relabel x /^.*$/P-ROLE\%{extra}/
+
+
+/^P\b(.*)/`#'1\%extra=x !== /^P-/ [ > (/^PP/ > (/^PP/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/ < (/^P-OPTR|^P-ROLE/))) | > (/^PP/ > (/^PP/ > (/^PP/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/ < (/^P-OPTR|^P-ROLE/)) < (/^P-OPTR|^P-ROLE/))) | > (/^PP/ > (/^PP/ > (/^PP/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/) < (/^P-OPTR|^P-ROLE/) $ /^CONJP/)) | > (/^PP/ > (/^PP/ > (/^CONJP/ > (/^PP/ > /^IP|^VP|^IML|^NP\b|^NML|^ADVP|^ADJP|^FRAG|^CP/)) < (/^P-OPTR|^P-ROLE/))) ]
+
+relabel x /^.*$/P-ROLE\%{extra}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove P-OPTR numbering
+/^P-OPTR/ < /._\p{Digit}+/=x
+
+relabel x /^(.*)_.*$/$1/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove (NP *)
+NP=x < /^_STAR$/
+
+prune x
+
+

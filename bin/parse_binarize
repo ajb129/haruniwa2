@@ -1,0 +1,104 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      parse_binarize - modify treebank data
+
+SYNOPSIS
+      parse_binarize [OPTIONS]
+
+DESCRIPTION
+      Binarize treebank data.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | parse_binarize | munge-trees -p
+END
+
+cat $0 | sed '1,/^cat << DEMO1/d; /^DEMO1$/,$d' | munge-trees -p | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO1 | parse_binarize | munge-trees -p | sed 's/^/      -| /' 1>&2
+( (IP-MAT (PP-SBJ (NP (N ゴスタック)) (P-OPTR は)) (PP-OB1 (NP (N ドッシュ)) (P-ROLE を)) (VB ディスティム) (VB0 し) (AX ます) (PU 。)) (ID 20_BUFFALO;JP))
+DEMO1
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | parse_binarize --left | munge-trees -p
+END
+
+cat $0 | sed '1,/^cat << DEMO2/d; /^DEMO2$/,$d' | munge-trees -p | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO2 | parse_binarize --left | munge-trees -p | sed 's/^/      -| /' 1>&2
+( (IP-MAT (NP-SBJ (PRO I)) (VBD went) (PP (P on) (NP (D a) (N trip))) (PP (P to) (NP (NPR Kyoto))) (NP-TMP (ADJ last) (N week)) (. .)) (ID 41_textbook_djg_basic;page_116;AT2-11;EN))
+DEMO2
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+      --left)     # make tree output binary branching for left headed language (e.g., English)
+         LEFT=1 ; shift ;;
+
+      --keepconj) # do not add coordination at the IP level
+         KEEP=1 ; shift ;;
+
+      --example)  # show examples
+         help_information
+         example
+         exit ;;
+
+      *)          # show this help message
+         help_information
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+DIR="$(dirname $0)/../scripts"
+
+CHANGE="${DIR}/binarize_punctuation.tsurgeon"
+
+if test "${KEEP}"; then
+  true
+else
+  CHANGE="${CHANGE} ${DIR}/clause_coordination.tsurgeon"
+fi
+
+if test "${LEFT}"; then
+  CHANGE="${CHANGE} ${DIR}/binarize_left.tsurgeon"
+else
+  CHANGE="${CHANGE} ${DIR}/binarize.tsurgeon"
+fi
+
+"${DIR}/tsurgeon_script" "${CHANGE}"
+

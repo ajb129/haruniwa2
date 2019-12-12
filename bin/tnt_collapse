@@ -8,13 +8,13 @@ function help_information () {
 
 cat 1>&2 << END
 NAME
-      tnt_collapse - modify keyaki POS information
+      tnt_collapse - modify NPCMJ word class and segmentation information
 
 SYNOPSIS
       tnt_collapse
 
 DESCRIPTION
-      Filter to merge certain entries from keyaki part-of-speech analysis.
+      Filter to modify NPCMJ word class and segmentation information.
 
 OPTIONS
 END

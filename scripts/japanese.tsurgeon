@@ -1,3 +1,6 @@
+define(`_pu', `ifelse(`$#', `0', `/^(PU|pu|PUL|PUQ|PUR)\b/', `/^(PU|pu|PUL|PUQ|PUR)\b/=$1')')dnl
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % start adding functional information, etc %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

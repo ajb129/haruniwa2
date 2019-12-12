@@ -1,0 +1,10 @@
+% __ < /^(.*)$/`#'1\%base=x $. (FRAME|SENSE=y < /^\*(.*)\*$/`#'1\%frame)
+% 
+% relabel x /^.*$/\%{base};\%{frame}/
+% delete y
+
+__ < __=x $. (FRAME|SENSE=y < /^\*(.*)\*$/`#'1\%frame)
+
+relabel x /^(.*)$/$1;\%{frame}/
+delete y
+

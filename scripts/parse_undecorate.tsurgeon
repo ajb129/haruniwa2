@@ -1,0 +1,113 @@
+define(`_STAR', `ifelse(`$#', `0', `\*', `\*$1\*')')dnl
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change how nodes are marked
+/^`#'(.*)`#'$/`#'1\%tag=x
+
+relabel x /^.*$/\%{tag}-MARKED/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% reposition CND, SCON and CONJ with extra informaltion
+/^(.*)-(CND|SCON|CONJ)-(\*[^*]+\*)(.*)$/`#'1\%first`#'2\%middle`#'3\%extra`#'4\%end=x > /^IP|^VP|^IML/
+
+relabel x /^.*$/\%{first}\%{end}/
+insert (=z =y) $- x
+relabel y /^.*$/\%{extra}/
+relabel z /^.*$/\%{middle}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% transfer NP functional information to PP level, relevant for -LGS
+/^PP(.*)/`#'1\%stuff=x < /^NP\b([^;]+)(.*)(-\p{Digit}+)$/`#'1\%var`#'2\%rest`#'3\%digit=y
+
+relabel x /^(.*)$/PP\%{var}\%{stuff}/
+relabel y /^(.*)$/NP\%{rest}\%{digit}/
+
+
+/^PP(.*)/`#'1\%stuff=x < (/^NP\b([^;]+)(.*)$/`#'1\%var`#'2\%rest=y !== /-\p{Digit}+$/)
+
+relabel x /^(.*)$/PP\%{var}\%{stuff}/
+relabel y /^(.*)$/NP\%{rest}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change how conjunctions are marked
+/^(...*)-(CND|SCON|CONJ)(.*)$/`#'1\%start`#'2\%middle`#'3\%end=x
+
+relabel x /^.*$/\%{start}\%{end}/
+insert (=y *) $- x
+relabel y /^.*$/\%{middle}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change how core arguments are marked: first version follows ICH link, and both take coordination into account.
+(/^PP(.*)(-SBJ2|-SBJ|-OB1|-OB2|-LGS|-ARG\p{Digit})\b(.*)$/`#'1\%start`#'2\%middle`#'3\%end=x
+   < /^_STAR(ICH)-(\p{Digit}+)$/`#'1\%index) : (/^PP-(\p{Digit}+)$/`#'1\%index
+     [ < (/^P-ROLE(.*)$/`#'1\%prest=y < /^(.+)$/`#'1\%part) | < (/^PP/ $ /^CONJP/ < (/^P-ROLE(.*)$/`#'1\%prest=y < /^(.+)$/`#'1\%part)) ])
+
+insert (=w =z) $- x
+relabel w /^.*$/NP\%{middle}\%{start}\%{end}/
+relabel z /^.*$/*\%{part}*/
+relabel x PP
+relabel y /^.*$/P\%{prest}/
+
+
+/^PP(.*)(-SBJ2|-SBJ|-OB1|-OB2|-LGS|-ARG\p{Digit})\b(.*)$/`#'1\%start`#'2\%middle`#'3\%end=x [ < (/^P-ROLE(.*)$/`#'1\%prest=y < /^(.+)$/`#'1\%part) | < (/^PP/ $ /^CONJP/ < (/^P-ROLE(.*)$/`#'1\%prest=y < /^(.+)$/`#'1\%part)) ]
+
+insert (=w =z) $- x
+relabel w /^.*$/NP\%{middle}\%{start}\%{end}/
+relabel z /^.*$/*\%{part}*/
+relabel x PP
+relabel y /^.*$/P\%{prest}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change how particles are marked
+/^PP(.*)(-SBJ2|-SBJ|-OB1|-OB2|-LGS|-ARG\p{Digit})\b(.*)$/`#'1\%start`#'2\%middle`#'3\%end=x
+
+insert (=w *) $- x
+relabel w /^.*$/NP\%{middle}\%{start}\%{end}/
+relabel x PP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change back marking
+/^(..*)-MARKED(.*)$/`#'1\%start`#'2\%end=x < (/^_STAR/ !< __) $, /^(.*)$/`#'1\%tag=y
+
+relabel x /^(.*)$/\%{start}\%{end}/
+relabel y /^(.*)$/`#'\%{tag}`#'/
+
+
+/^(..*)-MARKED(.*)$/`#'1\%start`#'2\%end=x
+
+relabel x /^(.*)$/`#'\%{start}\%{end}`#'/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% move position information backwards
+/^(.+)(;@.+)$/`#'1\%start`#'2\%postion=y < (/^_STAR/ !< __) $, !/;@/=x
+
+relabel x /^(.*)$/$1\%{postion}/
+relabel y /^.*$/\%{start}/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% clean up CONJ
+CONJ=x < /^_STAR$/ [ $. CONJ | $. (PU $. CONJ) ]
+
+delete x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove P marking
+/^P-.*(;.*)$/`#'1\%extra=x
+
+relabel x /^.*$/P\%{extra}/
+
+
+/^P-./=x
+
+relabel x P
+
+

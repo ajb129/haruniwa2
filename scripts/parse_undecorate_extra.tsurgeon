@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove SORT
+SORT=z < __=y $, /^(PP|NP)\b/=x
+
+relabel x /^.*$/={x};={y}/
+delete z
+
+
+SORT=x !> TOP !$ ID
+
+prune x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove ZERO
+ZERO=x >: __
+
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove extra information with N
+/^N;/=x < (__ !< __)
+
+relabel x N
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove FRAME, ACT, ANT, and COMMENT
+ACT|ANT|COMMENT|FRAME=x
+
+delete x
+
+

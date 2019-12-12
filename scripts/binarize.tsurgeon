@@ -1,0 +1,282 @@
+define(`_extra', `ifelse(`$#', `0', `/^(FS|INTJ|INTJP|LST|PRN|PU|pu|PUL|PUQ|PUR|eq|bq|SYM)\b/', `/^(FS|INTJ|INTJP|LST|PRN|PU|pu|PUL|PUQ|PUR|eq|bq|SYM)\b/=$1')')dnl
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make clause structure right binary branching
+!/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NP\b|^NUMCLP|^PP|^Q|^CONJ/=x $, !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NP\b|^NUMCLP|^PP|^Q|^CONJ/=y $. !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NP\b|^NUMCLP|^PP|^Q|^CONJ/ > /^IP|^IML/
+
+adjoinF (IML @) y
+move x $- y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make clause structure left binary branching
+/^IP|^IML/ <-3 __ <-2 __=x <-1 __=y !< @CONJP
+
+adjoinF (IML @) y
+move x $+ y
+
+
+/^IP-MAT/ <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (IP-MAT @) y
+move x $+ y
+
+
+@IP <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (IP-SUB @) y
+move x $+ y
+
+
+@IML <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (IML @) y
+move x $+ y
+
+
+@FRAG <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (FRAG @) y
+move x $+ y
+
+
+@INTJP <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (INTJP @) y
+move x $+ y
+
+
+@FS <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (FS @) y
+move x $+ y
+
+
+@LST <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (LST @) y
+move x $+ y
+
+
+@QP <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (QP @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make noun phrase structure right binary branching
+!/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^D|^IML|^CONJ/=x $, !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^D|^IML|^CONJ/=y $. !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^D|^IML|^CONJ/ > /^NP\b|^NML/
+
+adjoinF (NML @) y
+move x $- y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make noun phrase structure left binary branching
+/^NP\b|^NML/ <-3 __ <-2 __=x <-1 __=y !< /^CONJP/
+
+adjoinF (NML @) y
+move x $+ y
+
+
+/^NP\b|^NML/ <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (NP @) y
+move x $+ y
+
+
+/^PRN/ [ > /^NP\b|^NML/ | > (/^PRN/ > /^NP\b|^NML/) | > (/^PRN/ > (/^PRN/ > /^NP\b|^NML/)) | > (/^PRN/ > (/^PRN/ > (/^PRN/ > /^NP\b|^NML/))) ] <-3 __ <-2 __=x <-1 __=y !< /^CONJP/
+
+adjoinF (NML @) y
+move x $+ y
+
+
+/^PRN/ [ > /^NP\b|^NML/ | > (/^PRN/ > /^NP\b|^NML/) | > (/^PRN/ > (/^PRN/ > /^NP\b|^NML/)) | > (/^PRN/ > (/^PRN/ > (/^PRN/ > /^NP\b|^NML/))) ] <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (NP @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make adjective phrase structure right binary branching
+!/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^IML|^CONJ/=x $, !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^IML|^CONJ/=y $. !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^IML|^CONJ/ > @ADJP
+
+adjoinF (ADJP @) y
+move x $- y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make adjective phrase structure left binary branching
+@ADJP <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (ADJP @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make adverb phrase structure right binary branching
+!/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^IML|^CONJ/=x $, !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^IML|^CONJ/=y $. !/^ADJP|^ADVP|^CP|^INTJ|^FS|PRN|^IP|^NML|^NP\b|^NUMCLP|^PP|^Q|^IML|^CONJ/ > @ADVP
+
+adjoinF (ADVP @) y
+move x $- y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make adverb phrase structure left binary branching
+@ADVP <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (ADVP @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make NUMCLP structure left binary branching
+@NUMCLP <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (NUMCLP @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% make complementiser phrase structure right binary branching
+__=x $, __=y $. __ > /^CP-THT/
+
+adjoinF (CP-THT @) y
+move x $- y
+
+
+__=x $, __=y $. __ > /^CP-QUE-TAG/
+
+adjoinF (CP-QUE-TAG @) y
+move x $- y
+
+
+__=x $, __=y $. __ > /^CP-QUE/
+
+adjoinF (CP-QUE @) y
+move x $- y
+
+
+__=x $, __=y $. __ > /^CP-EXL/
+
+adjoinF (CP-EXL @) y
+move x $- y
+
+
+__=x $, __=y $. __ > /^CP-FINAL/
+
+adjoinF (CP-FINAL @) y
+move x $- y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/^IP|^IML/ <2 @IP=x !< @CONJP
+
+relabel x IML
+
+
+__ <: IML=x
+
+excise x x
+
+
+@IML=x < /^CONJP/ < /^IP|^CP/
+
+relabel x IP-MAT
+
+
+/^IP-SUB/=y <1 /^IP-SUB/=z <2 (__=x < ？) !<3 __ > /^CP-QUE/
+
+adjoinF (CP-QUE @) y
+move x $- y
+excise z z
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for relative clause
+/IP-REL/ > @IML=x
+
+relabel x IP-REL
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change punctuation, etc location
+/^(.*)$/`#'1\%index=x <1 /^(.*)$/`#'1\%index <2 _extra(z) !<3 __ $. @IML=y
+
+adjoinF (IML @) y
+move z $+ y
+excise x x
+
+
+_extra(y) $. __ $, /^NP\b/=x
+
+adjoinH ( NML@) x
+move y >-1 x
+
+
+@IML=x <1 _extra(y) !<3 __ >1 (/^IP|^IML/=z <2 !_extra)
+
+adjoinH ( IML@) z
+move y >1 z
+excise x x
+
+
+@NML=x <1 _extra(y) !<3 __ >1 (/^NP\b|^NML/=z <2 !_extra)
+
+adjoinH ( NML@) z
+move y >1 z
+excise x x
+
+
+@IML=x <-1 _extra(y) <2 __ $ @IML=z
+
+adjoinH ( IML@) z
+move y >1 z
+excise x x
+
+
+@NML=x <-1 _extra(y) <2 __ $ @NML=z
+
+adjoinH ( NML@) z
+move y >1 z
+excise x x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PRN
+/^PRN/ <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (PRN @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONJP
+/^CONJP/ <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (CONJX @) y
+move x $+ y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PP
+/^PP|^CP/ <-3 __ <-2 __=x <-1 __=y
+
+adjoinF (PX @) y
+move x $+ y
+
+
+PX=x < PP [ < _extra | < /^CONJP/ ]
+
+relabel x PP
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% change IP-IML
+IP-IML=x
+
+relabel x IML
+

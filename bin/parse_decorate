@@ -1,0 +1,141 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      parse_decorate - filter to change tree
+
+SYNOPSIS
+      parse_decorate
+
+DESCRIPTION
+      Filter that by default decorates nodes with extended tags. In
+      particular various P roles are elaborated. Also extends selects
+      word_1 of terminals.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | parse_decorate | munge-trees -p
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | munge-trees -p | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | parse_decorate | munge-trees -p | sed 's/^/      -| /' 1>&2
+( (IP-MAT (NP-SBJ;{SPEAKER_28} *pro*) (PP (NP (NPR O王)) (P を)) (VB 追お) (MD う)) (ID 28_misc_BUFFALO;JP))
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      parse_undecorate(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+     --script)         # send tsurgeon script to stdout
+         CAT=1 ; shift ;;
+
+     --keep)           # neither decorate nodes nor reposition functional information to remove stars (other consequences depend on presence of other flags)
+         KEEP=1 ; shift ;;
+
+     --frame2)         # keep frame information
+         FRAME2=1 ; shift ;;
+
+     --frame*|--sense) # keep frame information
+         FRAME=1 ; shift ;;
+
+     --pruneframe)     # remove frame information
+         PRUNEFRAME=1 ; shift ;;
+
+     --comment)        # keep comments
+         COMMENT=1 ; shift ;;
+
+     --essence|-e)     # retain only essential aspects of parse
+         ESSENCE=1 ; shift ;;
+
+     --luw)            # make long unit words
+         LUW=1 ; shift ;;
+
+     --removeluw)      # remove long unit words
+         REMLUW=1 ; shift ;;
+
+     --example)        # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+      *)               # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+SCRIPTS="$(dirname $0)/../scripts"
+
+if test "${FRAME2}"; then
+ USE="${SCRIPTS}/incorporate_frame2.tsurgeon"
+elif test "${FRAME}"; then
+ USE="${SCRIPTS}/incorporate_frame.tsurgeon"
+elif test "${PRUNEFRAME}"; then
+ USE="${SCRIPTS}/prune_frame.tsurgeon"
+fi
+
+if ! test "${COMMENT}"; then
+ USE="${USE} ${SCRIPTS}/prune_comment.tsurgeon"
+fi
+
+if test "${LUW}"; then
+ USE="${USE} ${SCRIPTS}/luw_make.tsurgeon"
+fi
+
+if test "${REMLUW}"; then
+ USE="${USE} ${SCRIPTS}/luw_remove.tsurgeon"
+fi
+
+if ! test "${KEEP}"; then
+ USE="${USE} ${SCRIPTS}/parse_decorate.tsurgeon ${SCRIPTS}/reposition_functional.tsurgeon"
+fi
+
+if test "${ESSENCE}"; then
+ USE="${USE} ${SCRIPTS}/parse_essence.tsurgeon"
+fi
+
+if test "${CAT}"; then
+  cat ${USE}
+else
+  "${SCRIPTS}/tsurgeon_script" ${USE}
+fi
+

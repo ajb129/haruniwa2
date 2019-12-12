@@ -1,3 +1,5 @@
+define(`_extra', `ifelse(`$#', `0', `/^(FS|INTJ|INTJP|LST|PRN|PU|pu|PUL|PUQ|PUR|eq|bq|SYM)\b/', `/^(FS|INTJ|INTJP|LST|PRN|PU|pu|PUL|PUQ|PUR|eq|bq|SYM)\b/=$1')')dnl
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % remove layers introduced because of punctuation etc %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

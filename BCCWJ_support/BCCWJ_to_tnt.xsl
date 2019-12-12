@@ -52,8 +52,8 @@ SYM               記号-文字
 SYM/PU/NUM        補助記号-一般
 PU                補助記号-句点
 PU                補助記号-読点
--LRB-             補助記号-括弧開
--RRB-             補助記号-括弧閉
+PUL             補助記号-括弧開
+PUR             補助記号-括弧閉
 PU                補助記号-AA-一般
 PU                補助記号-AA-顔文字
 FW                未知語 英単語
@@ -999,10 +999,10 @@ FW                未知語 英単語
 
               <!-- brackets -->
               <xsl:when test="@pos='補助記号-括弧開'">
-                <xsl:value-of select="."/><xsl:text>&#x9;-LRB-&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;PUL&#x0A;</xsl:text>
               </xsl:when>
               <xsl:when test="@pos='補助記号-括弧閉'">
-                <xsl:value-of select="."/><xsl:text>&#x9;-RRB-&#x0A;</xsl:text>
+                <xsl:value-of select="."/><xsl:text>&#x9;PUR&#x0A;</xsl:text>
               </xsl:when>
 
               <!-- punctuation, AA -->

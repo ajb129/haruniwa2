@@ -1,0 +1,5 @@
+/^([^;]*)(.*)$/`#'1\%base`#'2\%end=x $. (FRAME|SENSE=y < /^\*(.*)\*$/`#'1\%frame)
+
+relabel x /^.*$/\%{base};\%{frame}\%{end}/
+delete y
+

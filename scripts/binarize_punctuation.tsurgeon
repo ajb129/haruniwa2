@@ -1,0 +1,64 @@
+define(`_conjp', `ifelse(`$#', `0', `/^CONJP\b/', `/^CONJP\b/=$1')')dnl
+define(`_extra', `ifelse(`$#', `0', `/^(FS|INTJ|INTJP|LST|PRN|PU|pu|PUL|PUQ|PUR|eq|bq|SYM)\b/', `/^(FS|INTJ|INTJP|LST|PRN|PU|pu|PUL|PUQ|PUR|eq|bq|SYM)\b/=$1')')dnl
+define(`_ip', `ifelse(`$#', `0', `/^IP\b/', `/^IP\b/=$1')')dnl
+define(`_xnp', `ifelse(`$#', `0', `/^(NP|NML)\b/', `/^(NP|NML)\b/=$1')')dnl
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% punctuation with CONJP
+_extra(x) $. _conjp(y)
+
+move x >1 y
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change final punctuation %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% create IP-IML, an intermediate clause layer above the VP level
+
+_ip(x) <-1 _extra(y) <3 __
+
+adjoinH ( IP-IML@) x
+move y >-1 x
+
+
+_ip(x) <1 _extra(y) <3 __
+
+adjoinH ( IP-IML@) x
+move y >1 x
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% nominal layer
+
+_xnp(x) <-1 _extra(y) <3 __
+
+adjoinH ( NML@) x
+move y >-1 x
+
+
+_xnp(x) <1 _extra(y) <3 __
+
+adjoinH ( NML@) x
+move y >1 x
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% general layer
+__=x <-1 _extra(y) <3 __
+
+adjoinH ( =z@) x
+move y >-1 x
+relabel z /^.*$/={x}/
+
+
+__=x <1 _extra(y) <3 __
+
+adjoinH ( =z@) x
+move y >1 x
+relabel z /^.*$/={x}/
+
+

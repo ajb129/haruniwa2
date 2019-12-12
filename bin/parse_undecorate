@@ -1,0 +1,104 @@
+#!/bin/bash
+
+####################
+# help information #
+####################
+
+function help_information () {
+
+cat 1>&2 << END
+NAME
+      parse_undecorate - remove node decorations
+
+SYNOPSIS
+      parse_undecorate [OPTIONS]
+
+DESCRIPTION
+      Filter to undecorate nodes by removing extended tags and creating star information.
+
+OPTIONS
+END
+
+cat $0 | grep " \# " 1>&2
+
+}
+
+function example () {
+
+cat 1>&2 << END
+
+EXAMPLE
+      $ cat << EOF | parse_undecorate | munge-trees -p
+END
+
+cat $0 | sed '1,/^cat << DEMO/d; /^DEMO$/,$d' | munge-trees -p | sed 's/^/      > /' 1>&2
+
+cat 1>&2 << END
+      > EOF
+END
+
+cat << DEMO | $0 | munge-trees -p | sed 's/^/      -| /' 1>&2
+( (IP-MAT (PP (NP (IP-REL (NP-SBJ *T*) (PP (NP (N 両耳受聴)) (P-ROLE によって)) (VB 得る)) (N 情報)) (P-ROLE に) (P-OPTR は)) (PP-SBJ (NP (CONJP (NP (N パワースペクトル情報)) (P-CONN と)) (NP (N 両耳間位相差))) (P-ROLE が)) (VB あり) (AX ます)) (ID example;JP))
+DEMO
+
+}
+
+function see_also () {
+
+cat 1>&2 << END
+
+SEE ALSO
+      parse_decorate(1)
+END
+
+}
+
+while test $# -gt 0 ; do
+  case "$1" in
+
+     --script)         # send tsurgeon script to stdout
+         CAT=1 ; shift ;;
+
+     --extra)          # make extra changes, notably to remove SORT information
+         EXTRA=1 ; shift ;;
+
+     --essence|-e)     # retain only essential aspects of parse
+         ESSENCE=1 ; shift ;;
+
+     --example)        # show an example
+         help_information
+         example
+         see_also
+         exit ;;
+
+     *)                # show this help message
+         help_information
+         see_also
+         exit ;;
+
+  esac
+done
+
+######################
+# script starts here #
+######################
+
+SCRIPTS="$(dirname $0)/../scripts"
+
+USE="${SCRIPTS}/parse_undecorate.tsurgeon ${SCRIPTS}/unpack_sort.tsurgeon"
+
+if test "${EXTRA}"; then
+ USE="${USE} ${SCRIPTS}/parse_undecorate_extra.tsurgeon"
+fi
+
+if test "${ESSENCE}"; then
+ USE="${USE} ${SCRIPTS}/prune_comment.tsurgeon"
+ USE="${USE} ${SCRIPTS}/parse_essence.tsurgeon"
+fi
+
+if test "${CAT}"; then
+  cat ${USE}
+else
+  "${SCRIPTS}/tsurgeon_script" ${USE}
+fi
+
