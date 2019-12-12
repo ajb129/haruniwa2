@@ -86,11 +86,25 @@ done
 # script starts here #
 ######################
 
+DIR=$(dirname $0)
+
+PATH=${DIR}:${PATH}
+
 tnt_to_flat_parse | \
 haruniwa2_scaffold | \
 if test "${TREE}"; then
   cat
 else
-  tree_to_tnt
+  "${DIR}/../scripts/tsurgeon_script" "${DIR}/../scripts/tag_word.tsurgeon" | \
+  sed 's/^( (//; s/))$//' | \
+  awk ' BEGIN {FS="\\) \\("}
+  {
+    for (i = 1; i <= NF; i++) {
+      split($i,part," ")
+      printf("%s\t%s\n", part[2], part[1])
+    }
+    printf("EOS\n")
+  }
+  '
 fi
 
