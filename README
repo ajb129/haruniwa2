@@ -1,44 +1,49 @@
 Steps to obtain a working HARUNIWA2 parser
 ==========================================
 
-1. Obtain the parser model trained on the NPCMJ from
+1. The basic assumption is that you have a computer with the basic
+   GNU toolset installed, with access in your PATH to bash, sed,
+   awk/gawk, and m4.
+   Other requirements are: xmllint, and xsltproc.
+
+2. Obtain the parser model from:
    http://npcmj.ninjal.ac.jp/interfaces/gram.gr
 
-   This parser model is trained on data from the NINJAL Parsed Corpus
+   This parser model was trained on data from the NINJAL Parsed Corpus
    of Modern Japanese (NPCMJ; http://npcmj.ninjal.ac.jp). The NPCMJ is
    a continuation of the Keyaki Treebank (http://www.compling.jp/keyaki/).
    The following pipeline was used to construct the model:
 
       cat NPCMJ_data | parse_undecorate --essence | parse_binarize --keepconj | csearch_to_top > data.mrg
 
-2. Change the content of "japanese_model_location" (found in the bin
-   directory) to point to your local copy of the parser model
-   downloaded at step 3.
+3. Change the content of "japanese_model_location" (found in the bin
+   directory) to point to your local copy of the parser model (gram.gr)
+   downloaded at step 2.
 
-3. Install:
+4. Install:
      munge-trees (http://web.science.mq.edu.au/~mjohnson/code/munge-trees.tgz)
 
-4. Obtain the Berkeley Parser (BerkeleyParser-1.7.jar) which is available
+5. Obtain the Berkeley Parser (BerkeleyParser-1.7.jar) which is available
    from https://github.com/slavpetrov/berkeleyparser
 
-5. Change the content of "berkeley_parser_location" (found in the bin
+6. Change the content of "berkeley_parser_location" (found in the bin
    directory) to point to your local copy of BerkeleyParser-1.7.jar
 
-6. Obtain:
+7. Obtain:
      stanford-tregex.jar (http://nlp.stanford.edu/software/tregex.shtml)
 
-7. Change the content of "tregex_location" (found in the bin
+8. Change the content of "tregex_location" (found in the bin
    directory) to point to your local copy of the stanford-tregex.jar.
 
-8. Install Comainu
+9. Install Comainu
    available from http://comainu.org/download 
    This also requires installing the UNIDIC dictionary for mecab
    (http://sourceforge.jp/projects/unidic) as well as other
    dependencies, including mecab (https://code.google.com/p/mecab).
 
-9. Test the parser
+10. Test the parser
    The parser assumes input in pos TnT format, where each line contains
-   one word token and one part-of-speech tag separated by a single
+   one word token and one word class tag separated by a single
    tab character.  EOS indicates end-of-sentence.
 
    Try:
@@ -47,6 +52,7 @@ Steps to obtain a working HARUNIWA2 parser
    Note that the comainu.pl command is part of Comainu, so the above
    pipeline can only work with Comainu correctly installed and with
    comainu.pl in your PATH.
+
 
 Feedback
 ========

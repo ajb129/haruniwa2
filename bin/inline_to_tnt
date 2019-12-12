@@ -16,9 +16,9 @@ SYNOPSIS
       inline_to_tnt
 
 DESCRIPTION
-      Filter to convert tagged information in inline format to TnT format,
-      that is: word-segment followed by tab followed by word-class
-      followed by newline.
+      Filter to convert tagged information in inline format to TnT format.
+      With TnT format each line contains one word token and one word class
+      tag separated by a single tab character.  EOS indicates end-of-sentence.
 
 OPTIONS
 END

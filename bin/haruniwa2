@@ -22,7 +22,7 @@ DESCRIPTION
       the Berkley parser.
 
       Input should be in TnT format where each line contains one
-      word token and one part-of-speech tag separated by a single tab
+      word token and one word class tag separated by a single tab
       character.  EOS indicates end-of-sentence.
 
 OPTIONS
