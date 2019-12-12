@@ -44,6 +44,9 @@ Steps to obtain a working HARUNIWA2 parser
    Try:
    > echo "輪が回る。" | comainu.pl plain2longout | Comainu_to_BCCWJ | BCCWJ_to_tnt | tnt_clean | haruniwa2
 
+   Note that the comainu.pl command is part of Comainu, so the above
+   pipeline can only work with Comainu correctly installed and with
+   comainu.pl in your PATH.
 
 Feedback
 ========

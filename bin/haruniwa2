@@ -139,7 +139,7 @@ done
 
 DIR=$(dirname $0)/../scripts
 
-PATH=${DIR}:${PATH}
+export PATH=${DIR}:${PATH}
 
 if test "${TOP}"; then
 function stamp () {

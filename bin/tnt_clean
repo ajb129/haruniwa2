@@ -8,13 +8,14 @@ function help_information () {
 
 cat 1>&2 << END
 NAME
-      tnt_clean - clean tnt
+      tnt_clean - clean TnT input
 
 SYNOPSIS
       tnt_clean [OPTIONS]
 
 DESCRIPTION
-      Filter that cleans tnt.
+      Filter that cleans TnT input by removing extensions that follow a semi-colon.
+      Also, without the --full flag, removes dash extensions that occur with P tags.
 
 OPTIONS
 END
