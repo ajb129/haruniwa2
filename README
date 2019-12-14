@@ -1,20 +1,19 @@
 Steps to obtain a working HARUNIWA2 parser
 ==========================================
 
-1. The basic assumption is that you have a computer with the basic
-   GNU toolset installed, with access in your PATH to bash, sed,
-   awk/gawk, and m4.
+1. The assumption is that you have a computer with the GNU toolset installed,
+   with access in your PATH to bash, GNU sed, gawk, and m4.
    Other requirements are: xmllint, and xsltproc.
 
 2. Obtain the parser model from:
    http://npcmj.ninjal.ac.jp/interfaces/gram.gr
 
-   This parser model was trained on data from the NINJAL Parsed Corpus
-   of Modern Japanese (NPCMJ; http://npcmj.ninjal.ac.jp). The NPCMJ is
-   a continuation of the Keyaki Treebank (http://www.compling.jp/keyaki/).
-   The following pipeline was used to construct the model:
+   This parser model was produced with training data from the NINJAL Parsed
+   Corpus of Modern Japanese (NPCMJ; http://npcmj.ninjal.ac.jp). The NPCMJ
+   is a continuation of the Keyaki Treebank (http://www.compling.jp/keyaki/).
+   The following pipeline constructed the training data used:
 
-      cat NPCMJ_data | parse_undecorate --essence | parse_binarize --keepconj | csearch_to_top > data.mrg
+     cat NPCMJ_data | parse_undecorate --essence | parse_binarize --keepconj | csearch_to_top > data.mrg
 
 3. Change the content of "japanese_model_location" (found in the bin
    directory) to point to your local copy of the parser model (gram.gr)
@@ -42,7 +41,7 @@ Steps to obtain a working HARUNIWA2 parser
    dependencies, including mecab (https://code.google.com/p/mecab).
 
 10. Test the parser
-   The parser assumes input in pos TnT format, where each line contains
+   The parser assumes input in TnT format, where each line contains
    one word token and one word class tag separated by a single
    tab character.  EOS indicates end-of-sentence.
 
