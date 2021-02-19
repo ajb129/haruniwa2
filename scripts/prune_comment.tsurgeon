@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%
 % remove COMMENT
-/^COMMENT/=x
+/^COMMENT/=x < __
 
 prune x
 

@@ -44,26 +44,18 @@ END
 cat $0 | grep " \# " 1>&2
 }
 
-function see_also () {
-
-cat 1>&2 << END
-
-SEE ALSO
-      tregex(1), tsurgeon_script_animate(1)
-END
-
-}
-
 while test $# -gt 0 ; do
   case "$1" in
 
-      -*)   # show this help message
+      --debug)   # see modified script
+         DEBUG=1 ; shift ;;
+
+      -*)        # show this help message
          help_information
-         see_also
          exit ;;
 
-      *)    # file name from where to source the tsurgeon script content
-         INPUT="${INPUT} $1" ; shift ;;
+      *)         # filename to source the tsurgeon script content
+         SCRIPT="${SCRIPT} $1" ; shift ;;
  
   esac
 done
@@ -73,20 +65,11 @@ done
 # script starts here #
 ######################
 
-TEMP=${TMP:-"/tmp"}/output_t$$
-SCRIPT=${TMP:-"/tmp"}/output_s$$
-
-# collect input
-cat > "${TEMP}"
-
-# ensure there is content to potentially alter
-if test $(cat "${TEMP}" | wc -l) -gt 0; then
-
-# establish location of stanford-tregex.jar
-TREGEX="$(tregex_location)"
+INPUT=${TMP:-"/tmp"}/output_in$$
+MODIFIED_SCRIPT=${TMP:-"/tmp"}/output_ms$$
 
 # collect and comment script content
-cat ${INPUT} | m4 | awk '
+cat ${SCRIPT} | m4 | awk '
 $1 ~ /^\.R/ { remove_all++ ; next }
 
 $1 ~ /^\.E/ { remove_all-- ; next }
@@ -94,19 +77,26 @@ $1 ~ /^\.E/ { remove_all-- ; next }
 remove_all != 0	{ next }
 
 { print }
-' > "${SCRIPT}"
+' > "${MODIFIED_SCRIPT}"
 
-# simple cat when ther are no script commands
-if test $(cat "${SCRIPT}" | wc -l) -eq 0; then cat "${TEMP}"; else
+# collect input
+cat > "${INPUT}"
 
-# run tsurgeon
-java -mx300m -cp "${TREGEX}" edu.stanford.nlp.trees.tregex.tsurgeon.Tsurgeon -treeFile "${TEMP}" "${SCRIPT}" -s
-
-rm "${SCRIPT}"
-
+# show modified tsurgeon script
+if test "${DEBUG}"; then
+  cat "${MODIFIED_SCRIPT}"
+# ensure input has content
+elif test $(cat "${INPUT}" | wc -l) -gt 0; then
+  # simple cat when there are no script commands
+  if test $(cat "${MODIFIED_SCRIPT}" | wc -l) -eq 0; then
+    cat "${INPUT}"
+  else
+    # establish location of stanford-tregex.jar
+    TREGEX="$(tregex_location)"
+    # run tsurgeon
+    java -mx300m -cp "${TREGEX}" edu.stanford.nlp.trees.tregex.tsurgeon.Tsurgeon -treeFile "${INPUT}" "${MODIFIED_SCRIPT}" -s
+  fi
 fi
 
-fi
-
-rm "${TEMP}"
+rm -f "${MODIFIED_SCRIPT}" "${INPUT}"
 

@@ -27,7 +27,7 @@ relabel x N
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % remove FRAME, ACT, ANT, and COMMENT
-ACT|ANT|COMMENT|FRAME=x
+ACT|ANT|COMMENT|FRAME=x < __
 
 delete x
 
